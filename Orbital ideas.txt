@@ -1,0 +1,71 @@
+#################
+# ORBITAL IDEAS #
+#################
+
+1. Better NUS maps
+	- Google maps api
+	- Include nus shuttle routes
+	- Nearby places (food, atms, etc)
+
+	- Schedule
+		- Take about a weekC
+	- To do:
+		- How to retrieve data like shuttle routes
+		- Fetch bus timings (look for correct api or something)
+		- Mongo/Angular/Django etc
+		- Learn the apis first, tutorials etc
+
+2. Game
+	a. Lim Kopi Please
+		- Vet people's fb posts as an AGC worker
+
+	b. Reigns ripoff 1 (WW2 style game)
+		- At the start: get a randomly selected country
+		- Cards: yes/no decisions / multiple decisions
+		- 2 sides: allies/axis
+		- Endgame: lose/win war
+
+	c. Reigns ripoff 2 (Post-apocalyptic survival)
+		- At the start: get randomly rolled stats, random starter item(s)
+		- Scenarios: 3-4 choices per decisions
+			- Kill/spare
+			- Accept/don't accept items/companions (guaranteed to get at least 1 new companion/item)
+			- Fight encounters with bandits/mutants/monsters (win/lose based ons stats/items acquired)
+		- Endgame: lose/die, begin again as one of your current companions
+
+	d. Reigns ripoff 3 (HOA simulator)
+		- At the start: basic HDB flat/house
+		- Scenarios: yes/no decisions / multiple decisions
+			- Stats: Property value, Reputation
+			- Beautify the front of your home as much as possible (increases Property value)
+			- HOA will demand that you follow their rules (take down decorations, etc)
+				- Following their rules will increase Reputation
+				- Not following will decrease Reputation
+			- Reputation lower: HOA more likely to send hitmen to sabotage your decor
+				- Counter by setting up security systems (turrets, alarms etc)
+				- This decreases property value slightly
+		- Endgame:
+			- Property value reaches max: sell house, start new run with new unlocked scenarios
+			- Property value reaches zero: default on house, get kicked out, start new run without unlocked scenarios (start over)
+
+	e. Reverse Papers Please
+		- You are a smuggler smuggling goods across the causeway
+		- Start small items (cigs, bubblegum) and progress to larger items (people smuggling)
+		- Can level up smuggling skill trees (Stealth, Luck, Hiding places etc)
+		- Gameplay (2D topdown, encounters - enter new screen Pokemon style where you try to get past the checkpoint)
+			- Encounters: "Sir you have been stopped for a random check"
+			- Everything else: navigate around the airport/checkpoint
+
+	f. Procedurally-generated roguelike dungeon crawler
+
+	g. Extreme UPS simulator
+		- 2D top down
+		- Speed of delivery vs quality of delivery
+			- Chuck packages out of truck at high speed: faster but poor quality delivery
+			- Slow down to deliver properly: slower but high quality delivery
+			- Monthly pay balanced between quality and speed
+		- Special levels: deliver a series of wedding cakes
+		- Always in truck/ character can get in and out of truck
+		- Randomly generated levels
+
+	
