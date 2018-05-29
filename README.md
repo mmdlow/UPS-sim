@@ -1,14 +1,17 @@
-"# UPS-sim" 
+# UPS-sim 
 
-AUTHORS: Matthew Low, Donald Lee
+*AUTHORS: Matthew Low, Donald Lee*
 
-OVERVIEW: A delivery service game where the player delivers goods across a map in a set amount of time, balancing between speed of delivery and quality of service to earn money
+# OVERVIEW 
+A delivery service game where the player delivers goods across a map in a set amount of time, balancing between speed of delivery and quality of service to earn money
 
-ENGINE: Unity, C#
+# ENGINE 
+Unity, C#
 
-PLATFORM (TBD): Windows Binary, WebGL 
+# PLATFORM (TBD) 
+Windows, WebGL 
 
-FEATURES (! indicates TBD):
+# FEATURES (! indicates TBD):
 	- Topdown 2D game
 	- One giant map
 	- Camera tracks vehicle/ Fixed camera orientation !
