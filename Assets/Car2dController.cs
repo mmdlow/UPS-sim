@@ -39,8 +39,7 @@ public class Car2dController : MonoBehaviour
     void Start () {
         rb = GetComponent<Rigidbody2D>();
         Renderer renderer = gameObject.GetComponent<Renderer>();
-        float width = renderer.bounds.size.x;
-        Debug.Log("width " + width);
+        Debug.Log("length " + renderer.bounds.size.y);
     }
 
     void FixedUpdate () {
