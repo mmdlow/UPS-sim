@@ -4,33 +4,6 @@ using UnityEngine;
 
 public class Car2dController : MonoBehaviour 
 {
-	// float speedForce = 10f;
-	// float torqueForce = -200f;
-	// float driftFactor = 0.99f;
-	// // Use this for initialization
-	// void Start () 
-	// {
-	// }
-	// void FixedUpdate () 
-	// {
-	// 	Rigidbody2D rb = GetComponent<Rigidbody2D>();
-	// 	if (Input.GetAxis("Vertical") > 0)
-	// 	{
-	// 		rb.AddForce(transform.up * speedForce);
-	// 	}
-	// 	rb.angularVelocity = Input.GetAxis("Horizontal") * torqueForce;
-	// 	rb.velocity = ForwardVelocity() + RightVelocity() * driftFactor;
-	// }
-
-	// Vector2 ForwardVelocity() 
-	// {
-	// 	return transform.up * Vector2.Dot(GetComponent<Rigidbody2D>().velocity, transform.up);
-	// }
-	// Vector2 RightVelocity() 
-	// {
-	// 	return transform.up * Vector2.Dot(GetComponent<Rigidbody2D>().velocity, transform.right);
-	// }
-    // 
     // Source: https://answers.unity.com/questions/686025/top-down-2d-car-physics-1.html
     public float acceleration;
     public float steering;
