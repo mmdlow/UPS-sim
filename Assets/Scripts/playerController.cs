@@ -14,8 +14,6 @@
      void FixedUpdate () {
          float h = -Input.GetAxis("Horizontal");
          float v = Input.GetAxis("Vertical");
-		 Debug.Log("h:" + h);
-		 Debug.Log("v:" + v);
  
          Vector2 speed = transform.up * (v * acceleration);
          rb.AddForce(speed);
