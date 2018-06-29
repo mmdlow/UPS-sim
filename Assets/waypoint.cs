@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class waypointManager : MonoBehaviour {
+public class waypoint : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
@@ -13,4 +13,7 @@ public class waypointManager : MonoBehaviour {
 	void Update () {
 		
 	}
+	void OnCollisionEnter (Collision col) {
+        Debug.Log("Hit!");
+    }
 }
