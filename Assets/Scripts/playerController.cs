@@ -47,4 +47,13 @@
  
          rb.AddForce(rb.GetRelativeVector(relativeForce));
      }
+     /*
+     void OnCollidionEnter(Collision col) {
+        Debug.Log("HIT");
+     }*/
+
+     void OnTriggerEnter2D(Collider2D other)
+     {
+        Debug.Log("HIT");
+     }
  }
