@@ -48,11 +48,8 @@
          rb.AddForce(rb.GetRelativeVector(relativeForce));
      }
 
-     void OnTriggerEnter2D(Collider2D other)
-     {
-        if (other.gameObject.CompareTag("RedCircle"))
-        {
-            Debug.Log("HIT");
-        }
-     }
+     //void OnTriggerEnter2D(Collider2D other)
+     //{
+     //   Debug.Log("HIT");
+     //}
  }
