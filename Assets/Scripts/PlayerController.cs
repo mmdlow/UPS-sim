@@ -1,14 +1,17 @@
 ﻿ using UnityEngine;
  using System.Collections;
  
- public class playerController : MonoBehaviour {
+ public class PlayerController : MonoBehaviour {
  
      public float acceleration;
      public float steering;
+     public GameObject gameManager;
+	 private BoardManager boardManager;
      private Rigidbody2D rb;
  
      void Start () {
          rb = GetComponent<Rigidbody2D>();
+		 boardManager = gameManager.GetComponent<BoardManager>();
      }
  
      void FixedUpdate () {
@@ -46,10 +49,11 @@
          Debug.DrawLine((Vector3)rb.position, (Vector3)rb.GetRelativePoint(relativeForce), Color.red);
  
          rb.AddForce(rb.GetRelativeVector(relativeForce));
+         //Debug.Log(transform.position.x + " " + transform.position.y);
      }
-
-     //void OnTriggerEnter2D(Collider2D other)
-     //{
-     //   Debug.Log("HIT");
-     //}
+     void Update() {
+         GameObject currentWaypoint = boardManager.GetCurrentWaypoint();
+         Gizmos.color = Color.blue;
+         Gizmos.DrawLine(transform.position, currentWaypoint.transform.position);
+     }
  }

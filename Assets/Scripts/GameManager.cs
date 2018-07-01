@@ -5,17 +5,18 @@ using UnityEngine;
 public class GameManager : MonoBehaviour {
 
 	public int count = 4;
-	public BoardManager boardScript;
+	public BoardManager boardManager;
 
 	// Use this for initialization
 	void Awake () 
 	{
-		boardScript = GetComponent<BoardManager>();
+		boardManager = GetComponent<BoardManager>();
 		InitGame();
 	}
 	void InitGame()
 	{
-		boardScript.SetupScene();
+		boardManager.SetupLevel();
+		boardManager.StartLevel();
 	}
 	
 	// Update is called once per frame

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class cameraController : MonoBehaviour {
+public class CameraController : MonoBehaviour {
 	
 	public float positionDampTime = 0.15f;
 	public float rotationDampTime = 0.15f;

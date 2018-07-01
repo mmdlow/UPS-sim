@@ -14308,6 +14308,11 @@ TilemapCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 1
   m_Offset: {x: 0, y: 0}
+--- !u!1 &286462797 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1558994462179366, guid: 7dc6b860b303a43e49cee36b6692745b,
+    type: 2}
+  m_PrefabInternal: {fileID: 577244946}
 --- !u!1 &307186071
 GameObject:
   m_ObjectHideFlags: 0
@@ -36081,7 +36086,7 @@ MonoBehaviour:
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
-  m_DynamicPixelsPerUnit: 1
+  m_DynamicPixelsPerUnit: 6.09
 --- !u!223 &335552663
 Canvas:
   m_ObjectHideFlags: 0
@@ -36130,11 +36135,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4960674209291076, guid: 7dc6b860b303a43e49cee36b6692745b, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -3.98
+      value: -4.73
       objectReference: {fileID: 0}
     - target: {fileID: 4960674209291076, guid: 7dc6b860b303a43e49cee36b6692745b, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 1.25
+      value: 0.83
       objectReference: {fileID: 0}
     - target: {fileID: 4960674209291076, guid: 7dc6b860b303a43e49cee36b6692745b, type: 2}
       propertyPath: m_LocalPosition.z
@@ -36160,6 +36165,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 114586436209184820, guid: 7dc6b860b303a43e49cee36b6692745b,
+        type: 2}
+      propertyPath: gameManager
+      value: 
+      objectReference: {fileID: 690693498}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7dc6b860b303a43e49cee36b6692745b, type: 2}
   m_IsPrefabParent: 0
@@ -36192,7 +36202,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   count: 4
-  boardScript: {fileID: 0}
+  boardManager: {fileID: 0}
 --- !u!4 &690693500
 Transform:
   m_ObjectHideFlags: 0
@@ -36218,9 +36228,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ground: {fileID: 1688933701}
-  roadTiles: []
-  waypointTiles:
-  - {fileID: 1558994462179366, guid: 7dc6b860b303a43e49cee36b6692745b, type: 2}
+  waypoint: {fileID: 286462797}
+  waypointCount: 10
 --- !u!1 &695891969
 GameObject:
   m_ObjectHideFlags: 0
@@ -36574,6 +36583,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   acceleration: 4.24
   steering: 10.78
+  gameManager: {fileID: 0}
 --- !u!1 &1094923918
 GameObject:
   m_ObjectHideFlags: 0
@@ -36722,7 +36732,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 1.5
+  orthographic size: 1.7053077
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
