@@ -6,14 +6,14 @@ public class waypoint : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
+		Debug.Log("Started!");
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		
 	}
-	void OnCollisionEnter (Collision col) {
+	void OnTriggerEnter(Collider col) {
         Debug.Log("Hit!");
     }
 }
