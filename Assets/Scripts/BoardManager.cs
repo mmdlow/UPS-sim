@@ -29,7 +29,7 @@ public class BoardManager : MonoBehaviour {
 
 	void LayoutWaypointAtRandom() {
 		Vector3 randomPosition = reachablePositions[Random.Range (0, reachablePositions.Count)];
-		GameObject currentWaypoint = Instantiate(waypoint, randomPosition, Quaternion.identity);
+		currentWaypoint = Instantiate(waypoint, randomPosition, Quaternion.identity);
 	}
 	public GameObject GetCurrentWaypoint() {
 		return currentWaypoint;

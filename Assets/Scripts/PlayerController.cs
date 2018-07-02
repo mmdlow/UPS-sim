@@ -6,6 +6,7 @@
      public float acceleration;
      public float steering;
      public GameObject gameManager;
+     public GameObject waypoint;
 	 private BoardManager boardManager;
      private Rigidbody2D rb;
  
@@ -53,8 +54,6 @@
      }
      
      void Update() {
-         GameObject currentWaypoint = boardManager.GetCurrentWaypoint();
-         Gizmos.color = Color.blue;
-         Gizmos.DrawLine(transform.position, currentWaypoint.transform.position);
+         //waypoint = boardManager.GetCurrentWaypoint();
      }
  }
