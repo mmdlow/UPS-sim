@@ -48,6 +48,9 @@ TagManager:
   - name: Buildings
     uniqueID: 1660987869
     locked: 0
+  - name: Truck
+    uniqueID: 3280601769
+    locked: 0
   - name: Truck icon
     uniqueID: 4048648547
     locked: 0
