@@ -36135,11 +36135,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4960674209291076, guid: 7dc6b860b303a43e49cee36b6692745b, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -4.73
+      value: -4.051
       objectReference: {fileID: 0}
     - target: {fileID: 4960674209291076, guid: 7dc6b860b303a43e49cee36b6692745b, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0.83
+      value: 0.585
       objectReference: {fileID: 0}
     - target: {fileID: 4960674209291076, guid: 7dc6b860b303a43e49cee36b6692745b, type: 2}
       propertyPath: m_LocalPosition.z
@@ -36170,6 +36170,45 @@ Prefab:
       propertyPath: gameManager
       value: 
       objectReference: {fileID: 690693498}
+    - target: {fileID: 212860420545790232, guid: 7dc6b860b303a43e49cee36b6692745b,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 6bc2da578015d2b4facd1de1a91af6a3,
+        type: 3}
+    - target: {fileID: 4960674209291076, guid: 7dc6b860b303a43e49cee36b6692745b, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 1.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 61262076365668664, guid: 7dc6b860b303a43e49cee36b6692745b,
+        type: 2}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 61262076365668664, guid: 7dc6b860b303a43e49cee36b6692745b,
+        type: 2}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 61262076365668664, guid: 7dc6b860b303a43e49cee36b6692745b,
+        type: 2}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 61262076365668664, guid: 7dc6b860b303a43e49cee36b6692745b,
+        type: 2}
+      propertyPath: m_Size.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 61262076365668664, guid: 7dc6b860b303a43e49cee36b6692745b,
+        type: 2}
+      propertyPath: m_Size.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4960674209291076, guid: 7dc6b860b303a43e49cee36b6692745b, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 1.69
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7dc6b860b303a43e49cee36b6692745b, type: 2}
   m_IsPrefabParent: 0
