@@ -78,6 +78,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a208425ac95e4447a45824c9293812b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameManager: {fileID: 0}
 --- !u!212 &212860420545790232
 SpriteRenderer:
   m_ObjectHideFlags: 1

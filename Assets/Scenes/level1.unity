@@ -36178,7 +36178,7 @@ Prefab:
         type: 3}
     - target: {fileID: 4960674209291076, guid: 7dc6b860b303a43e49cee36b6692745b, type: 2}
       propertyPath: m_LocalScale.x
-      value: 1.7
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 61262076365668664, guid: 7dc6b860b303a43e49cee36b6692745b,
         type: 2}
@@ -36188,30 +36188,40 @@ Prefab:
     - target: {fileID: 61262076365668664, guid: 7dc6b860b303a43e49cee36b6692745b,
         type: 2}
       propertyPath: m_SpriteTilingProperty.oldSize.x
-      value: 0.5
+      value: 1.28
       objectReference: {fileID: 0}
     - target: {fileID: 61262076365668664, guid: 7dc6b860b303a43e49cee36b6692745b,
         type: 2}
       propertyPath: m_SpriteTilingProperty.oldSize.y
-      value: 0.5
+      value: 1.28
       objectReference: {fileID: 0}
     - target: {fileID: 61262076365668664, guid: 7dc6b860b303a43e49cee36b6692745b,
         type: 2}
       propertyPath: m_Size.x
-      value: 0.5
+      value: 1.19626
       objectReference: {fileID: 0}
     - target: {fileID: 61262076365668664, guid: 7dc6b860b303a43e49cee36b6692745b,
         type: 2}
       propertyPath: m_Size.y
-      value: 0.5
+      value: 1.2021194
       objectReference: {fileID: 0}
     - target: {fileID: 4960674209291076, guid: 7dc6b860b303a43e49cee36b6692745b, type: 2}
       propertyPath: m_LocalScale.y
-      value: 1.69
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1558994462179366, guid: 7dc6b860b303a43e49cee36b6692745b, type: 2}
       propertyPath: m_Layer
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 61262076365668664, guid: 7dc6b860b303a43e49cee36b6692745b,
+        type: 2}
+      propertyPath: m_Offset.x
+      value: -0.0036580563
+      objectReference: {fileID: 0}
+    - target: {fileID: 61262076365668664, guid: 7dc6b860b303a43e49cee36b6692745b,
+        type: 2}
+      propertyPath: m_Offset.y
+      value: -0.003198117
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7dc6b860b303a43e49cee36b6692745b, type: 2}
@@ -36412,7 +36422,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 7
+  orthographic size: 7.2
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
@@ -36604,7 +36614,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1082902045}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.69, y: -0.005, z: 0}
+  m_LocalPosition: {x: 1, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 937672109}
@@ -36777,7 +36787,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 1.7053077
+  orthographic size: 1.8
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -36903,7 +36913,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1609367533}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.4296875}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2033281753}
