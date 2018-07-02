@@ -51,6 +51,7 @@
          rb.AddForce(rb.GetRelativeVector(relativeForce));
          //Debug.Log(transform.position.x + " " + transform.position.y);
      }
+     
      void Update() {
          GameObject currentWaypoint = boardManager.GetCurrentWaypoint();
          Gizmos.color = Color.blue;

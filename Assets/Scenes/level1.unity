@@ -36581,9 +36581,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64a21c60d94b64ddc9b1cc3fdd7d1e90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  acceleration: 4.24
-  steering: 10.78
-  gameManager: {fileID: 0}
+  acceleration: 7
+  steering: 7
+  gameManager: {fileID: 690693498}
 --- !u!1 &1094923918
 GameObject:
   m_ObjectHideFlags: 0
