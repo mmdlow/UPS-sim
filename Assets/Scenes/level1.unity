@@ -36575,7 +36575,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   acceleration: 7
   steering: 7
-  gameManager: {fileID: 0}
   waypoint: {fileID: 0}
 --- !u!1 &1094923918
 GameObject:

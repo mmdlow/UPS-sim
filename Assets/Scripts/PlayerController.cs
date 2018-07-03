@@ -5,14 +5,11 @@
  
      public float acceleration;
      public float steering;
-     public GameObject gameManager;
      public GameObject waypoint;
-	 private BoardManager boardManager;
      private Rigidbody2D rb;
  
      void Start () {
          rb = GetComponent<Rigidbody2D>();
-		 boardManager = gameManager.GetComponent<BoardManager>();
      }
  
      void FixedUpdate () {

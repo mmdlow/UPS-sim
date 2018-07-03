@@ -5,14 +5,29 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using Random = UnityEngine.Random;
 
+/*
+	BoardManager manages instances of Unity scenes i.e. levels. For every new 
+	scene there should be a new instance of boardManager.
+ */
 public class BoardManager : MonoBehaviour {
 
+	public static BoardManager instance = null;
 	public GameObject ground;
 	public GameObject waypoint;
 	private GameObject currentWaypoint;
 	private List<Vector3Int> reachablePositions = new List<Vector3Int>();
 	public int waypointCount = 10;
 	private int currWaypointCount = 0;
+
+	void Awake() {
+		if (instance == null) {
+			instance = this;
+		} else if (instance != this) {
+			Destroy(gameObject); // enforce singleton pattern wrt BoardManager
+		}
+
+		ground = GameObject.Find("Ground");
+	}
 	void InitReachablePositions() {
 		reachablePositions.Clear();
 		Tilemap groundTilemap = ground.transform.Find("Tilemap-ground").gameObject.GetComponent(typeof(Tilemap)) as Tilemap;
@@ -47,5 +62,6 @@ public class BoardManager : MonoBehaviour {
 	}
 	public void StartLevel() {
 		LoadNextWaypoint();
+		Debug.Log("Hello from BM!");
 	}
 }

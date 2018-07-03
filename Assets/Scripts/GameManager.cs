@@ -2,10 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+	GameManager manages every instance of this game. There should only ever one
+	gameManager per instance of this program. GameManager can be referenced 
+	from any class by calling 'GameManager.instance'.
+
+	GameManager is loaded at the start by Loader which is a component of 
+	the main camera.
+ */
 public class GameManager : MonoBehaviour {
 
 	public static GameManager instance = null;
-	private BoardManager boardManager;
+	public BoardManager boardManager;
 
 	// Use this for initialization
 	void Awake() {
@@ -15,11 +23,13 @@ public class GameManager : MonoBehaviour {
 			Destroy(gameObject); // enforce singleton pattern wrt GameManger
 		}
 		DontDestroyOnLoad(gameObject);
-		boardManager = GetComponent<BoardManager>();
 		InitGame();
 	}
 	void InitGame() {
-		boardManager.SetupLevel();
-		boardManager.StartLevel();
+		if (BoardManager.instance == null) {
+			Instantiate(boardManager);
+		}
+		BoardManager.instance.SetupLevel();
+		BoardManager.instance.StartLevel();
 	}
 }

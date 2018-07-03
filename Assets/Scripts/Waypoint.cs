@@ -5,10 +5,10 @@ using UnityEngine;
 public class Waypoint : MonoBehaviour {
 
 	private BoardManager boardManager;
-	public GameObject gameManager;
+	//public GameObject gameManager;
 	// Use this for initialization
 	void Awake () {
-		boardManager = gameManager.GetComponent<BoardManager>();
+		boardManager = BoardManager.instance;
 	}
 	
 	// Update is called once per frame
