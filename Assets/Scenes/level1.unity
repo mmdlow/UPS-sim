@@ -14308,11 +14308,6 @@ TilemapCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 1
   m_Offset: {x: 0, y: 0}
---- !u!1 &286462797 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1558994462179366, guid: 7dc6b860b303a43e49cee36b6692745b,
-    type: 2}
-  m_PrefabInternal: {fileID: 577244946}
 --- !u!1 &307186071
 GameObject:
   m_ObjectHideFlags: 0
@@ -36135,11 +36130,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4960674209291076, guid: 7dc6b860b303a43e49cee36b6692745b, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -4.051
+      value: -4.21
       objectReference: {fileID: 0}
     - target: {fileID: 4960674209291076, guid: 7dc6b860b303a43e49cee36b6692745b, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0.585
+      value: 1.04
       objectReference: {fileID: 0}
     - target: {fileID: 4960674209291076, guid: 7dc6b860b303a43e49cee36b6692745b, type: 2}
       propertyPath: m_LocalPosition.z
@@ -36169,7 +36164,7 @@ Prefab:
         type: 2}
       propertyPath: gameManager
       value: 
-      objectReference: {fileID: 690693498}
+      objectReference: {fileID: 0}
     - target: {fileID: 212860420545790232, guid: 7dc6b860b303a43e49cee36b6692745b,
         type: 2}
       propertyPath: m_Sprite
@@ -36226,63 +36221,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7dc6b860b303a43e49cee36b6692745b, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &690693498
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 690693500}
-  - component: {fileID: 690693499}
-  - component: {fileID: 690693501}
-  m_Layer: 0
-  m_Name: GameManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &690693499
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 690693498}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 574d6bbccefa849efa6549f42c61a785, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  count: 4
-  boardManager: {fileID: 0}
---- !u!4 &690693500
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 690693498}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.72854894, y: -6.4157553, z: 0.15324628}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &690693501
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 690693498}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc637dc8ca340439985580869a2224ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ground: {fileID: 1688933701}
-  waypoint: {fileID: 286462797}
-  waypointCount: 10
 --- !u!1 &695891969
 GameObject:
   m_ObjectHideFlags: 0
@@ -36637,7 +36575,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   acceleration: 7
   steering: 7
-  gameManager: {fileID: 690693498}
+  gameManager: {fileID: 0}
   waypoint: {fileID: 0}
 --- !u!1 &1094923918
 GameObject:
@@ -36715,6 +36653,7 @@ GameObject:
   - component: {fileID: 1445488148}
   - component: {fileID: 1445488147}
   - component: {fileID: 1445488151}
+  - component: {fileID: 1445488152}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -36848,6 +36787,19 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
+--- !u!114 &1445488152
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1445488145}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f58f4a197984a474987fb6b462f7b88d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameManager: {fileID: 1972761851953420, guid: 983c87beb995b4a3aa3c64451dd4bab0,
+    type: 2}
 --- !u!1 &1450578669
 GameObject:
   m_ObjectHideFlags: 0
@@ -36888,7 +36840,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad394bf5d6b164d8ca58dce665342407, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameManager: {fileID: 690693499}
+  gameManager: {fileID: 0}
 --- !u!1 &1609367533
 GameObject:
   m_ObjectHideFlags: 0

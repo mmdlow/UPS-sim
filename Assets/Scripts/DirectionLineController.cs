@@ -6,10 +6,10 @@ public class DirectionLineController : MonoBehaviour {
     private GameObject waypoint;
 	public GameManager gameManager;
     private BoardManager boardManager;
-    private LineRenderer line;                           // Line Renderer
+    private LineRenderer line; // Line Renderer
 
     // Use this for initialization
-    void Start () {
+    void Start() {
         Debug.Log("line started");
         // Add a Line Renderer to the GameObject
         line = this.gameObject.AddComponent<LineRenderer>();
@@ -22,9 +22,8 @@ public class DirectionLineController : MonoBehaviour {
         waypoint = boardManager.GetCurrentWaypoint();
     }
     
-    void Update () {
-        if (waypoint != null)
-        {
+    void Update() {
+        if (waypoint != null) {
             // Update position of the two vertex of the Line Renderer
             waypoint = boardManager.GetCurrentWaypoint();
             line.SetPosition(0, this.gameObject.transform.position);
