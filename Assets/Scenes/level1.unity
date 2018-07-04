@@ -36573,8 +36573,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64a21c60d94b64ddc9b1cc3fdd7d1e90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  acceleration: 7
-  steering: 7
+  acceleration: 0
+  steering: 0
   waypoint: {fileID: 0}
 --- !u!1 &1094923918
 GameObject:

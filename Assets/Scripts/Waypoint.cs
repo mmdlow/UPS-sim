@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class Waypoint : MonoBehaviour {
 
@@ -28,14 +29,9 @@ public class Waypoint : MonoBehaviour {
 
 	public static void LayoutWaypointAtRandom() {
 		Vector3 randomPosition = reachablePositions[Random.Range (0, reachablePositions.Count)];
-		currentWaypoint = Instantiate(waypoint, randomPosition, Quaternion.identity);
 	}
 
 	public static void LoadNextWaypoint() {
-		if (currWaypointCount <= waypointCount) {
-			LayoutWaypointAtRandom();
-			currWaypointCount++;
-		}
 	}
 	void Awake () {
 		boardManager = BoardManager.instance;
@@ -48,6 +44,5 @@ public class Waypoint : MonoBehaviour {
 		Destroy(this.gameObject);
      }
 	 void OnDestroy() {
-		 boardManager.LoadNextWaypoint();
 	 }
 }

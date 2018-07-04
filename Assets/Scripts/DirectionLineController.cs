@@ -19,15 +19,14 @@ public class DirectionLineController : MonoBehaviour {
         line.endWidth = 0.05F;
         // Set the number of vertex fo the Line Renderer
         line.positionCount = 2;
-        waypoint = BoardManager.instance.GetCurrentWaypoint();
     }
     
     void Update() {
         if (waypoint != null) {
             // Update position of the two vertex of the Line Renderer
-            waypoint = BoardManager.instance.GetCurrentWaypoint();
-            line.SetPosition(0, this.gameObject.transform.position);
-            line.SetPosition(1, waypoint.transform.position);
+            //waypoint = BoardManager.instance.GetCurrentWaypoint();
+            //line.SetPosition(0, this.gameObject.transform.position);
+            //line.SetPosition(1, waypoint.transform.position);
         }
     }
 }

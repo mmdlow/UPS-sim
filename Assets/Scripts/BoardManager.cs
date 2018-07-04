@@ -2,16 +2,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Tilemaps;
 using Random = UnityEngine.Random;
 
 /*
 	BoardManager manages instances of Unity scenes i.e. levels. For every new 
 	scene there should be a new instance of boardManager.
 
-	Apart from GameManager, BoardManager, all other GameObjects should only 
-	"talk" to their own static classes. GameObjects shall *not* reference static
-	methods of other classes.
+	GM and BM follow the singleton pattern, i.e. there can only be one.
+	GameObject, their static methods, and BM should all communicate using 
+	message passing.
  */
 public class BoardManager : MonoBehaviour {
 
