@@ -10,6 +10,26 @@ public class Inventory : MonoBehaviour {
 	public OnItemChanged onItemChangedCallback;
 	public GameObject GeneratePackagesBtn;
 	public static Inventory instance;
+	string[] pkgNames = new string[] {
+		"AK-47", "ANTIQUE DRESS", "ARMADILLO",
+		"BAT FOOD", "BLOOD BAGS", "BOMB", "BONG", "BOOKS",
+		"CAT FOOD", "CHINA VASE", "CLAY VASE", "CONDOMS", "CREEPY DOLL",
+		"DESIGNER CLOTHES", "DILDOS", "DOG FOOD", "DORITOS", "DUCT TAPE", 
+		"EMPTY BOX",
+		"FAECES", "FEDORA", "FIREWORKS", "FIGURINES",
+		"GLITTER", "GUITAR", "GARLIC", "GLASS BOX",
+		"HAND BAG", "HARD DRIVE", "HEADPHONES", "HOOKAH", "HOLY WATER",
+		"INSECTISIDE",
+		"KATANA", "KETCHUP", "KEYBOARD", "KNIFE",
+		"LAMP", "LAPTOP", "LATEX SUIT", "LEATHER JACKET", 
+		"MACBOOK", "MACHETE", "MARIJUANA", "MYSTERY BOX",
+		"PARROT", "PIRANHA", "PORTAL GUN",
+		"RAT POISON", "RATS", "RATTLING BOX",
+		"SENTRY GUN", "SHOTGUN", "SOAP", "STRAP-ONS", "STUFFED TOY",
+		"TABLE", "TV SET", "TOWELS", "TRENCHCOAT",
+		"UMBRELLA",
+		"WARDROBE", "WHIP", "WIRE"
+	};
 
 	// Create Singleton Inventory for reference
 	void Awake() {
@@ -28,8 +48,8 @@ public class Inventory : MonoBehaviour {
 			return;
 		}
 		for (int i = 0; i < numItems; i++) {
-			// This will be replaced with a pkg name from a list
-			items.Add("new item");
+			// Pick a random pkg name
+			items.Add(pkgNames[Mathf.RoundToInt(Random.Range(0, pkgNames.Length - 1))]);
 		}
 		Debug.Log("Generated " + numItems + " packages");
 		if (onItemChangedCallback != null) {
