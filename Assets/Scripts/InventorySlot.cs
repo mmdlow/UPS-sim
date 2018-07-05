@@ -20,4 +20,10 @@ public class InventorySlot : MonoBehaviour {
 		icon.sprite = null;
 		icon.enabled = false;
 	}
+
+	public void Prioritize() {
+		if (name != null) {
+			Debug.Log("En route to " + name);
+		}
+	}
 }
