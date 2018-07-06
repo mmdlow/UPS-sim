@@ -4,12 +4,23 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour {
 
-	public List<string> items = new List<string>();
+	public List<string> items = new List<string>(); // Randomized item name list
+	public List<Sprite> spriteRand = new List<Sprite>(); // Randomized sprite list
+
 	public int maxSpace = 9;
+	public int priorityPkg = -1; // Current priority package
+
 	public delegate void OnItemChanged();
 	public OnItemChanged onItemChangedCallback;
+
+	public delegate void OnPriorityChanged();
+	public OnPriorityChanged onPriorityChangedCallback;
+
 	public GameObject GeneratePackagesBtn;
 	public static Inventory instance;
+
+	public Sprite[] sprites; // Package sprites to choose from
+
 	string[] pkgNames = new string[] {
 		"AK-47", "ANTIQUE DRESS", "ARMADILLO",
 		"BAT FOOD", "BLOOD BAGS", "BOMB", "BONG", "BOOKS",
@@ -40,9 +51,9 @@ public class Inventory : MonoBehaviour {
 		instance = this;
 	}
 
-	// Generate random number of packages from 1 to maxSpace
+	// Generate random number of packages from 3 to maxSpace
 	public void GeneratePackages() {
-		int numItems = Mathf.RoundToInt(Random.Range(1, maxSpace));
+		int numItems = Mathf.RoundToInt(Random.Range(3, maxSpace));
 		if (numItems > maxSpace - items.Count) {
 			Debug.Log("Not enough room");
 			return;
@@ -50,6 +61,8 @@ public class Inventory : MonoBehaviour {
 		for (int i = 0; i < numItems; i++) {
 			// Pick a random pkg name
 			items.Add(pkgNames[Mathf.RoundToInt(Random.Range(0, pkgNames.Length - 1))]);
+			// Pick a random pkg sprite from sprites, add to spriteRand
+			spriteRand.Add(sprites[Mathf.RoundToInt(Random.Range(0, sprites.Length - 1))]);
 		}
 		Debug.Log("Generated " + numItems + " packages");
 		if (onItemChangedCallback != null) {
@@ -63,6 +76,13 @@ public class Inventory : MonoBehaviour {
 		items.Remove(item);
 		if (onItemChangedCallback != null) {
 			onItemChangedCallback.Invoke();
+		}
+	}
+
+	public void UpdatePackagePriorities(int index) {
+		priorityPkg = index;
+		if (onPriorityChangedCallback != null) {
+			onPriorityChangedCallback.Invoke();
 		}
 	}
 }

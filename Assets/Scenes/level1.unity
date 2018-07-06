@@ -234,6 +234,21 @@ Prefab:
       propertyPath: m_Name
       value: Slot (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 114747012331787812, guid: 7ada99562c7d081468f53f9b38d98992,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1094923922}
+    - target: {fileID: 114747012331787812, guid: 7ada99562c7d081468f53f9b38d98992,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: UpdatePackagePriorities
+      objectReference: {fileID: 0}
+    - target: {fileID: 114747012331787812, guid: 7ada99562c7d081468f53f9b38d98992,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7ada99562c7d081468f53f9b38d98992, type: 2}
   m_IsPrefabParent: 0
@@ -352,6 +367,21 @@ Prefab:
     - target: {fileID: 1546375999612716, guid: 7ada99562c7d081468f53f9b38d98992, type: 2}
       propertyPath: m_Name
       value: Slot (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 114747012331787812, guid: 7ada99562c7d081468f53f9b38d98992,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1094923922}
+    - target: {fileID: 114747012331787812, guid: 7ada99562c7d081468f53f9b38d98992,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: UpdatePackagePriorities
+      objectReference: {fileID: 0}
+    - target: {fileID: 114747012331787812, guid: 7ada99562c7d081468f53f9b38d98992,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7ada99562c7d081468f53f9b38d98992, type: 2}
@@ -36504,12 +36534,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemsParent: {fileID: 1468462333}
-  spriteCol:
-  - {fileID: 21300000, guid: 804bc221f0fdc1c4cbb086125631ab57, type: 3}
-  - {fileID: 21300000, guid: 9ffb9d6205f09764bb148b346bdd978b, type: 3}
-  - {fileID: 21300000, guid: 57dffb8a18da2db45894d8b0667339e5, type: 3}
-  - {fileID: 21300000, guid: 432a27f28da8e4943907fece5522bf18, type: 3}
-  - {fileID: 21300000, guid: b4df6e05b471b0040846157db72cad55, type: 3}
   inventoryUI: {fileID: 1027074059}
 --- !u!224 &509112324 stripped
 RectTransform:
@@ -36732,6 +36756,21 @@ Prefab:
       propertyPath: m_Name
       value: Slot (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 114747012331787812, guid: 7ada99562c7d081468f53f9b38d98992,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1094923922}
+    - target: {fileID: 114747012331787812, guid: 7ada99562c7d081468f53f9b38d98992,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: UpdatePackagePriorities
+      objectReference: {fileID: 0}
+    - target: {fileID: 114747012331787812, guid: 7ada99562c7d081468f53f9b38d98992,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7ada99562c7d081468f53f9b38d98992, type: 2}
   m_IsPrefabParent: 0
@@ -36911,6 +36950,11 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 114747012331787812, guid: 7ada99562c7d081468f53f9b38d98992,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1094923922}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7ada99562c7d081468f53f9b38d98992, type: 2}
   m_IsPrefabParent: 0
@@ -37187,6 +37231,21 @@ Prefab:
     - target: {fileID: 1546375999612716, guid: 7ada99562c7d081468f53f9b38d98992, type: 2}
       propertyPath: m_Name
       value: Slot (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 114747012331787812, guid: 7ada99562c7d081468f53f9b38d98992,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1094923922}
+    - target: {fileID: 114747012331787812, guid: 7ada99562c7d081468f53f9b38d98992,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: UpdatePackagePriorities
+      objectReference: {fileID: 0}
+    - target: {fileID: 114747012331787812, guid: 7ada99562c7d081468f53f9b38d98992,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7ada99562c7d081468f53f9b38d98992, type: 2}
@@ -37478,6 +37537,21 @@ Prefab:
       propertyPath: m_Name
       value: Slot (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 114747012331787812, guid: 7ada99562c7d081468f53f9b38d98992,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1094923922}
+    - target: {fileID: 114747012331787812, guid: 7ada99562c7d081468f53f9b38d98992,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: UpdatePackagePriorities
+      objectReference: {fileID: 0}
+    - target: {fileID: 114747012331787812, guid: 7ada99562c7d081468f53f9b38d98992,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7ada99562c7d081468f53f9b38d98992, type: 2}
   m_IsPrefabParent: 0
@@ -37597,6 +37671,21 @@ Prefab:
       propertyPath: m_Name
       value: Slot (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 114747012331787812, guid: 7ada99562c7d081468f53f9b38d98992,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1094923922}
+    - target: {fileID: 114747012331787812, guid: 7ada99562c7d081468f53f9b38d98992,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: UpdatePackagePriorities
+      objectReference: {fileID: 0}
+    - target: {fileID: 114747012331787812, guid: 7ada99562c7d081468f53f9b38d98992,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7ada99562c7d081468f53f9b38d98992, type: 2}
   m_IsPrefabParent: 0
@@ -37675,8 +37764,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   items: []
+  spriteRand: []
   maxSpace: 9
+  priorityPkg: -1
   GeneratePackagesBtn: {fileID: 225910532}
+  sprites:
+  - {fileID: 21300000, guid: 804bc221f0fdc1c4cbb086125631ab57, type: 3}
+  - {fileID: 21300000, guid: 9ffb9d6205f09764bb148b346bdd978b, type: 3}
+  - {fileID: 21300000, guid: 57dffb8a18da2db45894d8b0667339e5, type: 3}
+  - {fileID: 21300000, guid: 432a27f28da8e4943907fece5522bf18, type: 3}
+  - {fileID: 21300000, guid: b4df6e05b471b0040846157db72cad55, type: 3}
 --- !u!224 &1152951228 stripped
 RectTransform:
   m_PrefabParentObject: {fileID: 224672538943775486, guid: 7ada99562c7d081468f53f9b38d98992,
@@ -38106,6 +38203,21 @@ Prefab:
       propertyPath: m_Name
       value: Slot (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 114747012331787812, guid: 7ada99562c7d081468f53f9b38d98992,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1094923922}
+    - target: {fileID: 114747012331787812, guid: 7ada99562c7d081468f53f9b38d98992,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: UpdatePackagePriorities
+      objectReference: {fileID: 0}
+    - target: {fileID: 114747012331787812, guid: 7ada99562c7d081468f53f9b38d98992,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7ada99562c7d081468f53f9b38d98992, type: 2}
   m_IsPrefabParent: 0
@@ -38486,6 +38598,21 @@ Prefab:
     - target: {fileID: 1546375999612716, guid: 7ada99562c7d081468f53f9b38d98992, type: 2}
       propertyPath: m_Name
       value: Slot (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 114747012331787812, guid: 7ada99562c7d081468f53f9b38d98992,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1094923922}
+    - target: {fileID: 114747012331787812, guid: 7ada99562c7d081468f53f9b38d98992,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: UpdatePackagePriorities
+      objectReference: {fileID: 0}
+    - target: {fileID: 114747012331787812, guid: 7ada99562c7d081468f53f9b38d98992,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7ada99562c7d081468f53f9b38d98992, type: 2}

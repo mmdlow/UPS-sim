@@ -5,7 +5,7 @@ using UnityEngine;
 public class InventoryUI : MonoBehaviour {
 
 	public Transform itemsParent; // Reference Slot Parent to access slots
-	public Sprite[] spriteCol; // Package sprites to choose from
+	//public Sprite[] spriteCol; // Package sprites to choose from
 	public GameObject inventoryUI; // Reference UI
 	bool hasPackages;
 	Inventory inventory;
@@ -15,6 +15,7 @@ public class InventoryUI : MonoBehaviour {
 	void Start () {
 		inventory = Inventory.instance;
 		inventory.onItemChangedCallback += UpdateUI;
+		inventory.onPriorityChangedCallback += UpdatePriority;
 		slots = itemsParent.GetComponentsInChildren<InventorySlot>();
 	}
 	
@@ -34,11 +35,24 @@ public class InventoryUI : MonoBehaviour {
 		for (int i = 0; i < slots.Length; i++) {
 			if (i < inventory.items.Count) {
 				// pass pkg name and a random pkg sprite from our array
-				slots[i].AddItem(inventory.items[i], spriteCol[Mathf.RoundToInt(Random.Range(0, spriteCol.Length - 1))]);
+				slots[i].AddItem(inventory.items[i], inventory.spriteRand[i]);
 			} else {
 				slots[i].ClearSlot();
 			}
 		}
 		hasPackages = true;
+	}
+
+	/* Loop thorugh inventory slots and updates priority package based on
+	the corresponding index in Inventory script */
+	void UpdatePriority() {
+		Debug.Log("Updating package priority");
+		for (int i = 0; i < slots.Length; i++) {
+			if (i == inventory.priorityPkg) {
+				slots[i].Prioritize();
+			} else {
+				slots[i].Deprioritize();
+			}
+		}
 	}
 }
