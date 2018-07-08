@@ -1,15 +1,46 @@
 ﻿ using UnityEngine;
+ using UnityEngine.UI;
  using System.Collections;
  
  public class PlayerController : MonoBehaviour {
  
      public float acceleration;
      public float steering;
+     public float damageConstant = 2f;
+     public int health = 100;
+     public Text healthDisplay;
+     public Text damageDisplay;
      public GameObject waypoint;
      private Rigidbody2D rb;
  
      void Start () {
          rb = GetComponent<Rigidbody2D>();
+         healthDisplay.text = health.ToString();
+     }  
+
+     IEnumerator DisplayDamage () {
+        damageDisplay.CrossFadeAlpha(1, 0f, false);
+        yield return new WaitForSeconds(2);
+        damageDisplay.CrossFadeAlpha(0, 1f, false);
+     }
+
+     void OnCollisionEnter2D (Collision2D col) {
+        int damage = Mathf.RoundToInt(damageConstant * col.relativeVelocity.magnitude);
+        health -= damage;
+
+        if (damage > 0) {
+            damageDisplay.text = (-damage).ToString();
+            StartCoroutine(DisplayDamage());
+        }
+
+        if (health <= 0) {
+            healthDisplay.text = "0";
+            Debug.Log("Game Over");
+            return;
+        }
+        if (health < 100 && health > 25) healthDisplay.color = Color.white;
+        else if (health <= 25) healthDisplay.color = Color.red;
+        healthDisplay.text = health.ToString();
      }
  
      void FixedUpdate () {

@@ -390,7 +390,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 100
+  m_Text: 
 --- !u!222 &89835847
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -37566,6 +37566,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   acceleration: 7
   steering: 7
+  damageConstant: 1
+  health: 100
+  healthDisplay: {fileID: 89835846}
   waypoint: {fileID: 0}
 --- !u!1001 &1084778689
 Prefab:
