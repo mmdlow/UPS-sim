@@ -40,9 +40,11 @@ public class Waypoint : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 	}
-     void OnTriggerEnter2D(Collider2D other) {
+
+	void OnTriggerEnter2D(Collider2D other) {
 		Destroy(this.gameObject);
-     }
-	 void OnDestroy() {
-	 }
+	}
+	
+	void OnDestroy() {
+	}
 }
