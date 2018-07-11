@@ -3,7 +3,9 @@ using UnityEngine.UI;
 
 public class InventorySlot : MonoBehaviour {
 
-	string pkgName;
+	Item slotItem;
+
+	string itemName;
 	public Image icon;
 	public Text nameDisplay;
 	public Image priorityAlert; // Alert icon
@@ -13,23 +15,27 @@ public class InventorySlot : MonoBehaviour {
 		priorityAlert.enabled = false;
 	}
 
-	public void AddItem(string newName, Sprite img) {
-		pkgName = newName;
-		nameDisplay.text = pkgName;
-		icon.sprite = img;
+	public void AddItem(Item item) {
+
+		slotItem = item;
+		itemName = slotItem.itemName;
+		icon.sprite = slotItem.icon;
+
+		nameDisplay.text = slotItem.itemName;
 		icon.enabled = true;
-		Debug.Log("Added " + pkgName);
+		Debug.Log("Added " + itemName);
 	}
 
 	public void ClearSlot() {
-		pkgName = null;
+		slotItem = null;
+		itemName = null;
 		icon.sprite = null;
 		icon.enabled = false;
 	}
 
 	public void Prioritize() {
-		if (pkgName != null) {
-			Debug.Log("En route to " + pkgName);
+		if (itemName != null) {
+			Debug.Log("En route to " + itemName);
 			// Display alert icon
 			priorityAlert.enabled = true;
 			// Prevent slot from being clicked again
@@ -38,7 +44,7 @@ public class InventorySlot : MonoBehaviour {
 	}
 
 	public void Deprioritize() {
-		if (pkgName != null) {
+		if (itemName != null) {
 			if (!prioritizeBtn.interactable) {
 				priorityAlert.enabled = false;
 				prioritizeBtn.interactable = true;

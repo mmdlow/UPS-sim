@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour {
 
-	public List<string> items = new List<string>(); // Randomized item name list
-	public List<Sprite> spriteRand = new List<Sprite>(); // Randomized sprite list
+	public List<Item> items = new List<Item>(); // Randomized item name list
 
 	public int maxSpace = 9;
 	public int priorityPkg = -1; // Current priority package
@@ -21,7 +20,7 @@ public class Inventory : MonoBehaviour {
 
 	public Sprite[] sprites; // Package sprites to choose from
 
-	string[] pkgNames = new string[] {
+	string[] itemNames = new string[] {
 		"AK-47", "ANTIQUE DRESS", "ARMADILLO",
 		"BAT FOOD", "BLOOD BAGS", "BOMB", "BONG", "BOOKS",
 		"CAT FOOD", "CHINA VASE", "CLAY VASE", "CONDOMS", "CREEPY DOLL",
@@ -60,9 +59,13 @@ public class Inventory : MonoBehaviour {
 		}
 		for (int i = 0; i < numItems; i++) {
 			// Pick a random pkg name
-			items.Add(pkgNames[Mathf.RoundToInt(Random.Range(0, pkgNames.Length - 1))]);
+			string itemName = itemNames[Mathf.RoundToInt(Random.Range(0, itemNames.Length - 1))];
 			// Pick a random pkg sprite from sprites, add to spriteRand
-			spriteRand.Add(sprites[Mathf.RoundToInt(Random.Range(0, sprites.Length - 1))]);
+			Sprite itemImg = sprites[Mathf.RoundToInt(Random.Range(0, sprites.Length - 1))];
+
+			GameObject itemContainer = new GameObject(); // Temp GameObject that will hold an Item instance
+			Item item = Item.InitItem(itemContainer, itemName, "HIGH", itemImg);
+			items.Add(item);
 		}
 		Debug.Log("Generated " + numItems + " packages");
 		if (onItemChangedCallback != null) {
@@ -72,7 +75,7 @@ public class Inventory : MonoBehaviour {
 		GeneratePackagesBtn.SetActive(false);
 	}
 
-	public void Remove(string item) {
+	public void Remove(Item item) {
 		items.Remove(item);
 		if (onItemChangedCallback != null) {
 			onItemChangedCallback.Invoke();

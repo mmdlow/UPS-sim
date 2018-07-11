@@ -35,7 +35,7 @@ public class InventoryUI : MonoBehaviour {
 		for (int i = 0; i < slots.Length; i++) {
 			if (i < inventory.items.Count) {
 				// pass pkg name and a random pkg sprite from our array
-				slots[i].AddItem(inventory.items[i], inventory.spriteRand[i]);
+				slots[i].AddItem(inventory.items[i]);
 			} else {
 				slots[i].ClearSlot();
 			}
