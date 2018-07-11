@@ -18,6 +18,9 @@
          healthDisplay.text = health.ToString();
      }  
 
+     void Update() {
+     }
+
      IEnumerator DisplayDamage () {
         damageDisplay.CrossFadeAlpha(1, 0f, false);
         yield return new WaitForSeconds(2);
@@ -79,9 +82,5 @@
  
          rb.AddForce(rb.GetRelativeVector(relativeForce));
          //Debug.Log(transform.position.x + " " + transform.position.y);
-     }
-     
-     void Update() {
-         //waypoint = boardManager.GetCurrentWaypoint();
      }
  }
