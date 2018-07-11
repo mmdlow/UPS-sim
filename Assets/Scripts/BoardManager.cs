@@ -1,20 +1,18 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using Random = UnityEngine.Random;
-
+﻿using UnityEngine;
+using UnityEngine.UI;
 /*
 	BoardManager manages instances of Unity scenes i.e. levels. For every new 
 	scene there should be a new instance of boardManager.
 
 	GM and BM follow the singleton pattern, i.e. there can only be one.
-	GameObject, their static methods, and BM should all communicate using 
-	message passing.
  */
 public class BoardManager : MonoBehaviour {
 
 	public static BoardManager instance = null;
+
+	public float gameTime = 90f;
+
+	public Text timer;
 
 	void Awake() {
 		if (instance == null) {
@@ -24,22 +22,17 @@ public class BoardManager : MonoBehaviour {
 		}
 	}
 
-	public void SetupLevel() {
-		Waypoint.Init();
+	void Start() {
+		timer = GameObject.Find("Timer").GetComponent<Text>();
 	}
 
-	// Use message passing to talk to BM. Check your spelling!
-	public void Send(String message) {
-		switch(message) {
-			case "LoadNextWaypoint":
-				Waypoint.LoadNextWaypoint();
-				break;
-			default:
-				Debug.LogError("Unknown message! Check your spelling.");
-				break;
-		}
+	void Update() {
+		UpdateGameTime();
 	}
-	public void StartLevel() {
-		this.Send("LoadNextWaypoint");  // Try to avoid directly calling Waypoint.LoadNextWaypoint()
+	void UpdateGameTime() {
+		if (gameTime > 0) gameTime -= Time.deltaTime;
+		int actualGameTime = Mathf.RoundToInt(gameTime);
+		if (actualGameTime == 0) Debug.Log("Game Over");
+		timer.text = actualGameTime.ToString();
 	}
 }
