@@ -9,7 +9,7 @@ public class Waypoint : MonoBehaviour {
 	private static List<Vector3Int> reachablePositions = new List<Vector3Int>();
 	private BoardManager boardManager;
 
-	public static void Init() {
+	public static void Start() {
 		ground = GameObject.Find("Ground");
 	}
 
