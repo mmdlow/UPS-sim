@@ -3,26 +3,41 @@ using UnityEngine.UI;
 
 public class InventorySlot : MonoBehaviour {
 
-	Item slotItem;
+	Inventory inventory;
 
+	Item slotItem;
 	string itemName;
 	public Image icon;
 	public Text nameDisplay;
 	public Image priorityAlert; // Alert icon
-	public Button prioritizeBtn; // Slot object itself is a button
+	Button prioritizeBtn; // Slot object itself is a button
 
 	void Start() {
 		priorityAlert.enabled = false;
+		inventory = Inventory.instance;
+		prioritizeBtn = GetComponentInChildren<Button>();
+		prioritizeBtn.interactable = false;
+	}
+
+	public Item GetSlotItem() {
+		return slotItem;
 	}
 
 	public void AddItem(Item item) {
 
 		slotItem = item;
-		itemName = slotItem.itemName;
-		icon.sprite = slotItem.icon;
+		itemName = slotItem.GetItemName();
+		icon.sprite = slotItem.GetItemIcon();
 
-		nameDisplay.text = slotItem.itemName;
+		nameDisplay.text = itemName;
 		icon.enabled = true;
+
+		//Only allow slot item to be prioritized if it actually contains an item
+		prioritizeBtn.interactable = true;
+		prioritizeBtn.onClick.AddListener(delegate {
+			inventory.UpdateItemPriorities(slotItem);
+		});
+
 		Debug.Log("Added " + itemName);
 	}
 
@@ -34,17 +49,19 @@ public class InventorySlot : MonoBehaviour {
 	}
 
 	public void Prioritize() {
-		if (itemName != null) {
+		if (slotItem != null) {
 			Debug.Log("En route to " + itemName);
 			// Display alert icon
 			priorityAlert.enabled = true;
 			// Prevent slot from being clicked again
 			prioritizeBtn.interactable = false;
+			// Update the static method in Item script
+			Item.ChangePriority(slotItem);
 		}
 	}
 
 	public void Deprioritize() {
-		if (itemName != null) {
+		if (slotItem != null) {
 			if (!prioritizeBtn.interactable) {
 				priorityAlert.enabled = false;
 				prioritizeBtn.interactable = true;

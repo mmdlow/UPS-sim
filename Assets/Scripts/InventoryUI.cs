@@ -7,22 +7,25 @@ public class InventoryUI : MonoBehaviour {
 	public Transform itemsParent; // Reference Slot Parent to access slots
 	//public Sprite[] spriteCol; // Package sprites to choose from
 	public GameObject inventoryUI; // Reference UI
-	bool hasPackages;
 	Inventory inventory;
 	InventorySlot[] slots; // Array of inventory slots
 
 	// Use this for initialization
 	void Start () {
+		// Close inventory by default
+		inventoryUI.SetActive(false);
 		inventory = Inventory.instance;
+		Debug.Log("Starting inventoryUI");
 		inventory.onItemChangedCallback += UpdateUI;
+		Debug.Log("[UI] delegate is empty: " + (inventory.onItemChangedCallback == null));
 		inventory.onPriorityChangedCallback += UpdatePriority;
 		slots = itemsParent.GetComponentsInChildren<InventorySlot>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		// Only let player close inventory after generating packages
-		if (hasPackages && Input.GetButtonDown("Inventory")) {
+		// Allow player to open/close inventory
+		if (Input.GetButtonDown("Inventory")) {
 			inventoryUI.SetActive(!inventoryUI.activeSelf);
 		}
 	}
@@ -40,7 +43,6 @@ public class InventoryUI : MonoBehaviour {
 				slots[i].ClearSlot();
 			}
 		}
-		hasPackages = true;
 	}
 
 	/* Loop thorugh inventory slots and updates priority package based on
@@ -48,7 +50,8 @@ public class InventoryUI : MonoBehaviour {
 	void UpdatePriority() {
 		Debug.Log("Updating package priority");
 		for (int i = 0; i < slots.Length; i++) {
-			if (i == inventory.priorityPkg) {
+			Item slotItem = slots[i].GetSlotItem();
+			if (slotItem != null && slotItem.Equals(inventory.priorityItem)) {
 				slots[i].Prioritize();
 			} else {
 				slots[i].Deprioritize();
