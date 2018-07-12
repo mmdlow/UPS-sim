@@ -35,16 +35,13 @@ public class GameManager : MonoBehaviour {
 			Destroy(gameObject); // enforce singleton pattern wrt GameManger
 		}
 		DontDestroyOnLoad(gameObject);
-		InitGame();
 	}
 
 	void Start() {
 		if (BoardManager.instance == null) {
 			Instantiate(boardManager);
 		}
-	}
 
-	void InitGame() {
 		doingSetup = true;
 
 		levelStart = GameObject.Find("Level Start Screen");

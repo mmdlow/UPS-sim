@@ -15,7 +15,6 @@ public class PlayerController : MonoBehaviour {
     public int health;
     public Text healthDisplay;
     public Text damageDisplay;
-    public GameObject waypoint;
     private Rigidbody2D rb;
 
     void Start () {
