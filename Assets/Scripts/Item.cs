@@ -11,8 +11,8 @@ public class Item : MonoBehaviour {
 	float itemBreakFactor; // Affected by drb -> Item resilience to damage
 	int itemIntegrity; // Item health -> Any damage to item = Player damage * BreakFactor
 	Sprite icon;
-	//public Dropzone dropzone;
 
+	public GameObject dropzonePrefab;
 	public static Inventory inventory;
 	public static Item priority = null;
 	public static List<Item> items = new List<Item>(); // Randomized item list
@@ -109,6 +109,12 @@ public class Item : MonoBehaviour {
 		LevelStart.onClick.AddListener(delegate {
 			inventory.AddInventoryItemList(items);
 		});
+	}
+
+	void Start() {
+		if (dropzonePrefab != null) {
+			Instantiate(dropzonePrefab);
+		}
 	}
 
 	public static void ChangePriority(Item item) {
