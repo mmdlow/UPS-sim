@@ -3,18 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class Waypoint : MonoBehaviour {
+public class Dropzone : MonoBehaviour {
 
-    private static GameObject ground;
-	private static List<Vector3Int> reachablePositions = new List<Vector3Int>();
-	private BoardManager boardManager;
-
-	public static void Start() {
-		ground = GameObject.Find("Ground");
-	}
+	private static List<Vector3Int> reachablePositions;
 
 	public static void InitReachablePositions() {
-		reachablePositions.Clear();
+		reachablePositions = new List<Vector3Int>();
+		GameObject ground = GameObject.Find("Ground");
 		Tilemap groundTilemap = ground.transform.Find("Tilemap-ground").gameObject.GetComponent(typeof(Tilemap)) as Tilemap;
         // TileBase[] groundTilesArray = groundTilemap.GetTilesBlock(groundTilemap.cellBounds);
 		for (int x=groundTilemap.origin.x; x<groundTilemap.size.x; x++) {
@@ -27,24 +22,25 @@ public class Waypoint : MonoBehaviour {
 		}
 	}
 
-	public static void LayoutWaypointAtRandom() {
-		Vector3 randomPosition = reachablePositions[Random.Range (0, reachablePositions.Count)];
+	public static Vector3 GetRandomPosition() {
+        int randomIndex = Random.Range(0, reachablePositions.Count);
+        Vector3 randomPosition = reachablePositions[randomIndex];
+        reachablePositions.RemoveAt(randomIndex);
+        return randomPosition;
 	}
 
-	public static void LoadNextWaypoint() {
-	}
-	void Awake () {
-		boardManager = BoardManager.instance;
-	}
 	
-	// Update is called once per frame
+	void Start() {
+		if (reachablePositions == null) {
+			InitReachablePositions();
+		}
+		transform.position = GetRandomPosition();
+	}
+
 	void Update () {
 	}
 
 	void OnTriggerEnter2D(Collider2D other) {
 		Destroy(this.gameObject);
-	}
-	
-	void OnDestroy() {
 	}
 }
