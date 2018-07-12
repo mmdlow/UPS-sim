@@ -6,6 +6,9 @@ public class PlayerController : MonoBehaviour {
 
     GameManager gameManager;
 
+    public delegate void OnSustainDamage(int damage);
+    public OnSustainDamage onSustainDamageCallback;
+
     public float acceleration;
     public float steering;
     public float damageConstant = 2f;
@@ -34,6 +37,11 @@ public class PlayerController : MonoBehaviour {
     void OnCollisionEnter2D (Collision2D col) {
         int damage = Mathf.RoundToInt(damageConstant * col.relativeVelocity.magnitude);
         health -= damage;
+
+        // For updating item integrities upon sustaining player damage
+        if (onSustainDamageCallback != null) {
+            onSustainDamageCallback(damage);
+        }
 
         if (damage > 0) {
             damageDisplay.text = (-damage).ToString();

@@ -129,6 +129,7 @@ public class Item : MonoBehaviour {
 
 	public int UpdateIntegrity(int playerDamage) {
 		itemIntegrity -= Mathf.RoundToInt(playerDamage * itemBreakFactor);
+		if (itemIntegrity <= 25) Debug.Log("Warning! " + itemName + " at risk");
 		return itemIntegrity;
 	}
 }

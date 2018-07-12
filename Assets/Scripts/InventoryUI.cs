@@ -5,21 +5,23 @@ using UnityEngine;
 public class InventoryUI : MonoBehaviour {
 
 	public Transform itemsParent; // Reference Slot Parent to access slots
-	//public Sprite[] spriteCol; // Package sprites to choose from
 	public GameObject inventoryUI; // Reference UI
 	Inventory inventory;
 	InventorySlot[] slots; // Array of inventory slots
+	PlayerController player;
 
 	// Use this for initialization
 	void Start () {
 		// Close inventory by default
 		inventoryUI.SetActive(false);
 		inventory = Inventory.instance;
-		Debug.Log("Starting inventoryUI");
 		inventory.onItemChangedCallback += UpdateUI;
-		Debug.Log("[UI] delegate is empty: " + (inventory.onItemChangedCallback == null));
 		inventory.onPriorityChangedCallback += UpdatePriority;
+
 		slots = itemsParent.GetComponentsInChildren<InventorySlot>();
+
+		player = GameObject.Find("Player").GetComponent<PlayerController>();
+		player.onSustainDamageCallback += UpdateItemIntegrities;
 	}
 	
 	// Update is called once per frame
@@ -30,7 +32,7 @@ public class InventoryUI : MonoBehaviour {
 		}
 	}
 
-	/* Loop through all Inventory script items array, adds item to slots if
+	/* Loops through all Inventory script items array, adds item to slots if
 	there is an item to add, else clear slot. Should theoretically only be
 	called once, when Gen Pkg button is pressed */
 	void UpdateUI () {
@@ -45,7 +47,7 @@ public class InventoryUI : MonoBehaviour {
 		}
 	}
 
-	/* Loop thorugh inventory slots and updates priority package based on
+	/* Loops thorugh inventory slots and updates priority package based on
 	the corresponding index in Inventory script */
 	void UpdatePriority() {
 		Debug.Log("Updating package priority");
@@ -55,6 +57,17 @@ public class InventoryUI : MonoBehaviour {
 				slots[i].Prioritize();
 			} else {
 				slots[i].Deprioritize();
+			}
+		}
+	}
+
+	/* Loops through inventory slots and updates slot item integrities based
+	on damage sustained by player*/
+	void UpdateItemIntegrities(int damage) {
+		Debug.Log("Updating item integrities");
+		for (int i = 0; i < slots.Length; i++) {
+			if (slots[i].GetSlotItem() != null) {
+				slots[i].UpdateItemIntegrity(damage);
 			}
 		}
 	}

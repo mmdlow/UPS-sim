@@ -4,7 +4,6 @@ using UnityEngine.UI;
 public class InventorySlot : MonoBehaviour {
 
 	Inventory inventory;
-
 	Item slotItem;
 	string itemName;
 	public Image icon;
@@ -29,7 +28,7 @@ public class InventorySlot : MonoBehaviour {
 		itemName = slotItem.GetItemName();
 		icon.sprite = slotItem.GetItemIcon();
 
-		nameDisplay.text = itemName;
+		nameDisplay.text = itemName + "\n" + slotItem.UpdateIntegrity(0) + "%";
 		icon.enabled = true;
 
 		//Only allow slot item to be prioritized if it actually contains an item
@@ -37,8 +36,6 @@ public class InventorySlot : MonoBehaviour {
 		prioritizeBtn.onClick.AddListener(delegate {
 			inventory.UpdateItemPriorities(slotItem);
 		});
-
-		Debug.Log("Added " + itemName);
 	}
 
 	public void ClearSlot() {
@@ -46,6 +43,10 @@ public class InventorySlot : MonoBehaviour {
 		itemName = null;
 		icon.sprite = null;
 		icon.enabled = false;
+	}
+
+	public void UpdateItemIntegrity(int playerDamage) {
+		nameDisplay.text = itemName + "\n" + slotItem.UpdateIntegrity(playerDamage) + "%";
 	}
 
 	public void Prioritize() {
