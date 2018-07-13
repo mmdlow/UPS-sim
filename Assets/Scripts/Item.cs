@@ -74,7 +74,8 @@ public class Item : MonoBehaviour {
 	}
 
 	public static void GenerateLevelItems() {
-		Item.inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
+		//Item.inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
+		Item.inventory = Inventory.instance;
 		int numItems = Mathf.RoundToInt(Random.Range(3, Item.inventory.maxSpace));
 		if (numItems > Item.inventory.maxSpace - items.Count) {
 			Debug.Log("Not enough room");
