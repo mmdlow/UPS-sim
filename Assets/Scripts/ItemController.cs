@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Item : MonoBehaviour {
+public class ItemController : MonoBehaviour {
 
 
 	string itemName;
@@ -13,13 +13,13 @@ public class Item : MonoBehaviour {
 	Sprite icon;
 
 	public GameObject dropzonePrefab;
-	public static Item priorityItem = null;
-	public delegate void PriorityItemHandler(Item item);
+	public static GameObject priorityItem = null;
+	public delegate void PriorityItemHandler(GameObject item);
 	public static event PriorityItemHandler onPriorityItemChange;
 	public static Inventory inventory;
-	public static List<Item> items = new List<Item>(); // Randomized item list
+	public static List<GameObject> items = new List<GameObject>(); // Randomized item list
 
-	public static string[] itemNames = new string[] {
+	private static string[] itemNames = new string[] {
 		"AK-47", "ANTIQUE DRESS", "ARMADILLO",
 		"BAT FOOD", "BLOOD BAGS", "BOMB", "BONG", "BOOKS",
 		"CAT FOOD", "CHINA VASE", "CLAY VASE", "CONDOMS", "CREEPY DOLL",
@@ -114,7 +114,7 @@ public class Item : MonoBehaviour {
 		});
 	}
 
-	public static void ChangePriorityItem(Item item) {
+	public static void ChangePriorityItem(GameObject item) {
 		priorityItem = item;
 		if (onPriorityItemChange != null) {
 			onPriorityItemChange(item);
@@ -126,7 +126,7 @@ public class Item : MonoBehaviour {
 			Instantiate(dropzonePrefab);
 		}
 		if (priorityItem == null) {
-			ChangePriorityItem(this);
+			ChangePriorityItem(this.gameObject);
 		}
 	}
 

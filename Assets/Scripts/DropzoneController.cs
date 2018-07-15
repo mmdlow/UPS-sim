@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class Dropzone : MonoBehaviour {
+public class DropzoneController : MonoBehaviour {
 
 	private static List<Vector3Int> reachablePositions;
 
