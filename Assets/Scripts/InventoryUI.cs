@@ -4,22 +4,22 @@ using UnityEngine;
 
 public class InventoryUI : MonoBehaviour {
 
-	public Transform itemsParent; // Reference Slot Parent to access slots
-	public GameObject inventory; // Reference UI
 	InventorySlot[] slots; // Array of inventory slots
 	PlayerController player;
 
 	// Use this for initialization
 	void Start () {
-		inventory = transform.Find("Inventory").gameObject;
 
 		// Close inventory by default
-		inventory.SetActive(false);
-		InventoryController.instance.onItemChangedCallback += UpdateUI;
+		gameObject.SetActive(false);
+		ItemManager.instance.onItemAdd += AddSlot;
+		ItemManager.instance.onItemRemove += RemoveSlot;
 		ItemManager.instance.onPriorityItemChange += UpdatePriorityIndicator;
 
-		slots = itemsParent.GetComponentsInChildren<InventorySlot>();
-
+		slots = GetComponentsInChildren<InventorySlot>();
+		for (int i=0; i<ItemManager.instance.items.Count; i++) {
+			slots[i].SetItem(ItemManager.instance.items[i]);
+		}
 		player = GameObject.Find("Player").GetComponent<PlayerController>();
 		player.onSustainDamageCallback += UpdateItemIntegrities;
 	}
@@ -28,21 +28,35 @@ public class InventoryUI : MonoBehaviour {
 	void Update () {
 		// Allow player to open/close inventory
 		if (Input.GetButtonDown("Inventory")) {
-			inventory.SetActive(!inventory.activeSelf);
+			gameObject.SetActive(!gameObject.activeInHierarchy);
 		}
 	}
 
 	/* Loops through all Inventory script items array, adds item to slots if
 	there is an item to add, else clear slot. Should theoretically only be
 	called once, when Gen Pkg button is pressed */
-	void UpdateUI () {
-		Debug.Log("Updating UI");
-		for (int i = 0; i < slots.Length; i++) {
-			if (i < InventoryController.instance.items.Count) {
-				// pass pkg name and a random pkg sprite from our array
-				slots[i].SetItem(InventoryController.instance.items[i]);
-			} else {
+	//void UpdateUI (GameObject item) {
+	//	Debug.Log("Updating UI");
+	//	for (int i = 0; i < slots.Length; i++) {
+	//		if (!ItemManager.instance.items.Contains(slots[i].GetSlotItem())) {
+	//			slots[i].ClearSlot();
+	//			slots[i].SetItem(ItemManager.instance.items[i]);
+	//		} else {
+	//			
+	//		}
+	//	}
+	//}
+	void RemoveSlot(GameObject item) {
+		for (int i=0; i<slots.Length; i++) {
+			if (slots[i].GetSlotItem().Equals(item)) {
 				slots[i].ClearSlot();
+			}
+		}
+	}
+	void AddSlot(GameObject item) {
+		for (int i=0; i<slots.Length; i++) {
+			if (slots[i].GetSlotItem().Equals(null)) {
+				slots[i].SetItem(item);
 			}
 		}
 	}

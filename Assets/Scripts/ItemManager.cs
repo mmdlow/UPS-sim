@@ -8,9 +8,12 @@ public class ItemManager : MonoBehaviour {
 	public static ItemManager instance = null;
 
 	public GameObject itemPrefab;
+	public int maxSpace = 9;
 	public GameObject priorityItem = null;
-	public delegate void PriorityItemHandler(GameObject item);
-	public event PriorityItemHandler onPriorityItemChange;
+	public delegate void ItemChangeHandler(GameObject item);
+	public event ItemChangeHandler onPriorityItemChange;
+	public event ItemChangeHandler onItemAdd;
+	public event ItemChangeHandler onItemRemove;
 	public List<GameObject> items = new List<GameObject>();
 	public Sprite[] sprites; // Item sprites to choose from
 
@@ -31,7 +34,6 @@ public class ItemManager : MonoBehaviour {
 		List<string[]> arr = new List<string[]>();
 		System.IO.StreamReader file = new System.IO.StreamReader(@"Assets/Scripts/ITEM_NAMES.txt");
 		while ((line = file.ReadLine()) != null) {
-			Debug.Log(line);
 			string[] s = line.Split(',');
 			arr.Add(new string[] {s[0], s[1]});
 		}
@@ -41,7 +43,7 @@ public class ItemManager : MonoBehaviour {
 
 	public void InitLevelItems() {
 		List<string[]> itemNamesDurabilities = ReadItemNames();
-		int numItems = Random.Range(3, InventoryController.instance.maxSpace);
+		int numItems = Random.Range(3, maxSpace);
 		for (int i=0; i<numItems; i++) {
             int randomIndex = Random.Range(0, itemNamesDurabilities.Count);
             string[] s = itemNamesDurabilities[randomIndex];   // s[0] is name, s[1] is durability
@@ -58,5 +60,13 @@ public class ItemManager : MonoBehaviour {
 		if (onPriorityItemChange != null) {
 			onPriorityItemChange(item);
 		}
+	}
+
+	public void AddItem(GameObject item) {
+		onItemAdd(item);
+	}
+
+	public void RemoveItem(GameObject item) {
+		onItemRemove(item);
 	}
 }

@@ -21,7 +21,7 @@ public class BoardManager : MonoBehaviour {
 	Text levelMoneyText;
 	Text levelItemNamesText;
 	Text levelItemDrbText;
-	GameObject levelStart;
+	public GameObject levelStart;
 	bool doingSetup;
 
 	void Awake() {
@@ -62,8 +62,9 @@ public class BoardManager : MonoBehaviour {
 	}
 
 	public void HideLevelStart() {
-		levelStart.SetActive(false);
+		GameObject.Find("Level Start Screen").SetActive(false);
 		doingSetup = false;
+		Debug.Log("Hide level start button");
 	}
 
 	void Update() {
