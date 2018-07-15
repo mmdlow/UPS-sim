@@ -51,6 +51,9 @@ TagManager:
   - name: Truck
     uniqueID: 3280601769
     locked: 0
+  - name: Traffic
+    uniqueID: 2350095885
+    locked: 0
   - name: Truck icon
     uniqueID: 4048648547
     locked: 0
