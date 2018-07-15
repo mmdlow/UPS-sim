@@ -30,13 +30,13 @@ public class BoardManager : MonoBehaviour {
 		} else if (instance != this) {
 			Destroy(gameObject); // enforce singleton pattern wrt BoardManager
 		}
-	}
-
-	void Start() {
 
 		if (ItemManager.instance == null) {
 			Instantiate(itemManager);
 		}
+	}
+
+	void Start() {
 
 		timer = GameObject.Find("Timer").GetComponent<Text>();
 

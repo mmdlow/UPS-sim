@@ -23,11 +23,12 @@ public class GameManager : MonoBehaviour {
 			Destroy(gameObject); // enforce singleton pattern wrt GameManger
 		}
 		DontDestroyOnLoad(gameObject);
-	}
 
-	void Start() {
 		if (BoardManager.instance == null) {
 			Instantiate(boardManager);
 		}
+	}
+
+	void Start() {
 	}
 }
