@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class InventoryController : MonoBehaviour {
 
-	public List<Item> items = new List<Item>(); // Randomized item list
+	public List<GameObject> items = new List<GameObject>(); // Randomized item list
 
 	public int maxSpace = 9;
 
@@ -13,7 +13,6 @@ public class InventoryController : MonoBehaviour {
 
 	public static InventoryController instance;
 
-	public Sprite[] sprites; // Item sprites to choose from
 
 	// Create Singleton Inventory for reference
 	void Awake() {
@@ -24,14 +23,14 @@ public class InventoryController : MonoBehaviour {
 		}
 	}
 
-	public void AddInventoryItemList(List<Item> itemList) {
+	public void AddInventoryItemList(List<GameObject> itemList) {
 		items = itemList;
 		if (onItemChangedCallback != null) {
 			onItemChangedCallback.Invoke();
 		}
 	}
 
-	public void Remove(Item item) {
+	public void Remove(GameObject item) {
 		items.Remove(item);
 		if (onItemChangedCallback != null) {
 			onItemChangedCallback.Invoke();

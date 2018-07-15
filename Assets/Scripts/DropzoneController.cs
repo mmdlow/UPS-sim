@@ -11,7 +11,6 @@ public class DropzoneController : MonoBehaviour {
 		reachablePositions = new List<Vector3Int>();
 		GameObject ground = GameObject.Find("Ground");
 		Tilemap groundTilemap = ground.transform.Find("Tilemap-ground").gameObject.GetComponent(typeof(Tilemap)) as Tilemap;
-        // TileBase[] groundTilesArray = groundTilemap.GetTilesBlock(groundTilemap.cellBounds);
 		for (int x=groundTilemap.origin.x; x<groundTilemap.size.x; x++) {
 			for (int y=groundTilemap.origin.y; y<groundTilemap.size.y; y++) {
 				TileBase tile = groundTilemap.GetTile(new Vector3Int(x, y, 0));

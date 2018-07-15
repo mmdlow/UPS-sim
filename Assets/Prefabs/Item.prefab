@@ -51,3 +51,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b32d3808cd7a04a02b518061d8bac279, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dropzonePrefab: {fileID: 1470097319497444, guid: 84fa95f4e5dab4eb18f4e0c3b2fa35e2,
+    type: 2}

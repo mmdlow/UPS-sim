@@ -5,18 +5,18 @@ using UnityEngine;
 public class InventoryUI : MonoBehaviour {
 
 	public Transform itemsParent; // Reference Slot Parent to access slots
-	public GameObject inventoryUI; // Reference UI
-	Inventory inventory;
+	public GameObject inventory; // Reference UI
 	InventorySlot[] slots; // Array of inventory slots
 	PlayerController player;
 
 	// Use this for initialization
 	void Start () {
+		inventory = transform.Find("Inventory").gameObject;
+
 		// Close inventory by default
-		inventoryUI.SetActive(false);
-		inventory = Inventory.instance;
-		inventory.onItemChangedCallback += UpdateUI;
-		Item.onPriorityItemChange += UpdatePriorityIndicator;
+		inventory.SetActive(false);
+		InventoryController.instance.onItemChangedCallback += UpdateUI;
+		ItemManager.instance.onPriorityItemChange += UpdatePriorityIndicator;
 
 		slots = itemsParent.GetComponentsInChildren<InventorySlot>();
 
@@ -28,7 +28,7 @@ public class InventoryUI : MonoBehaviour {
 	void Update () {
 		// Allow player to open/close inventory
 		if (Input.GetButtonDown("Inventory")) {
-			inventoryUI.SetActive(!inventoryUI.activeSelf);
+			inventory.SetActive(!inventory.activeSelf);
 		}
 	}
 
@@ -38,9 +38,9 @@ public class InventoryUI : MonoBehaviour {
 	void UpdateUI () {
 		Debug.Log("Updating UI");
 		for (int i = 0; i < slots.Length; i++) {
-			if (i < inventory.items.Count) {
+			if (i < InventoryController.instance.items.Count) {
 				// pass pkg name and a random pkg sprite from our array
-				slots[i].AddItem(inventory.items[i]);
+				slots[i].SetItem(InventoryController.instance.items[i]);
 			} else {
 				slots[i].ClearSlot();
 			}
@@ -49,14 +49,14 @@ public class InventoryUI : MonoBehaviour {
 
 	/* Loops thorugh inventory slots and updates priority package based on
 	the corresponding index in Inventory script */
-	void UpdatePriorityIndicator(Item priorityItem) {
+	void UpdatePriorityIndicator(GameObject priorityItem) {
 		Debug.Log("Updating package priority");
 		for (int i = 0; i < slots.Length; i++) {
-			Item slotItem = slots[i].GetSlotItem();
+			GameObject slotItem = slots[i].GetSlotItem();
 			if (slotItem != null && slotItem.Equals(priorityItem)) {
-				slots[i].Prioritize();
+				slots[i].SetPriorityAlert();
 			} else {
-				slots[i].Deprioritize();
+				slots[i].UnsetPriorityAlert();
 			}
 		}
 	}

@@ -3,8 +3,7 @@ using UnityEngine.UI;
 
 public class InventorySlot : MonoBehaviour {
 
-	Inventory inventory;
-	Item slotItem;
+	GameObject slotItem;
 	string itemName;
 	public Image icon;
 	public Text nameDisplay;
@@ -13,27 +12,25 @@ public class InventorySlot : MonoBehaviour {
 
 	void Start() {
 		priorityAlert.enabled = false;
-		inventory = Inventory.instance;
 		prioritizeBtn = GetComponentInChildren<Button>();
 		prioritizeBtn.interactable = false;
 	}
 
-	public Item GetSlotItem() {
+	public GameObject GetSlotItem() {
 		return slotItem;
 	}
 
-	public void AddItem(Item item) {
-
+	public void SetItem(GameObject item) {
 		slotItem = item;
-		itemName = slotItem.GetItemName();
-		icon.sprite = slotItem.GetItemIcon();
+		itemName = slotItem.GetComponent<ItemController>().GetItemName();
+		icon.sprite = slotItem.GetComponent<ItemController>().GetItemIcon();
 
-		nameDisplay.text = itemName + "\n" + slotItem.UpdateIntegrity(0) + "%";
+		nameDisplay.text = itemName + "\n" + slotItem.GetComponent<ItemController>().UpdateIntegrity(0) + "%";
 		icon.enabled = true;
 
 		//Only allow slot item to be prioritized if it actually contains an item
 		prioritizeBtn.interactable = true;
-		prioritizeBtn.onClick.AddListener(() => Item.ChangePriorityItem(item));
+		prioritizeBtn.onClick.AddListener(() => ItemManager.instance.ChangePriorityItem(item));
 	}
 
 	public void ClearSlot() {
@@ -44,21 +41,20 @@ public class InventorySlot : MonoBehaviour {
 	}
 
 	public void UpdateItemIntegrity(int playerDamage) {
-		nameDisplay.text = itemName + "\n" + slotItem.UpdateIntegrity(playerDamage) + "%";
+		nameDisplay.text = itemName + "\n" + slotItem.GetComponent<ItemController>().UpdateIntegrity(playerDamage) + "%";
 	}
 
-	public void Prioritize() {
+	public void SetPriorityAlert() {
 		if (slotItem != null) {
 			Debug.Log("En route to " + itemName);
 			// Display alert icon
 			priorityAlert.enabled = true;
 			// Prevent slot from being clicked again
 			prioritizeBtn.interactable = false;
-			// Update the static method in Item script
 		}
 	}
 
-	public void Deprioritize() {
+	public void UnsetPriorityAlert() {
 		if (slotItem != null) {
 			if (!prioritizeBtn.interactable) {
 				priorityAlert.enabled = false;

@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4875483399116732}
   - component: {fileID: 212409548115237732}
   - component: {fileID: 61630000429526350}
-  - component: {fileID: 114207657630027642}
+  - component: {fileID: 114418418372183884}
   m_Layer: 0
   m_Name: Dropzone
   m_TagString: RedCircle
@@ -67,7 +67,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 12.8, y: 12.64}
   m_EdgeRadius: 0
---- !u!114 &114207657630027642
+--- !u!114 &114418418372183884
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -75,7 +75,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1470097319497444}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eaa974c34d51f453ea45d0279ddc5a1f, type: 3}
+  m_Script: {fileID: 11500000, guid: 810a22561df084f5095c67d1c22bba21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!212 &212409548115237732

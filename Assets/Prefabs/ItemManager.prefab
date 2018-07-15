@@ -9,50 +9,54 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1420219742455558}
+  m_RootGameObject: {fileID: 1595597867186856}
   m_IsPrefabParent: 1
---- !u!1 &1420219742455558
+--- !u!1 &1595597867186856
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4201869355878918}
-  - component: {fileID: 114473372727875732}
+  - component: {fileID: 4879526964485832}
+  - component: {fileID: 114359045731070540}
   m_Layer: 0
-  m_Name: BoardManager
+  m_Name: ItemManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4201869355878918
+--- !u!4 &4879526964485832
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1420219742455558}
+  m_GameObject: {fileID: 1595597867186856}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.0505985, y: -0.18439725, z: 4.8046875}
+  m_LocalPosition: {x: 1.1159928, y: 1.3476295, z: 6.2823467}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114473372727875732
+--- !u!114 &114359045731070540
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1420219742455558}
+  m_GameObject: {fileID: 1595597867186856}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc637dc8ca340439985580869a2224ff, type: 3}
+  m_Script: {fileID: 11500000, guid: 33e0a9f693bde429292188231aa15cee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemManager: {fileID: 114359045731070540, guid: bc7b404cee0fa4f6aaa38f0cad2408ad,
-    type: 2}
-  gameTime: 90
-  timer: {fileID: 0}
-  health: 100
+  itemPrefab: {fileID: 1959031675278994, guid: 633f4b4cf1ce07143a370716abce824a, type: 2}
+  priorityItem: {fileID: 0}
+  items: []
+  sprites:
+  - {fileID: 21300000, guid: 804bc221f0fdc1c4cbb086125631ab57, type: 3}
+  - {fileID: 21300000, guid: 9ffb9d6205f09764bb148b346bdd978b, type: 3}
+  - {fileID: 21300000, guid: 57dffb8a18da2db45894d8b0667339e5, type: 3}
+  - {fileID: 21300000, guid: 432a27f28da8e4943907fece5522bf18, type: 3}
+  - {fileID: 21300000, guid: b4df6e05b471b0040846157db72cad55, type: 3}

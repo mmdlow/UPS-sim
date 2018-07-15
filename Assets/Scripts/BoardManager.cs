@@ -10,6 +10,7 @@ public class BoardManager : MonoBehaviour {
 
 	public static BoardManager instance = null;
 
+	public ItemManager itemManager;
 	public float gameTime = 90f;
 	public Text timer;
 	public int health = 100;
@@ -32,6 +33,11 @@ public class BoardManager : MonoBehaviour {
 	}
 
 	void Start() {
+
+		if (ItemManager.instance == null) {
+			Instantiate(itemManager);
+		}
+
 		timer = GameObject.Find("Timer").GetComponent<Text>();
 
 		doingSetup = true;
@@ -47,9 +53,7 @@ public class BoardManager : MonoBehaviour {
 		levelHealthText.text = health.ToString();
 		levelMoneyText.text = money.ToString();
 
-		ItemController.InitLevelItems();
-
-		foreach(GameObject item in ItemController.items) {
+		foreach(GameObject item in ItemManager.instance.items) {
 			levelItemNamesText.text += item.GetComponent<ItemController>().GetItemName() + "\n";
 			levelItemDrbText.text += item.GetComponent<ItemController>().GetItemDurability() + "\n";
 		}

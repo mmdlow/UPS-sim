@@ -52,9 +52,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc637dc8ca340439985580869a2224ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ground: {fileID: 0}
-  waypoint: {fileID: 0}
-  waypointCount: 10
+  itemManager: {fileID: 114359045731070540, guid: bc7b404cee0fa4f6aaa38f0cad2408ad,
+    type: 2}
+  gameTime: 90
+  timer: {fileID: 0}
+  health: 100
 --- !u!114 &114593235881517624
 MonoBehaviour:
   m_ObjectHideFlags: 1

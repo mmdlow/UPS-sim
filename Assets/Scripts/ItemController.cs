@@ -13,51 +13,37 @@ public class ItemController : MonoBehaviour {
 	Sprite icon;
 
 	public GameObject dropzonePrefab;
-	public static GameObject itemPrefab;
-	public static GameObject priorityItem = null;
-	public delegate void PriorityItemHandler(GameObject item);
-	public static event PriorityItemHandler onPriorityItemChange;
-	public static List<GameObject> items = new List<GameObject>(); // Randomized item list
 
+	public void UpdateStats(string name, string drb, Sprite icon) {
+		this.itemName = name;
+		this.durability = drb;
+		this.itemIntegrity = 100;
+		this.icon = icon;
 
-	private static List<string[]> ReadItemNames() {
-		string line;
-		List<string[]> arr = new List<string[]>();
-		System.IO.StreamReader file = new System.IO.StreamReader(@"ITEM_NAMES.txt");
-		while ((line = file.ReadLine()) != null) {
-			Debug.Log(line);
-			string[] s = line.Split(',');
-			arr.Add(new string[] {s[0], s[1]});
-		}
-		file.Close();
-		return arr;
-	}
-
-	public static void InitLevelItems() {
-		List<string[]> itemNamesDurabilities = ReadItemNames();
-		int numItems = Random.Range(3, InventoryController.instance.maxSpace);
-		for (int i=0; i<numItems; i++) {
-            int randomIndex = Random.Range(0, itemNamesDurabilities.Count);
-            string[] s = itemNamesDurabilities[randomIndex];
-            itemNamesDurabilities.RemoveAt(randomIndex);
-			GameObject itemClone = Instantiate(itemPrefab);
-
+		// Set Item Integrity
+		switch (durability) {
+			case "H":
+				this.itemBreakFactor = 1f;
+				break;
+			case "M":
+				this.itemBreakFactor = 1.5f;
+				break;
+			case "L":
+				this.itemBreakFactor = 2f;
+				break;
+			default:
+				Debug.LogWarning("Invalid durability status");
+				break;
 		}
 	}
 
-	public static void ChangePriorityItem(GameObject item) {
-		priorityItem = item;
-		if (onPriorityItemChange != null) {
-			onPriorityItemChange(item);
-		}
-	}
 
 	void Start() {
 		if (dropzonePrefab != null) {
 			Instantiate(dropzonePrefab);
 		}
-		if (priorityItem == null) {
-			ChangePriorityItem(this.gameObject);
+		if (ItemManager.instance.priorityItem == null) {
+			ItemManager.instance.ChangePriorityItem(this.gameObject);
 		}
 	}
 
