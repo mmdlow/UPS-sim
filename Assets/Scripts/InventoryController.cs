@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Inventory : MonoBehaviour {
+public class InventoryController : MonoBehaviour {
 
 	public List<Item> items = new List<Item>(); // Randomized item list
 
@@ -11,7 +11,7 @@ public class Inventory : MonoBehaviour {
 	public delegate void OnItemChanged();
 	public OnItemChanged onItemChangedCallback;
 
-	public static Inventory instance;
+	public static InventoryController instance;
 
 	public Sprite[] sprites; // Item sprites to choose from
 
