@@ -33,9 +33,7 @@ public class InventorySlot : MonoBehaviour {
 
 		//Only allow slot item to be prioritized if it actually contains an item
 		prioritizeBtn.interactable = true;
-		prioritizeBtn.onClick.AddListener(delegate {
-			inventory.UpdateItemPriorities(slotItem);
-		});
+		prioritizeBtn.onClick.AddListener(() => Item.ChangePriorityItem(item));
 	}
 
 	public void ClearSlot() {
@@ -57,7 +55,6 @@ public class InventorySlot : MonoBehaviour {
 			// Prevent slot from being clicked again
 			prioritizeBtn.interactable = false;
 			// Update the static method in Item script
-			Item.ChangePriority(slotItem);
 		}
 	}
 

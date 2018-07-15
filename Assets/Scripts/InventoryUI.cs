@@ -16,7 +16,7 @@ public class InventoryUI : MonoBehaviour {
 		inventoryUI.SetActive(false);
 		inventory = Inventory.instance;
 		inventory.onItemChangedCallback += UpdateUI;
-		inventory.onPriorityChangedCallback += UpdatePriority;
+		Item.onPriorityItemChange += UpdatePriorityIndicator;
 
 		slots = itemsParent.GetComponentsInChildren<InventorySlot>();
 
@@ -49,11 +49,11 @@ public class InventoryUI : MonoBehaviour {
 
 	/* Loops thorugh inventory slots and updates priority package based on
 	the corresponding index in Inventory script */
-	void UpdatePriority() {
+	void UpdatePriorityIndicator(Item priorityItem) {
 		Debug.Log("Updating package priority");
 		for (int i = 0; i < slots.Length; i++) {
 			Item slotItem = slots[i].GetSlotItem();
-			if (slotItem != null && slotItem.Equals(inventory.priorityItem)) {
+			if (slotItem != null && slotItem.Equals(priorityItem)) {
 				slots[i].Prioritize();
 			} else {
 				slots[i].Deprioritize();

@@ -7,13 +7,9 @@ public class Inventory : MonoBehaviour {
 	public List<Item> items = new List<Item>(); // Randomized item list
 
 	public int maxSpace = 9;
-	public Item priorityItem = null; // Current priority item
 
 	public delegate void OnItemChanged();
 	public OnItemChanged onItemChangedCallback;
-
-	public delegate void OnPriorityChanged();
-	public OnPriorityChanged onPriorityChangedCallback;
 
 	public static Inventory instance;
 
@@ -21,11 +17,11 @@ public class Inventory : MonoBehaviour {
 
 	// Create Singleton Inventory for reference
 	void Awake() {
-		if (instance != null) {
-			Debug.LogWarning("More than one instance of Inventory found!");
-			return;
+		if (instance == null) {
+			instance = this;
+		} else if (instance != this) {
+			Destroy(this.gameObject); // enforce singleton pattern
 		}
-		instance = this;
 	}
 
 	public void AddInventoryItemList(List<Item> itemList) {
@@ -39,13 +35,6 @@ public class Inventory : MonoBehaviour {
 		items.Remove(item);
 		if (onItemChangedCallback != null) {
 			onItemChangedCallback.Invoke();
-		}
-	}
-
-	public void UpdateItemPriorities(Item item) {
-		priorityItem = item;
-		if (onPriorityChangedCallback != null) {
-			onPriorityChangedCallback.Invoke();
 		}
 	}
 }

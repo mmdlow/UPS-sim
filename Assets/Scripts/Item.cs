@@ -13,8 +13,10 @@ public class Item : MonoBehaviour {
 	Sprite icon;
 
 	public GameObject dropzonePrefab;
+	public static Item priorityItem = null;
+	public delegate void PriorityItemHandler(Item item);
+	public static event PriorityItemHandler onPriorityItemChange;
 	public static Inventory inventory;
-	public static Item priority = null;
 	public static List<Item> items = new List<Item>(); // Randomized item list
 
 	public static string[] itemNames = new string[] {
@@ -112,14 +114,20 @@ public class Item : MonoBehaviour {
 		});
 	}
 
+	public static void ChangePriorityItem(Item item) {
+		priorityItem = item;
+		if (onPriorityItemChange != null) {
+			onPriorityItemChange(item);
+		}
+	}
+
 	void Start() {
 		if (dropzonePrefab != null) {
 			Instantiate(dropzonePrefab);
 		}
-	}
-
-	public static void ChangePriority(Item item) {
-		priority = item;
+		if (priorityItem == null) {
+			ChangePriorityItem(this);
+		}
 	}
 
 	public string GetItemName() {
