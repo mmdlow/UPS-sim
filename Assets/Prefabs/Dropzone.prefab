@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 61630000429526350}
   - component: {fileID: 114207657630027642}
   m_Layer: 0
-  m_Name: Dropzone 1
+  m_Name: Dropzone
   m_TagString: RedCircle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

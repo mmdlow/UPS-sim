@@ -18,8 +18,7 @@ public class PlayerController : MonoBehaviour {
     private Rigidbody2D rb;
 
     void Start () {
-        gameManager = GameManager.instance;
-        health = gameManager.health; // Use health field in game manager
+        health = BoardManager.instance.health; // Use health field in game manager
         rb = GetComponent<Rigidbody2D>();
         healthDisplay.text = health.ToString();
     }  
@@ -92,6 +91,5 @@ public class PlayerController : MonoBehaviour {
         Debug.DrawLine((Vector3)rb.position, (Vector3)rb.GetRelativePoint(relativeForce), Color.red);
 
         rb.AddForce(rb.GetRelativeVector(relativeForce));
-        //Debug.Log(transform.position.x + " " + transform.position.y);
     }
 }
