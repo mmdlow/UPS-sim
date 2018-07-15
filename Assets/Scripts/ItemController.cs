@@ -19,27 +19,6 @@ public class ItemController : MonoBehaviour {
 	public static Inventory inventory;
 	public static List<GameObject> items = new List<GameObject>(); // Randomized item list
 
-	private static string[] itemNames = new string[] {
-		"AK-47", "ANTIQUE DRESS", "ARMADILLO",
-		"BAT FOOD", "BLOOD BAGS", "BOMB", "BONG", "BOOKS",
-		"CAT FOOD", "CHINA VASE", "CLAY VASE", "CONDOMS", "CREEPY DOLL",
-		"DESIGNER CLOTHES", "DILDOS", "DOG FOOD", "DORITOS", "DUCT TAPE", 
-		"EMPTY BOX",
-		"FAECES", "FEDORA", "FIREWORKS", "FIGURINES",
-		"GLITTER", "GUITAR", "GARLIC", "GLASS BOX",
-		"HAND BAG", "HARD DRIVE", "HEADPHONES", "HOOKAH", "HOLY WATER",
-		"INSECTISIDE",
-		"KATANA", "KETCHUP", "KEYBOARD", "KNIFE",
-		"LAMP", "LAPTOP", "LATEX SUIT", "LEATHER JACKET", 
-		"MACBOOK", "MACHETE", "MARIJUANA", "MYSTERY BOX",
-		"PARROT", "PIRANHA", "PORTAL GUN",
-		"RAT POISON", "RATS", "RATTLING BOX",
-		"SENTRY GUN", "SHOTGUN", "SOAP", "STRAP-ONS", "STUFFED TOY",
-		"TABLE", "TV SET", "TOWELS", "TRENCHCOAT",
-		"UMBRELLA",
-		"WARDROBE", "WHIP", "WIRE"
-	};
-
 	void UpdateStats(string name, string drb, Sprite icon) {
 		this.itemName = name;
 		this.durability = drb;
@@ -112,6 +91,27 @@ public class ItemController : MonoBehaviour {
 		LevelStart.onClick.AddListener(delegate {
 			inventory.AddInventoryItemList(items);
 		});
+	}
+
+	private static List<string[]> ReadItemNames() {
+		string line;
+		List<string[]> arr = new List<string[]>();
+		System.IO.StreamReader file = new System.IO.StreamReader(@"ITEM_NAMES.txt");
+		while ((line = file.ReadLine()) != null) {
+			Debug.Log(line);
+			string[] s = line.Split(',');
+			arr.Add(new string[] {s[0], s[1]});
+		}
+		file.Close();
+		return arr;
+	}
+
+	public static void InitLevelItems() {
+		List<string[]> itemNamesDurabilities = ReadItemNames();
+		int numItems = Random.Range(3, InventoryController.instance.maxSpace);
+		for (int i=0; i<numItems; i++) {
+
+		}
 	}
 
 	public static void ChangePriorityItem(GameObject item) {
