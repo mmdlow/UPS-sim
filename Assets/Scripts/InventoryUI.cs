@@ -32,20 +32,6 @@ public class InventoryUI : MonoBehaviour {
 		}
 	}
 
-	/* Loops through all Inventory script items array, adds item to slots if
-	there is an item to add, else clear slot. Should theoretically only be
-	called once, when Gen Pkg button is pressed */
-	//void UpdateUI (GameObject item) {
-	//	Debug.Log("Updating UI");
-	//	for (int i = 0; i < slots.Length; i++) {
-	//		if (!ItemManager.instance.items.Contains(slots[i].GetSlotItem())) {
-	//			slots[i].ClearSlot();
-	//			slots[i].SetItem(ItemManager.instance.items[i]);
-	//		} else {
-	//			
-	//		}
-	//	}
-	//}
 	void RemoveSlot(GameObject item) {
 		for (int i=0; i<slots.Length; i++) {
 			if (slots[i].GetSlotItem().Equals(item)) {

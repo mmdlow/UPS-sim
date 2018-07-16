@@ -23,10 +23,10 @@ public class ItemManager : MonoBehaviour {
 		} else if (instance != this) {
 			Destroy(gameObject); // enforce singleton pattern
 		}
+        InitLevelItems();
 	}
 
 	void Start() {
-		InitLevelItems();
 	}
 
 	private List<string[]> ReadItemNames() {

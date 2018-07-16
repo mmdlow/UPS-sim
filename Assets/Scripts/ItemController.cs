@@ -37,7 +37,6 @@ public class ItemController : MonoBehaviour {
 		}
 	}
 
-
 	void Start() {
 		if (dropzonePrefab != null) {
 			Instantiate(dropzonePrefab);
