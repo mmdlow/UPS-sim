@@ -63,10 +63,12 @@ public class ItemManager : MonoBehaviour {
 	}
 
 	public void AddItem(GameObject item) {
+		items.Add(item);
 		onItemAdd(item);
 	}
 
 	public void RemoveItem(GameObject item) {
+		items.Remove(item);
 		onItemRemove(item);
 	}
 }
