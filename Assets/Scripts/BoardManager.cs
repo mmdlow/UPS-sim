@@ -25,6 +25,7 @@ public class BoardManager : MonoBehaviour {
 	bool doingSetup;
 	GameObject inventory;
 	GameObject worldmap;
+	GameObject minimap;
 	Button levelStartBtn;
 
 	void Awake() {
@@ -65,6 +66,7 @@ public class BoardManager : MonoBehaviour {
 
 		inventory = GameObject.Find("Inventory");
 		worldmap = GameObject.Find("Worldmap");
+		minimap = GameObject.Find("Minimap");
 		levelStartBtn = GameObject.Find("Level Start Button").GetComponent<Button>();
 		levelStartBtn.onClick.AddListener(HideLevelStart);
 		inventory.SetActive(false);
@@ -82,6 +84,7 @@ public class BoardManager : MonoBehaviour {
 		if (Input.GetButtonDown("Inventory")) {
 			inventory.SetActive(!inventory.activeInHierarchy);
 			worldmap.SetActive(!worldmap.activeInHierarchy);
+			minimap.SetActive(!minimap.activeInHierarchy);
 		}
 	}
 
