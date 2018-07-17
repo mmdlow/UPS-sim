@@ -11,7 +11,7 @@ public class InventoryUI : MonoBehaviour {
 	void Start () {
 
 		// Close inventory by default
-		gameObject.SetActive(false);
+		//gameObject.SetActive(false);
 		ItemManager.instance.onItemAdd += AddSlot;
 		ItemManager.instance.onItemRemove += RemoveSlot;
 		ItemManager.instance.onPriorityItemChange += UpdatePriorityIndicator;
@@ -27,9 +27,10 @@ public class InventoryUI : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		// Allow player to open/close inventory
-		if (Input.GetButtonDown("Inventory")) {
-			gameObject.SetActive(!gameObject.activeInHierarchy);
-		}
+		// if (Input.GetButtonDown("Inventory")) {
+		// 	Debug.Log("Toggling inventory");
+		// 	gameObject.SetActive(!gameObject.activeInHierarchy);
+		// }
 	}
 
 	void RemoveSlot(GameObject item) {

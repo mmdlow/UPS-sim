@@ -23,6 +23,8 @@ public class BoardManager : MonoBehaviour {
 	Text levelItemDrbText;
 	public GameObject levelStart;
 	bool doingSetup;
+	GameObject inventory;
+	Button levelStartBtn;
 
 	void Awake() {
 		if (instance == null) {
@@ -59,17 +61,26 @@ public class BoardManager : MonoBehaviour {
 		}
 
 		levelStart.SetActive(true);
+
+		inventory = GameObject.Find("Inventory");
+		levelStartBtn = GameObject.Find("Level Start Button").GetComponent<Button>();
+		levelStartBtn.onClick.AddListener(HideLevelStart);
+		inventory.SetActive(false);
 	}
 
-	public void HideLevelStart() {
-		GameObject.Find("Level Start Screen").SetActive(false);
+	void HideLevelStart() {
 		doingSetup = false;
-		Debug.Log("Hide level start button");
+		GameObject.Find("Level Start Screen").SetActive(false);
 	}
 
 	void Update() {
+		if (doingSetup) return;
 		UpdateGameTime();
+		if (Input.GetButtonDown("Inventory")) {
+			inventory.SetActive(!inventory.activeInHierarchy);
+		}
 	}
+	
 	void UpdateGameTime() {
 		if (gameTime > 0) gameTime -= Time.deltaTime;
 		int actualGameTime = Mathf.RoundToInt(gameTime);
