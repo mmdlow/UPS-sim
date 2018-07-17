@@ -7,7 +7,7 @@ public class WorldmapUI : MonoBehaviour {
 
 	public GameObject locationMarker;
 
-	List<Transform> locations = new List<Transform>();
+	List<GameObject> markers = new List<GameObject>();
 
 	// Use this for initialization
 	void Start () {
@@ -22,9 +22,9 @@ public class WorldmapUI : MonoBehaviour {
 			Debug.LogWarning("Error: dropzone does not exist");
 			return;
 		}
-		locations.Add(dropzone.transform);
-		GameObject loc = Instantiate(locationMarker, dropzone.transform.position, Quaternion.identity);
-		loc.layer = LayerMask.NameToLayer("Worldmap");
+		GameObject marker = Instantiate(locationMarker, dropzone.transform.position, Quaternion.identity);
+		marker.layer = LayerMask.NameToLayer("Worldmap");
+		markers.Add(marker);
 	}
 
 	void RemoveLocation(GameObject item) {
@@ -33,7 +33,15 @@ public class WorldmapUI : MonoBehaviour {
 			Debug.LogWarning("Error: dropzone does not exist");
 			return;
 		}
-		locations.Remove(dropzone.transform);
+		GameObject markerToRemove = null;
+		foreach (GameObject marker in markers) {
+			if (marker.transform.position == dropzone.transform.position) {
+				markerToRemove = marker;
+				break;
+			}
+		}
+		markers.Remove(markerToRemove);
+		Destroy(markerToRemove);
 	}
 	
 	// Update is called once per frame

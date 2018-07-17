@@ -24,6 +24,7 @@ public class BoardManager : MonoBehaviour {
 	public GameObject levelStart;
 	bool doingSetup;
 	GameObject inventory;
+	GameObject worldmap;
 	Button levelStartBtn;
 
 	void Awake() {
@@ -63,9 +64,11 @@ public class BoardManager : MonoBehaviour {
 		levelStart.SetActive(true);
 
 		inventory = GameObject.Find("Inventory");
+		worldmap = GameObject.Find("Worldmap");
 		levelStartBtn = GameObject.Find("Level Start Button").GetComponent<Button>();
 		levelStartBtn.onClick.AddListener(HideLevelStart);
 		inventory.SetActive(false);
+		worldmap.SetActive(false);
 	}
 
 	void HideLevelStart() {
@@ -78,9 +81,10 @@ public class BoardManager : MonoBehaviour {
 		UpdateGameTime();
 		if (Input.GetButtonDown("Inventory")) {
 			inventory.SetActive(!inventory.activeInHierarchy);
+			worldmap.SetActive(!worldmap.activeInHierarchy);
 		}
 	}
-	
+
 	void UpdateGameTime() {
 		if (gameTime > 0) gameTime -= Time.deltaTime;
 		int actualGameTime = Mathf.RoundToInt(gameTime);
