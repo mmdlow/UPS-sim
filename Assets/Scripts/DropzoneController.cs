@@ -7,6 +7,8 @@ public class DropzoneController : MonoBehaviour {
 
 	private static List<Vector3Int> reachablePositions;
 
+	public GameObject locationPin;
+
 	public static void InitReachablePositions() {
 		reachablePositions = new List<Vector3Int>();
 		GameObject ground = GameObject.Find("Ground");
@@ -34,6 +36,8 @@ public class DropzoneController : MonoBehaviour {
 			InitReachablePositions();
 		}
 		transform.position = GetRandomPosition();
+		GameObject pin = Instantiate(locationPin, transform.position, Quaternion.identity);
+		pin.layer = LayerMask.NameToLayer("WorldMap");
 	}
 
 	void Update () {
