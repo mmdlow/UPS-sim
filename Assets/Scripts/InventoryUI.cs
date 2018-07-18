@@ -43,7 +43,7 @@ public class InventoryUI : MonoBehaviour {
 	/* Loops thorugh inventory slots and updates priority package based on
 	the corresponding index in Inventory script */
 	void UpdatePriorityIndicator(GameObject priorityItem) {
-		Debug.Log("Updating package priority");
+		Debug.Log("Updating item priorities");
 		for (int i = 0; i < slots.Length; i++) {
 			GameObject slotItem = slots[i].GetSlotItem();
 			if (slotItem != null && slotItem.Equals(priorityItem)) {

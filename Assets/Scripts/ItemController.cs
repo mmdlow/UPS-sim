@@ -13,6 +13,7 @@ public class ItemController : MonoBehaviour {
 	Sprite icon;
 
 	public GameObject dropzonePrefab;
+	GameObject dropzone;
 
 	public void UpdateStats(string name, string drb, Sprite icon) {
 		this.itemName = name;
@@ -39,11 +40,11 @@ public class ItemController : MonoBehaviour {
 
 	void Start() {
 		if (dropzonePrefab != null) {
-			Instantiate(dropzonePrefab);
+			dropzone = Instantiate(dropzonePrefab);
 		}
-		if (ItemManager.instance.priorityItem == null) {
-			ItemManager.instance.ChangePriorityItem(this.gameObject);
-		}
+		// if (ItemManager.instance.priorityItem == null) {
+		// 	ItemManager.instance.ChangePriorityItem(this.gameObject);
+		// }
 	}
 
 	public string GetItemName() {
@@ -59,7 +60,7 @@ public class ItemController : MonoBehaviour {
 	}
 
 	public GameObject GetDropzone() {
-		return dropzonePrefab;
+		return dropzone;
 	}
 
 	public int UpdateIntegrity(int playerDamage) {

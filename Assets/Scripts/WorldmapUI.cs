@@ -11,8 +11,6 @@ public class WorldmapUI : MonoBehaviour {
 	List<GameObject> smallPins = new List<GameObject>();
 	List<GameObject> bigPins = new List<GameObject>();
 
-	Color original;
-
 	// Use this for initialization
 	void Start () {
 		ItemManager.instance.onPriorityItemChange += UpdatePinPriority;
@@ -29,20 +27,24 @@ public class WorldmapUI : MonoBehaviour {
 		GameObject smallPin = Instantiate(locationPinSmall, location, Quaternion.identity);
 		bigPins.Add(bigPin);
 		smallPins.Add(smallPin);
- 		original = bigPin.GetComponentInChildren<Renderer>().material.GetColor("_Color");	
 	}
 
 	void UpdatePinPriority(GameObject priorityItem) {
+		Debug.Log("Updating pin priority, locations count: " + locations.Count);
 		for (int i = 0; i < locations.Count; i++) {
 			Vector3 itemLoc = locations[i];
 			Vector3 piLoc = priorityItem.GetComponent<ItemController>().GetDropzone().GetComponent<DropzoneController>().transform.position;
 			if (itemLoc == piLoc) {
-				Debug.Log("Updating pin color");
-				bigPins[i].GetComponentInChildren<Renderer>().material.color = Color.yellow;
-				smallPins[i].GetComponentInChildren<Renderer>().material.color = Color.yellow;
+				Color temp = bigPins[i].GetComponentInChildren<SpriteRenderer>().color;
+				temp.a = 1f;
+				bigPins[i].GetComponentInChildren<SpriteRenderer>().color = temp;				
+				smallPins[i].GetComponentInChildren<SpriteRenderer>().color = temp;
+
 			} else {
-				bigPins[i].GetComponentInChildren<Renderer>().material.color = original;
-				smallPins[i].GetComponentInChildren<Renderer>().material.color = original;
+				Color temp = bigPins[i].GetComponentInChildren<SpriteRenderer>().color;
+				temp.a = 0.5f;
+				bigPins[i].GetComponentInChildren<SpriteRenderer>().color = temp;
+				smallPins[i].GetComponentInChildren<SpriteRenderer>().color = temp;
 			}
 		}
 	}
