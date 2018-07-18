@@ -69,13 +69,13 @@ public class BoardManager : MonoBehaviour {
 		minimap = GameObject.Find("Minimap");
 		levelStartBtn = GameObject.Find("Level Start Button").GetComponent<Button>();
 		levelStartBtn.onClick.AddListener(HideLevelStart);
-		inventory.SetActive(false);
-		worldmap.SetActive(false);
 	}
 
 	void HideLevelStart() {
 		doingSetup = false;
 		GameObject.Find("Level Start Screen").SetActive(false);
+		inventory.SetActive(false);
+		worldmap.SetActive(false);
 	}
 
 	void Update() {

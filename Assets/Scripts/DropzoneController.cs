@@ -7,9 +7,12 @@ public class DropzoneController : MonoBehaviour {
 
 	private static List<Vector3Int> reachablePositions;
 
-	public GameObject locationPinBig;
-	public GameObject locationPinSmall;
-	public GameObject player;
+	public WorldmapUI worldmap;
+
+	// public GameObject locationPinBig;
+	// public GameObject locationPinSmall;
+	// GameObject bigPin;
+	// GameObject smallPin;
 
 	public static void InitReachablePositions() {
 		reachablePositions = new List<Vector3Int>();
@@ -37,15 +40,9 @@ public class DropzoneController : MonoBehaviour {
 		if (reachablePositions == null) {
 			InitReachablePositions();
 		}
-		player = GameObject.Find("Player");
 		transform.position = GetRandomPosition();
-		GameObject bigPin = Instantiate(locationPinBig, transform.position, Quaternion.identity);
-		//bigPin.layer = LayerMask.NameToLayer("WorldMap");
-		GameObject smallPin = Instantiate(locationPinSmall, transform.position, Quaternion.identity);
-		//smallPin.layer = LayerMask.NameToLayer("Minimap");
-	}
-
-	void Update () {
+		worldmap = GameObject.Find("Worldmap").GetComponent<WorldmapUI>();
+		worldmap.AddPin(transform.position);
 	}
 
 	void OnTriggerEnter2D(Collider2D other) {
