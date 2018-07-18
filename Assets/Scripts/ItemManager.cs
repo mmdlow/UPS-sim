@@ -63,11 +63,13 @@ public class ItemManager : MonoBehaviour {
 	}
 
 	public void AddItem(GameObject item) {
+		// Might not work!
 		items.Add(item);
 		onItemAdd(item);
 	}
 
 	public void RemoveItem(GameObject item) {
+		Destroy(item);
 		items.Remove(item);
 		onItemRemove(item);
 	}
