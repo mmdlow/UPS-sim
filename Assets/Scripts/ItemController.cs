@@ -41,6 +41,7 @@ public class ItemController : MonoBehaviour {
 	void Start() {
 		if (dropzonePrefab != null) {
 			dropzone = Instantiate(dropzonePrefab);
+			dropzone.GetComponent<DropzoneController>().SetItem(this.gameObject);
 		}
 		// if (ItemManager.instance.priorityItem == null) {
 		// 	ItemManager.instance.ChangePriorityItem(this.gameObject);
@@ -67,5 +68,8 @@ public class ItemController : MonoBehaviour {
 		itemIntegrity -= Mathf.RoundToInt(playerDamage * itemBreakFactor);
 		if (itemIntegrity <= 25) Debug.Log("Warning! " + itemName + " at risk");
 		return itemIntegrity;
+	}
+	void OnDestroy() {
+		Destroy(dropzone);
 	}
 }

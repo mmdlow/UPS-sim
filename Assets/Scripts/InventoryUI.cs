@@ -9,8 +9,8 @@ public class InventoryUI : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		ItemManager.instance.onItemAdd += AddSlot;
-		ItemManager.instance.onItemRemove += RemoveSlot;
+		ItemManager.instance.onItemAdd += UpdateUI;
+		ItemManager.instance.onItemRemove += UpdateUI;
 		ItemManager.instance.onPriorityItemChange += UpdatePriorityIndicator;
 
 		slots = GetComponentsInChildren<InventorySlot>();
@@ -21,21 +21,15 @@ public class InventoryUI : MonoBehaviour {
 		player.onSustainDamageCallback += UpdateItemIntegrities;
 	}
 	
-	// Update is called once per frame
 	void Update () {
 	}
 
-	void RemoveSlot(GameObject item) {
+	void UpdateUI (GameObject item) {
 		for (int i=0; i<slots.Length; i++) {
-			if (slots[i].GetSlotItem().Equals(item)) {
+			if (i < ItemManager.instance.items.Count) {
+				slots[i].SetItem(ItemManager.instance.items[i]);
+			} else {
 				slots[i].ClearSlot();
-			}
-		}
-	}
-	void AddSlot(GameObject item) {
-		for (int i=0; i<slots.Length; i++) {
-			if (slots[i].GetSlotItem().Equals(null)) {
-				slots[i].SetItem(item);
 			}
 		}
 	}

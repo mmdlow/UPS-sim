@@ -36,6 +36,7 @@ public class InventorySlot : MonoBehaviour {
 	public void ClearSlot() {
 		slotItem = null;
 		itemName = null;
+		nameDisplay.text = null;
 		icon.sprite = null;
 		icon.enabled = false;
 	}
@@ -61,5 +62,8 @@ public class InventorySlot : MonoBehaviour {
 				prioritizeBtn.interactable = true;
 			}
 		}
+	}
+	public bool IsEmpty() {
+		return slotItem == null;
 	}
 }

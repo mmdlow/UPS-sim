@@ -8,6 +8,7 @@ public class DropzoneController : MonoBehaviour {
 	private static List<Vector3Int> reachablePositions;
 	public MapPinManager worldmap;
 	private BoxCollider2D boxCol;
+	public GameObject item;
 	private int MIN_HEIGHT = 50;
 	private int MAX_HEIGHT = 100;
 	private int MIN_WIDTH = 50;
@@ -47,7 +48,7 @@ public class DropzoneController : MonoBehaviour {
 		}
 		transform.position = GetRandomPosition();
 		worldmap = GameObject.Find("Worldmap").GetComponent<MapPinManager>();
-		worldmap.AddPin(transform.position);
+		worldmap.AddPin(item);
 
 		InitBoxCol();
 	}
@@ -72,7 +73,13 @@ public class DropzoneController : MonoBehaviour {
 		outline.SetPositions(positions);
 	}
 
+	public void SetItem(GameObject item) {
+		this.item = item;
+	}
+
 	void OnTriggerEnter2D(Collider2D other) {
-		Destroy(this.gameObject);
+		if (item != null) {
+            ItemManager.instance.RemoveItem(item);
+		}
 	}
 }
