@@ -16,6 +16,15 @@ public class PlayerController : MonoBehaviour {
     public Text healthDisplay;
     public Text damageDisplay;
     private Rigidbody2D rb;
+    public static GameObject instance;
+
+	void Awake() {
+		if (instance == null) {
+			instance = this.gameObject;
+		} else if (instance != this) {
+			Destroy(this.gameObject); // enforce singleton pattern 
+		}
+	}
 
     void Start () {
         health = BoardManager.instance.health; // Use health field in game manager

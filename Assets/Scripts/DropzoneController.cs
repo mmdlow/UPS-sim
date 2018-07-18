@@ -6,8 +6,14 @@ using UnityEngine.Tilemaps;
 public class DropzoneController : MonoBehaviour {
 
 	private static List<Vector3Int> reachablePositions;
-
 	public MapPinManager worldmap;
+	public WorldmapUI worldmap;
+	private BoxCollider2D boxCol;
+	private int MIN_HEIGHT = 50;
+	private int MAX_HEIGHT = 100;
+	private int MIN_WIDTH = 50;
+	private int MAX_WIDTH = 100;
+    private LineRenderer outline; // Line Renderer
 
 	// public GameObject locationPinBig;
 	// public GameObject locationPinSmall;
@@ -43,6 +49,28 @@ public class DropzoneController : MonoBehaviour {
 		transform.position = GetRandomPosition();
 		worldmap = GameObject.Find("Worldmap").GetComponent<MapPinManager>();
 		worldmap.AddPin(transform.position);
+
+		InitBoxCol();
+	}
+
+	void InitBoxCol() {
+		boxCol = GetComponent<BoxCollider2D>();
+		int height = Random.Range(MIN_HEIGHT, MAX_HEIGHT);
+		int width = Random.Range(MIN_WIDTH, MAX_WIDTH);
+		boxCol.size = new Vector3(height, width, 0f);
+
+        outline = this.gameObject.AddComponent<LineRenderer>();
+		Vector3[] positions = new Vector3[5];
+        positions[0] = new Vector3(0.5f*(boxCol.offset.x + boxCol.size.x), 0.5f*(boxCol.offset.y - boxCol.size.y), -1);
+        positions[1] = new Vector3(0.5f*(boxCol.offset.x - boxCol.size.x), 0.5f*(boxCol.offset.y - boxCol.size.y), -1);
+        positions[2] = new Vector3(0.5f*(boxCol.offset.x - boxCol.size.x), 0.5f*(boxCol.offset.y + boxCol.size.y), -1);
+        positions[3] = new Vector3(0.5f*(boxCol.offset.x + boxCol.size.x), 0.5f*(boxCol.offset.y + boxCol.size.y), -1);
+		positions[4] = positions[0];
+		outline.positionCount = positions.Length;
+        outline.startWidth = 0.05F;
+        outline.endWidth = 0.05F;
+		outline.useWorldSpace = false;
+		outline.SetPositions(positions);
 	}
 
 	void OnTriggerEnter2D(Collider2D other) {
