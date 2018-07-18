@@ -7,7 +7,6 @@ public class DropzoneController : MonoBehaviour {
 
 	private static List<Vector3Int> reachablePositions;
 	public MapPinManager worldmap;
-	public WorldmapUI worldmap;
 	private BoxCollider2D boxCol;
 	private int MIN_HEIGHT = 50;
 	private int MAX_HEIGHT = 100;
