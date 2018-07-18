@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WorldmapUI : MonoBehaviour {
+public class MapPinManager : MonoBehaviour {
 
 	public GameObject locationPinBig;
 	public GameObject locationPinSmall;
@@ -10,6 +10,9 @@ public class WorldmapUI : MonoBehaviour {
 	List<Vector3> locations = new List<Vector3>();
 	List<GameObject> smallPins = new List<GameObject>();
 	List<GameObject> bigPins = new List<GameObject>();
+
+	Color pinColor;
+	float disabledAlpha = 0.3f;
 
 	// Use this for initialization
 	void Start () {
@@ -25,6 +28,10 @@ public class WorldmapUI : MonoBehaviour {
 		locations.Add(location);
 		GameObject bigPin = Instantiate(locationPinBig, location, Quaternion.identity);
 		GameObject smallPin = Instantiate(locationPinSmall, location, Quaternion.identity);
+		pinColor = bigPin.GetComponentInChildren<SpriteRenderer>().color;
+		pinColor.a = disabledAlpha;
+		bigPin.GetComponentInChildren<SpriteRenderer>().color = pinColor;
+		smallPin.SetActive(false);				
 		bigPins.Add(bigPin);
 		smallPins.Add(smallPin);
 	}
@@ -35,16 +42,14 @@ public class WorldmapUI : MonoBehaviour {
 			Vector3 itemLoc = locations[i];
 			Vector3 piLoc = priorityItem.GetComponent<ItemController>().GetDropzone().GetComponent<DropzoneController>().transform.position;
 			if (itemLoc == piLoc) {
-				Color temp = bigPins[i].GetComponentInChildren<SpriteRenderer>().color;
-				temp.a = 1f;
-				bigPins[i].GetComponentInChildren<SpriteRenderer>().color = temp;				
-				smallPins[i].GetComponentInChildren<SpriteRenderer>().color = temp;
+				pinColor.a = 1f;
+				bigPins[i].GetComponentInChildren<SpriteRenderer>().color = pinColor;			
+				smallPins[i].SetActive(true);
 
 			} else {
-				Color temp = bigPins[i].GetComponentInChildren<SpriteRenderer>().color;
-				temp.a = 0.5f;
-				bigPins[i].GetComponentInChildren<SpriteRenderer>().color = temp;
-				smallPins[i].GetComponentInChildren<SpriteRenderer>().color = temp;
+				pinColor.a = disabledAlpha;
+				bigPins[i].GetComponentInChildren<SpriteRenderer>().color = pinColor;
+				smallPins[i].SetActive(false);
 			}
 		}
 	}

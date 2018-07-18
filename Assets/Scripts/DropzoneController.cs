@@ -7,7 +7,7 @@ public class DropzoneController : MonoBehaviour {
 
 	private static List<Vector3Int> reachablePositions;
 
-	public WorldmapUI worldmap;
+	public MapPinManager worldmap;
 
 	// public GameObject locationPinBig;
 	// public GameObject locationPinSmall;
@@ -18,8 +18,8 @@ public class DropzoneController : MonoBehaviour {
 		reachablePositions = new List<Vector3Int>();
 		GameObject ground = GameObject.Find("Ground");
 		Tilemap groundTilemap = ground.transform.Find("Tilemap-ground").gameObject.GetComponent(typeof(Tilemap)) as Tilemap;
-		for (int x=groundTilemap.origin.x; x<groundTilemap.size.x; x++) {
-			for (int y=groundTilemap.origin.y; y<groundTilemap.size.y; y++) {
+		for (int x=groundTilemap.origin.x; x<groundTilemap.size.x; x += 12) {
+			for (int y=groundTilemap.origin.y; y<groundTilemap.size.y; y += 12) {
 				TileBase tile = groundTilemap.GetTile(new Vector3Int(x, y, 0));
 				if (tile != null && tile.name.StartsWith("pavement")) {
 					reachablePositions.Add(new Vector3Int(x, y, 0));
@@ -41,7 +41,7 @@ public class DropzoneController : MonoBehaviour {
 			InitReachablePositions();
 		}
 		transform.position = GetRandomPosition();
-		worldmap = GameObject.Find("Worldmap").GetComponent<WorldmapUI>();
+		worldmap = GameObject.Find("Worldmap").GetComponent<MapPinManager>();
 		worldmap.AddPin(transform.position);
 	}
 
