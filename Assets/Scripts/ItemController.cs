@@ -67,7 +67,4 @@ public class ItemController : MonoBehaviour {
 		if (itemIntegrity <= 25) Debug.Log("Warning! " + itemName + " at risk");
 		return itemIntegrity;
 	}
-	void OnDestroy() {
-		Destroy(dropzone);
-	}
 }

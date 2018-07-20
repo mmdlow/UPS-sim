@@ -57,7 +57,6 @@ public class PlayerController : MonoBehaviour {
 
         if (health <= 0) {
             healthDisplay.text = "0";
-            Debug.Log("Game Over");
             return;
         }
         if (health < 100 && health > 25) healthDisplay.color = Color.white;

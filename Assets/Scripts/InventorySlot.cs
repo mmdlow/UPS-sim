@@ -21,6 +21,7 @@ public class InventorySlot : MonoBehaviour {
 	}
 
 	public void SetItem(GameObject item) {
+		Debug.Log("Setting item from invslot " + item.name);
 		slotItem = item;
 		itemName = slotItem.GetComponent<ItemController>().GetItemName();
 		icon.sprite = slotItem.GetComponent<ItemController>().GetItemIcon();
@@ -30,7 +31,8 @@ public class InventorySlot : MonoBehaviour {
 
 		//Only allow slot item to be prioritized if it actually contains an item
 		prioritizeBtn.interactable = true;
-		prioritizeBtn.onClick.AddListener(() => ItemManager.instance.ChangePriorityItem(item));
+		prioritizeBtn.onClick.RemoveAllListeners();
+		prioritizeBtn.onClick.AddListener( delegate { ItemManager.instance.ChangePriorityItem(slotItem);});
 	}
 
 	public void ClearSlot() {
@@ -40,6 +42,7 @@ public class InventorySlot : MonoBehaviour {
 		icon.sprite = null;
 		icon.enabled = false;
 		prioritizeBtn.interactable = false;
+		prioritizeBtn.onClick.RemoveAllListeners();
 	}
 
 	public void UpdateItemIntegrity(int playerDamage) {

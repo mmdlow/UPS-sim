@@ -91,7 +91,7 @@ public class BoardManager : MonoBehaviour {
 	void UpdateGameTime() {
 		if (gameTime > 0) gameTime -= Time.deltaTime;
 		int actualGameTime = Mathf.RoundToInt(gameTime);
-		if (actualGameTime == 0) Debug.Log("Game Over");
+		if (actualGameTime == 0) {} ;
 		timer.text = actualGameTime.ToString();
 	}
 }

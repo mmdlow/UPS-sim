@@ -30,8 +30,10 @@ public class InventoryUI : MonoBehaviour {
 				slots[i].SetItem(ItemManager.instance.items[i]);
 			} else {
 				slots[i].ClearSlot();
+				slots[i].UnsetPriorityAlert();
 			}
 		}
+		UpdatePriorityIndicator(ItemManager.instance.priorityItem);
 	}
 
 	/* Loops thorugh inventory slots and updates priority package based on

@@ -19,4 +19,7 @@ public class MapPinController : MonoBehaviour {
 		}
 		transform.rotation = player.transform.rotation;
 	}
+	void OnDestroy() {
+		MapPinManager.instance.RemovePin(this.gameObject);
+	}
 }

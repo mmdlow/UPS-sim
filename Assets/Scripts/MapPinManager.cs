@@ -6,7 +6,7 @@ public class MapPinManager : MonoBehaviour {
 
 	public GameObject locationPinBig;
 	public GameObject locationPinSmall;
-	
+	public static MapPinManager instance = null;
 
 	List<Vector3> locations = new List<Vector3>();
 	List<GameObject> smallPins = new List<GameObject>();
@@ -15,7 +15,13 @@ public class MapPinManager : MonoBehaviour {
 	Color pinColor;
 	float disabledAlpha = 0.3f;
 
-	// Use this for initialization
+	void Awake() {
+		if (instance == null) {
+			instance = this;
+		} else if (instance != this) {
+			Destroy(gameObject); // enforce singleton pattern
+		}
+	}
 	void Start () {
 		ItemManager.instance.onPriorityItemChange += UpdatePinPriority;
 	}
@@ -55,5 +61,10 @@ public class MapPinManager : MonoBehaviour {
 				smallPins[i].SetActive(false);
 			}
 		}
+	}
+	public void RemovePin(GameObject pin) {
+		bigPins.Remove(pin);
+		smallPins.Remove(pin);
+		locations.Remove(pin.transform.position);
 	}
 }

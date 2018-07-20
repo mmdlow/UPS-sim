@@ -69,9 +69,12 @@ public class ItemManager : MonoBehaviour {
 	}
 
 	public void RemoveItem(GameObject item) {
-		Debug.Log("Item removed");
 		items.Remove(item);
+		if (priorityItem == item) {
+			ChangePriorityItem(items[0]);
+		}
 		onItemRemove(item);
+		// if priority item is destroyed, change to sth else
 		Destroy(item);
 	}
 }
