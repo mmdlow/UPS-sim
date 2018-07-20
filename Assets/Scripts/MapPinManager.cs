@@ -23,14 +23,9 @@ public class MapPinManager : MonoBehaviour {
 		}
 	}
 	void Start () {
-		ItemManager.instance.onPriorityItemChange += UpdatePinPriority;
+		//ItemManager.instance.onPriorityItemChange += UpdatePinPriority;
 	}
 	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
 	public void AddPin(GameObject dropzone) {
 		locations.Add(dropzone.transform.position);
 		GameObject bigPin = Instantiate(locationPinBig, dropzone.transform.position, Quaternion.identity);
@@ -56,6 +51,7 @@ public class MapPinManager : MonoBehaviour {
 				smallPins[i].SetActive(true);
 
 			} else {
+				// What is it trying to acheive i.e. what happens to pins when diabled?
 				pinColor.a = disabledAlpha;
 				bigPins[i].GetComponentInChildren<SpriteRenderer>().color = pinColor;
 				smallPins[i].SetActive(false);

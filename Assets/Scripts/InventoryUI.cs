@@ -14,35 +14,33 @@ public class InventoryUI : MonoBehaviour {
 		ItemManager.instance.onPriorityItemChange += UpdatePriorityIndicator;
 
 		slots = GetComponentsInChildren<InventorySlot>();
-		for (int i=0; i<ItemManager.instance.items.Count; i++) {
-			slots[i].SetItem(ItemManager.instance.items[i]);
-		}
+		UpdateUI(null);
 		player = GameObject.Find("Player").GetComponent<PlayerController>();
 		player.onSustainDamageCallback += UpdateItemIntegrities;
 	}
 	
-	void Update () {
-	}
-
 	void UpdateUI (GameObject item) {
 		for (int i=0; i<slots.Length; i++) {
 			if (i < ItemManager.instance.items.Count) {
 				slots[i].SetItem(ItemManager.instance.items[i]);
+				if (ItemManager.instance.items[i] == ItemManager.instance.priorityItem) {
+					slots[i].SetPriorityAlert();
+				} else {
+					slots[i].UnsetPriorityAlert();
+				}
 			} else {
 				slots[i].ClearSlot();
-				slots[i].UnsetPriorityAlert();
 			}
 		}
-		UpdatePriorityIndicator(ItemManager.instance.priorityItem);
 	}
 
 	/* Loops thorugh inventory slots and updates priority package based on
 	the corresponding index in Inventory script */
 	void UpdatePriorityIndicator(GameObject priorityItem) {
-		Debug.Log("Updating item priorities");
+		Debug.Log("Update Priority indicator called");
 		for (int i = 0; i < slots.Length; i++) {
 			GameObject slotItem = slots[i].GetSlotItem();
-			if (slotItem != null && slotItem.Equals(priorityItem)) {
+			if (slotItem != null && slotItem == priorityItem) {
 				slots[i].SetPriorityAlert();
 			} else {
 				slots[i].UnsetPriorityAlert();

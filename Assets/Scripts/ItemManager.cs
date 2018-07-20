@@ -72,9 +72,8 @@ public class ItemManager : MonoBehaviour {
 		items.Remove(item);
 		if (priorityItem == item) {
 			ChangePriorityItem(items[0]);
-		}
+		} 
 		onItemRemove(item);
-		// if priority item is destroyed, change to sth else
 		Destroy(item);
 	}
 }

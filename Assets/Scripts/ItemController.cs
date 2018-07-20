@@ -41,7 +41,7 @@ public class ItemController : MonoBehaviour {
 	void Start() {
 		if (dropzonePrefab != null) {
 			dropzone = Instantiate(dropzonePrefab);
-			dropzone.GetComponent<DropzoneController>().SetItem(gameObject);
+			dropzone.GetComponent<DropzoneController>().SetItem(this.gameObject);
 			dropzone.transform.parent = gameObject.transform;
 		}
 	}

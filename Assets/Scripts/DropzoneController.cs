@@ -17,8 +17,8 @@ public class DropzoneController : MonoBehaviour {
 
 	// public GameObject locationPinBig;
 	// public GameObject locationPinSmall;
-	// GameObject bigPin;
-	// GameObject smallPin;
+	private GameObject bigPin;
+	private GameObject smallPin;
 
 	public static void InitReachablePositions() {
 		reachablePositions = new List<Vector3Int>();
@@ -49,6 +49,8 @@ public class DropzoneController : MonoBehaviour {
 		transform.position = GetRandomPosition();
 		worldmap = GameObject.Find("Worldmap").GetComponent<MapPinManager>();
 		worldmap.AddPin(this.gameObject);
+		smallPin = transform.GetChild(0).gameObject;
+		bigPin = transform.GetChild(0).gameObject;
 
 		InitBoxCol();
 	}
@@ -78,9 +80,14 @@ public class DropzoneController : MonoBehaviour {
 	}
 
 	void OnTriggerEnter2D(Collider2D other) {
-		Debug.Log("dropzone entered");
+		Debug.Log("dropzone entered of item : " + item.GetComponent<ItemController>().GetItemName());
 		if (item != null) {
             ItemManager.instance.RemoveItem(item);
 		}
 	}
+
+	//void OnDestroy() {
+	//	MapPinManager.instance.RemovePin(smallPin);
+	//	MapPinManager.instance.RemovePin(bigPin);
+	//}
 }
