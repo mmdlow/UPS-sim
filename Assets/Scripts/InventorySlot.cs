@@ -39,6 +39,7 @@ public class InventorySlot : MonoBehaviour {
 		nameDisplay.text = null;
 		icon.sprite = null;
 		icon.enabled = false;
+		prioritizeBtn.interactable = false;
 	}
 
 	public void UpdateItemIntegrity(int playerDamage) {

@@ -48,7 +48,7 @@ public class DropzoneController : MonoBehaviour {
 		}
 		transform.position = GetRandomPosition();
 		worldmap = GameObject.Find("Worldmap").GetComponent<MapPinManager>();
-		worldmap.AddPin(item);
+		worldmap.AddPin(this.gameObject);
 
 		InitBoxCol();
 	}
@@ -78,6 +78,7 @@ public class DropzoneController : MonoBehaviour {
 	}
 
 	void OnTriggerEnter2D(Collider2D other) {
+		Debug.Log("dropzone entered");
 		if (item != null) {
             ItemManager.instance.RemoveItem(item);
 		}

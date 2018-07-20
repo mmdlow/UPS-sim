@@ -69,8 +69,9 @@ public class ItemManager : MonoBehaviour {
 	}
 
 	public void RemoveItem(GameObject item) {
-		Destroy(item);
+		Debug.Log("Item removed");
 		items.Remove(item);
 		onItemRemove(item);
+		Destroy(item);
 	}
 }

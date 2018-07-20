@@ -6,6 +6,7 @@ public class MapPinManager : MonoBehaviour {
 
 	public GameObject locationPinBig;
 	public GameObject locationPinSmall;
+	
 
 	List<Vector3> locations = new List<Vector3>();
 	List<GameObject> smallPins = new List<GameObject>();
@@ -24,14 +25,16 @@ public class MapPinManager : MonoBehaviour {
 		
 	}
 
-	public void AddPin(Vector3 location) {
-		locations.Add(location);
-		GameObject bigPin = Instantiate(locationPinBig, location, Quaternion.identity);
-		GameObject smallPin = Instantiate(locationPinSmall, location, Quaternion.identity);
+	public void AddPin(GameObject dropzone) {
+		locations.Add(dropzone.transform.position);
+		GameObject bigPin = Instantiate(locationPinBig, dropzone.transform.position, Quaternion.identity);
+		GameObject smallPin = Instantiate(locationPinSmall, dropzone.transform.position, Quaternion.identity);
 		pinColor = bigPin.GetComponentInChildren<SpriteRenderer>().color;
 		pinColor.a = disabledAlpha;
 		bigPin.GetComponentInChildren<SpriteRenderer>().color = pinColor;
 		smallPin.SetActive(false);				
+		bigPin.transform.parent = dropzone.transform;
+		smallPin.transform.parent = dropzone.transform;
 		bigPins.Add(bigPin);
 		smallPins.Add(smallPin);
 	}

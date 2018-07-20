@@ -41,11 +41,9 @@ public class ItemController : MonoBehaviour {
 	void Start() {
 		if (dropzonePrefab != null) {
 			dropzone = Instantiate(dropzonePrefab);
-			dropzone.GetComponent<DropzoneController>().SetItem(this.gameObject);
+			dropzone.GetComponent<DropzoneController>().SetItem(gameObject);
+			dropzone.transform.parent = gameObject.transform;
 		}
-		// if (ItemManager.instance.priorityItem == null) {
-		// 	ItemManager.instance.ChangePriorityItem(this.gameObject);
-		// }
 	}
 
 	public string GetItemName() {
