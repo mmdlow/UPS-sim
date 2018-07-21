@@ -61,7 +61,7 @@ public class DropzoneController : MonoBehaviour {
 		int width = Random.Range(MIN_WIDTH, MAX_WIDTH);
 		boxCol.size = new Vector3(height, width, 0f);
 
-        outline = this.gameObject.AddComponent<LineRenderer>();
+        LineRenderer outline = GetComponent<LineRenderer>();
 		Vector3[] positions = new Vector3[5];
         positions[0] = new Vector3(0.5f*(boxCol.offset.x + boxCol.size.x), 0.5f*(boxCol.offset.y - boxCol.size.y), -1);
         positions[1] = new Vector3(0.5f*(boxCol.offset.x - boxCol.size.x), 0.5f*(boxCol.offset.y - boxCol.size.y), -1);

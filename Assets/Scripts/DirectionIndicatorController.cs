@@ -15,7 +15,7 @@ public class DirectionIndicatorController : MonoBehaviour {
 	}
 	
 	void Update () {
-		transform.position = player.transform.position + new Vector3(0, 1.2f, 0);
+		transform.position = player.transform.position;// + new Vector3(0, 1.2f, 0);
         Vector3 dir = dropzone.transform.position - player.transform.position;
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 90;
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
