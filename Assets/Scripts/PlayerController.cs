@@ -17,6 +17,8 @@ public class PlayerController : MonoBehaviour {
     public Text damageDisplay;
     private Rigidbody2D rb;
     public static GameObject instance;
+    public GameObject directionIndicatorPrefab;
+    private GameObject directionIndicator;
 
 	void Awake() {
 		if (instance == null) {
@@ -24,6 +26,9 @@ public class PlayerController : MonoBehaviour {
 		} else if (instance != this) {
 			Destroy(this.gameObject); // enforce singleton pattern 
 		}
+
+        directionIndicator = Instantiate(directionIndicatorPrefab);
+        directionIndicator.transform.parent = this.gameObject.transform;
 	}
 
     void Start () {
