@@ -43,6 +43,7 @@ public class InventorySlot : MonoBehaviour {
 		icon.enabled = false;
 		prioritizeBtn.interactable = false;
 		prioritizeBtn.onClick.RemoveAllListeners();
+        priorityAlert.enabled = false;
 	}
 
 	public void UpdateItemIntegrity(int playerDamage) {
@@ -60,10 +61,12 @@ public class InventorySlot : MonoBehaviour {
 	}
 
 	public void UnsetPriorityAlert() {
-        if (!prioritizeBtn.interactable) {
-            priorityAlert.enabled = false;
+        priorityAlert.enabled = false;
+		if (slotItem != null) {
             prioritizeBtn.interactable = true;
-        }
+		} else {
+			prioritizeBtn.interactable = false;
+		}
 	}
 	public bool IsEmpty() {
 		return slotItem == null;

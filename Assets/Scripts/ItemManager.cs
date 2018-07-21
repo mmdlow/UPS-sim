@@ -70,10 +70,12 @@ public class ItemManager : MonoBehaviour {
 
 	public void RemoveItem(GameObject item) {
 		items.Remove(item);
-		if (priorityItem == item) {
-			ChangePriorityItem(items[0]);
-		} 
 		onItemRemove(item);
+		if (priorityItem == item) {
+			ChangePriorityItem(null);
+		} else {
+			ChangePriorityItem(ItemManager.instance.priorityItem);
+		}
 		Destroy(item);
 	}
 }

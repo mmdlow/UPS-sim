@@ -13,7 +13,7 @@ public class ItemController : MonoBehaviour {
 	Sprite icon;
 
 	public GameObject dropzonePrefab;
-	GameObject dropzone;
+	public GameObject dropzone;
 
 	public void UpdateStats(string name, string drb, Sprite icon) {
 		this.itemName = name;
