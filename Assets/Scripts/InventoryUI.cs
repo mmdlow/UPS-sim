@@ -23,11 +23,6 @@ public class InventoryUI : MonoBehaviour {
 		for (int i=0; i<slots.Length; i++) {
 			if (i < ItemManager.instance.items.Count) {
 				slots[i].SetItem(ItemManager.instance.items[i]);
-				if (ItemManager.instance.items[i] == ItemManager.instance.priorityItem) {
-					slots[i].SetPriorityAlert();
-				} else {
-					slots[i].UnsetPriorityAlert();
-				}
 			} else {
 				slots[i].ClearSlot();
 			}
@@ -40,9 +35,12 @@ public class InventoryUI : MonoBehaviour {
 		Debug.Log("Update Priority indicator called");
 		for (int i = 0; i < slots.Length; i++) {
 			GameObject slotItem = slots[i].GetSlotItem();
-			if (slotItem != null && slotItem == priorityItem) {
+			if (slotItem != null && slotItem == ItemManager.instance.priorityItem) {
+				Debug.Log("Setting alert for : " + slotItem.GetComponent<ItemController>().GetItemName());
 				slots[i].SetPriorityAlert();
 			} else {
+				string name = slotItem != null ? slotItem.GetComponent<ItemController>().GetItemName() : "NULL" ;
+				Debug.Log("UNSetting alert for : " + name);
 				slots[i].UnsetPriorityAlert();
 			}
 		}

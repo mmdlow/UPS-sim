@@ -17,8 +17,8 @@ public class DropzoneController : MonoBehaviour {
 
 	// public GameObject locationPinBig;
 	// public GameObject locationPinSmall;
-	private GameObject bigPin;
-	private GameObject smallPin;
+	public GameObject bigPin;
+	public GameObject smallPin;
 
 	public static void InitReachablePositions() {
 		reachablePositions = new List<Vector3Int>();
@@ -49,8 +49,8 @@ public class DropzoneController : MonoBehaviour {
 		transform.position = GetRandomPosition();
 		worldmap = GameObject.Find("Worldmap").GetComponent<MapPinManager>();
 		worldmap.AddPin(this.gameObject);
-		smallPin = transform.GetChild(0).gameObject;
 		bigPin = transform.GetChild(0).gameObject;
+		smallPin = transform.GetChild(1).gameObject;
 
 		InitBoxCol();
 	}

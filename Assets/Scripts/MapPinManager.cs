@@ -23,7 +23,8 @@ public class MapPinManager : MonoBehaviour {
 		}
 	}
 	void Start () {
-		//ItemManager.instance.onPriorityItemChange += UpdatePinPriority;
+		ItemManager.instance.onItemRemove += RemovePin;
+		ItemManager.instance.onPriorityItemChange += UpdatePinPriority;
 	}
 	
 	public void AddPin(GameObject dropzone) {
@@ -44,23 +45,24 @@ public class MapPinManager : MonoBehaviour {
 		Debug.Log("Updating pin priority, locations count: " + locations.Count);
 		for (int i = 0; i < locations.Count; i++) {
 			Vector3 itemLoc = locations[i];
-			Vector3 piLoc = priorityItem.GetComponent<ItemController>().GetDropzone().GetComponent<DropzoneController>().transform.position;
+			Vector3 piLoc = priorityItem != null ? priorityItem.GetComponent<ItemController>().GetDropzone().GetComponent<DropzoneController>().transform.position : new Vector3(-999, -999, -999);
 			if (itemLoc == piLoc) {
 				pinColor.a = 1f;
 				bigPins[i].GetComponentInChildren<SpriteRenderer>().color = pinColor;			
 				smallPins[i].SetActive(true);
 
 			} else {
-				// What is it trying to acheive i.e. what happens to pins when diabled?
 				pinColor.a = disabledAlpha;
 				bigPins[i].GetComponentInChildren<SpriteRenderer>().color = pinColor;
 				smallPins[i].SetActive(false);
 			}
 		}
 	}
-	public void RemovePin(GameObject pin) {
-		bigPins.Remove(pin);
-		smallPins.Remove(pin);
-		locations.Remove(pin.transform.position);
+	public void RemovePin(GameObject item) {
+		GameObject smallPin = item.GetComponent<ItemController>().dropzone.GetComponent<DropzoneController>().smallPin;
+		GameObject bigPin = item.GetComponent<ItemController>().dropzone.GetComponent<DropzoneController>().bigPin;
+		bigPins.Remove(bigPin);
+		smallPins.Remove(smallPin);
+		locations.Remove(smallPin.transform.position);
 	}
 }
