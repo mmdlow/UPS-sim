@@ -21,7 +21,6 @@ public class InventorySlot : MonoBehaviour {
 	}
 
 	public void SetItem(GameObject item) {
-		Debug.Log("Setting item from invslot " + item.GetComponent<ItemController>().GetItemName());
 		slotItem = item;
 		itemName = slotItem.GetComponent<ItemController>().GetItemName();
 		icon.sprite = slotItem.GetComponent<ItemController>().GetItemIcon();
@@ -52,7 +51,6 @@ public class InventorySlot : MonoBehaviour {
 
 	public void SetPriorityAlert() {
 		if (slotItem != null) {
-			Debug.Log("En route to " + itemName);
 			// Display alert icon
 			priorityAlert.enabled = true;
 			// Prevent slot from being clicked again

@@ -32,15 +32,12 @@ public class InventoryUI : MonoBehaviour {
 	/* Loops thorugh inventory slots and updates priority package based on
 	the corresponding index in Inventory script */
 	void UpdatePriorityIndicator(GameObject priorityItem) {
-		Debug.Log("Update Priority indicator called");
 		for (int i = 0; i < slots.Length; i++) {
 			GameObject slotItem = slots[i].GetSlotItem();
 			if (slotItem != null && slotItem == ItemManager.instance.priorityItem) {
-				Debug.Log("Setting alert for : " + slotItem.GetComponent<ItemController>().GetItemName());
 				slots[i].SetPriorityAlert();
 			} else {
 				string name = slotItem != null ? slotItem.GetComponent<ItemController>().GetItemName() : "NULL" ;
-				Debug.Log("UNSetting alert for : " + name);
 				slots[i].UnsetPriorityAlert();
 			}
 		}
@@ -49,7 +46,6 @@ public class InventoryUI : MonoBehaviour {
 	/* Loops through inventory slots and updates slot item integrities based
 	on damage sustained by player*/
 	void UpdateItemIntegrities(int damage) {
-		Debug.Log("Updating item integrities");
 		for (int i = 0; i < slots.Length; i++) {
 			if (slots[i].GetSlotItem() != null) {
 				slots[i].UpdateItemIntegrity(damage);

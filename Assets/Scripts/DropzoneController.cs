@@ -80,7 +80,6 @@ public class DropzoneController : MonoBehaviour {
 	}
 
 	void OnTriggerEnter2D(Collider2D other) {
-		Debug.Log("dropzone entered of item : " + item.GetComponent<ItemController>().GetItemName());
 		if (item != null) {
             ItemManager.instance.RemoveItem(item);
 		}
