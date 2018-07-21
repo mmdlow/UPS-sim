@@ -16,17 +16,13 @@ public class BoardManager : MonoBehaviour {
 	public int health = 100;
 	int money = 0;
 	int level = 1;
-	Text levelNumText;
-	Text levelHealthText;
-	Text levelMoneyText;
-	Text levelItemNamesText;
-	Text levelItemDrbText;
-	public GameObject levelStart;
 	bool doingSetup;
+	GameObject levelStart;
+	GameObject levelPassed;
+	GameObject gameOver;
 	GameObject inventory;
 	GameObject worldmap;
 	GameObject minimap;
-	Button levelStartBtn;
 
 	void Awake() {
 		if (instance == null) {
@@ -47,11 +43,18 @@ public class BoardManager : MonoBehaviour {
 		doingSetup = true;
 
 		levelStart = GameObject.Find("Level Start Screen");
-		levelNumText = GameObject.Find("Level Number").GetComponent<Text>();
-		levelHealthText = GameObject.Find("Level Health").GetComponent<Text>();
-		levelMoneyText = GameObject.Find("Level Money").GetComponent<Text>();
-		levelItemNamesText = GameObject.Find("Level Item Names").GetComponent<Text>();
-		levelItemDrbText = GameObject.Find("Level Item Drb").GetComponent<Text>();
+		levelPassed = GameObject.Find("Level Passed Screen");
+		gameOver = GameObject.Find("Game Over Screen");
+		levelPassed.SetActive(false);
+		gameOver.SetActive(false);
+
+		// Get content parent for levelStart
+		GameObject contentParent = levelStart.transform.Find("Level Image").gameObject;
+		Text levelNumText = contentParent.transform.Find("Level Number").GetComponent<Text>();
+		Text levelHealthText = contentParent.transform.Find("Level Health").GetComponent<Text>();
+		Text levelMoneyText = contentParent.transform.Find("Level Money").GetComponent<Text>();
+		Text levelItemNamesText = contentParent.transform.Find("Level Item Names").GetComponent<Text>();
+		Text levelItemDrbText = contentParent.transform.Find("Level Item Drb").GetComponent<Text>();
 
 		levelNumText.text = "DAY " + level;
 		levelHealthText.text = health.ToString();
@@ -67,8 +70,54 @@ public class BoardManager : MonoBehaviour {
 		inventory = GameObject.Find("Inventory");
 		worldmap = GameObject.Find("Worldmap");
 		minimap = GameObject.Find("Minimap");
-		levelStartBtn = GameObject.Find("Level Start Button").GetComponent<Button>();
+		Button levelStartBtn = contentParent.transform.Find("Level Start Button").GetComponent<Button>();
 		levelStartBtn.onClick.AddListener(HideLevelStart);
+	}
+
+	void LevelPassed() {
+		GameObject contentParent = levelPassed.transform.Find("Passed Image").Find("Dynamic Text").gameObject;
+		Text levelNumText = contentParent.transform.Find("Level Number").GetComponent<Text>();
+		Text PDText = contentParent.transform.Find("PD Text").GetComponent<Text>();
+		Text VDText = contentParent.transform.Find("VD Text").GetComponent<Text>();
+		Text VTText = contentParent.transform.Find("VT Text").GetComponent<Text>();
+		Text PHText = contentParent.transform.Find("PH Text").GetComponent<Text>();
+		Text CEText = contentParent.transform.Find("CE Text").GetComponent<Text>();
+		Text TCText = contentParent.transform.Find("TC Text").GetComponent<Text>();
+
+		levelNumText.text = "DAY " + level + " SUMMARY";
+		// PDText.text = "6/9";
+		// VDText.text = "12";
+		// VTText.text = "5";
+		// PHText.text = "23";
+		// CEText.text = "$300";
+		// TCText.text = "$" + money;
+
+		levelPassed.SetActive(true);
+		Button nextBtn = contentParent.transform.Find("Next Button").GetComponent<Button>();
+		// nextBtn.onClick.AddListener(go to upgrades);
+	}
+
+	void GameOver() {
+		GameObject contentParent = gameOver.transform.Find("Failed Image").Find("Dynamic Text").gameObject;
+		Text levelNumText = contentParent.transform.Find("Level Number").GetComponent<Text>();
+		Text DeathCauseText = contentParent.transform.Find("Cause Text").GetComponent<Text>();
+		Text FinalCashText = contentParent.transform.Find("TC Text").GetComponent<Text>();
+
+		levelNumText.text = "YOU ENDURED FOR " + level + " DAYS";
+		if (health == 0) {
+			DeathCauseText.text = "BEFORE WRECKING YOUR TRUCK";
+		}
+		// if (all items destroyed) {
+		// 	DeathCauseText.text = "BEFORE FAILING ALL DELIVERIES";			
+		// }
+		FinalCashText.text = "$" + money;
+
+		gameOver.SetActive(true);
+
+		Button menuBtn = contentParent.transform.Find("Menu Button").GetComponent<Button>();
+		Button restartBtn = contentParent.transform.Find("Restart Button").GetComponent<Button>();
+		// menuBtn.onClick.AddListener(go to menu);
+		// restartBtn.onClick.AddListener(restart game);
 	}
 
 	void HideLevelStart() {
@@ -86,6 +135,7 @@ public class BoardManager : MonoBehaviour {
 			worldmap.SetActive(!worldmap.activeInHierarchy);
 			minimap.SetActive(!minimap.activeInHierarchy);
 		}
+		if (health == 0) GameOver();
 	}
 
 	void UpdateGameTime() {
