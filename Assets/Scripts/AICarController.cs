@@ -5,12 +5,12 @@ using UnityEngine;
 public class AICarController : MonoBehaviour {
 
 	public Transform path;
-	public float acceleration;
-	public float steering;
-	public float turnTrigger;
+	public float acceleration = 0.07f;
+	public float steering = 4f;
+	public float turnTrigger = 0.5f;
 
-	public int recoverTime;
-	public int health;
+	public int recoverTime = 3;
+	public int health = 20;
 	public float damageConstant = 2f;
 
 	List<Transform> nodes;
@@ -25,9 +25,6 @@ public class AICarController : MonoBehaviour {
 		nodes = new List<Transform>();
 		for (int i = 0; i < pathTransforms.Length; i++) {
 			if (pathTransforms[i] != path.transform) nodes.Add(pathTransforms[i]);
-		}
-		for (int i = 0; i < nodes.Count; i++) {
-
 		}
 	}
 	
