@@ -7,7 +7,7 @@ public class AIPath : MonoBehaviour {
 	public Color lineColor;
 	List<Transform> nodes = new List<Transform>();
 
-	void OnDrawGizmos() {
+	void OnDrawGizmosSelected() {
 		Gizmos.color = lineColor;
 		Transform[] pathTransforms = GetComponentsInChildren<Transform>();
 		//nodes = new List<Transform>();
