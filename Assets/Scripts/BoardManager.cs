@@ -16,9 +16,11 @@ public class BoardManager : MonoBehaviour {
 	public int health = 100;
 	int money = 0;
 	int level = 1;
+	int repairCost = 100;
 	bool doingSetup;
 	GameObject levelStart;
 	GameObject levelPassed;
+	GameObject workshop;
 	GameObject gameOver;
 	GameObject inventory;
 	GameObject worldmap;
@@ -44,8 +46,10 @@ public class BoardManager : MonoBehaviour {
 
 		levelStart = GameObject.Find("Level Start Screen");
 		levelPassed = GameObject.Find("Level Passed Screen");
+		workshop = GameObject.Find("Workshop Screen");
 		gameOver = GameObject.Find("Game Over Screen");
 		levelPassed.SetActive(false);
+		workshop.SetActive(false);
 		gameOver.SetActive(false);
 
 		// Get content parent for levelStart
@@ -94,7 +98,31 @@ public class BoardManager : MonoBehaviour {
 
 		levelPassed.SetActive(true);
 		Button nextBtn = levelPassed.transform.Find("Passed Image").Find("Next Button").GetComponent<Button>();
-		// nextBtn.onClick.AddListener(go to upgrades);
+		nextBtn.onClick.AddListener(Upgrade);
+	}
+
+	public void Upgrade() {
+		GameObject contentParent = workshop.transform.Find("Workshop Image").gameObject;
+		Text healthText = contentParent.transform.Find("Health Text").GetComponent<Text>();
+		Text cashText = contentParent.transform.Find("Cash Text").GetComponent<Text>();
+		Text mechDialogue = contentParent.transform.Find("Mechanic Text").GetComponent<Text>();
+
+		healthText.text = health.ToString();
+		cashText.text = money.ToString();
+		mechDialogue.text = "Upgrade and repair here!";
+
+		workshop.SetActive(true);
+		Button repairBtn = contentParent.transform.Find("Repair Button").GetComponent<Button>();
+		Button nextBtn = contentParent.transform.Find("Next Button").GetComponent<Button>();
+		repairBtn.onClick.AddListener(() => {
+			if (money < 100) {
+				mechDialogue.text = "Get yo broke ass outta here";
+			} else {
+				mechDialogue.text = "An excellent choice";
+				health += 20;
+			}
+		});
+		// nextBtn.onClick.AddListener(go to next level);
 	}
 
 	public void GameOver() {
