@@ -40,6 +40,10 @@ public class PlayerController : MonoBehaviour {
     void Update() {
     }
 
+    private float distanceToPriorityItem(GameObject item) {
+        return Vector3.Distance(transform.position, item.transform.position);
+    } 
+
     IEnumerator DisplayDamage () {
         damageDisplay.CrossFadeAlpha(1, 0f, false);
         yield return new WaitForSeconds(2);
