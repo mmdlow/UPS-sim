@@ -25,6 +25,7 @@ public class BoardManager : MonoBehaviour {
 	GameObject inventory;
 	GameObject worldmap;
 	GameObject minimap;
+	GameObject messages;
 
 	void Awake() {
 		if (instance == null) {
@@ -74,6 +75,7 @@ public class BoardManager : MonoBehaviour {
 		inventory = GameObject.Find("Inventory");
 		worldmap = GameObject.Find("Worldmap");
 		minimap = GameObject.Find("Minimap");
+		messages = GameObject.Find("Messages");
 		Button levelStartBtn = contentParent.transform.Find("Level Start Button").GetComponent<Button>();
 		levelStartBtn.onClick.AddListener(HideLevelStart);
 	}
@@ -166,10 +168,20 @@ public class BoardManager : MonoBehaviour {
 		UpdateGameTime();
 		if (Input.GetButtonDown("Inventory")) {
 			inventory.SetActive(!inventory.activeInHierarchy);
-			worldmap.SetActive(!worldmap.activeInHierarchy);
 			minimap.SetActive(!minimap.activeInHierarchy);
+			messages.SetActive(!messages.activeInHierarchy);
+
+			if (inventory.activeSelf) worldmap.SetActive(true);
+			else worldmap.SetActive(false);
+
 		}
-		if (health == 0) GameOver();
+		// Allow for toggling of worldmap when inventory is active
+		if (inventory.activeSelf) {
+			if (Input.GetButtonDown("Worldmap")) {
+				worldmap.SetActive(!worldmap.activeInHierarchy);
+			}
+		}
+		//if (health == 0) GameOver();
 	}
 
 	void UpdateGameTime() {
