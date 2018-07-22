@@ -16,9 +16,11 @@ public class BoardManager : MonoBehaviour {
 	public int health = 100;
 	int money = 0;
 	int level = 1;
+	int repairCost = 100;
 	bool doingSetup;
 	GameObject levelStart;
 	GameObject levelPassed;
+	GameObject workshop;
 	GameObject gameOver;
 	GameObject inventory;
 	GameObject worldmap;
@@ -44,8 +46,10 @@ public class BoardManager : MonoBehaviour {
 
 		levelStart = GameObject.Find("Level Start Screen");
 		levelPassed = GameObject.Find("Level Passed Screen");
+		workshop = GameObject.Find("Workshop Screen");
 		gameOver = GameObject.Find("Game Over Screen");
 		levelPassed.SetActive(false);
+		workshop.SetActive(false);
 		gameOver.SetActive(false);
 
 		// Get content parent for levelStart
@@ -93,18 +97,48 @@ public class BoardManager : MonoBehaviour {
 		// TCText.text = "$" + money;
 
 		levelPassed.SetActive(true);
-		Button nextBtn = contentParent.transform.Find("Next Button").GetComponent<Button>();
-		// nextBtn.onClick.AddListener(go to upgrades);
+		Button nextBtn = levelPassed.transform.Find("Passed Image").Find("Next Button").GetComponent<Button>();
+		nextBtn.onClick.AddListener(Upgrade);
 	}
 
-	void GameOver() {
+	public void Upgrade() {
+		GameObject contentParent = workshop.transform.Find("Workshop Image").gameObject;
+		Text healthText = contentParent.transform.Find("Health Text").GetComponent<Text>();
+		Text cashText = contentParent.transform.Find("Cash Text").GetComponent<Text>();
+		Text mechDialogue = contentParent.transform.Find("Mechanic Text").GetComponent<Text>();
+
+		healthText.text = health.ToString();
+		cashText.text = money.ToString();
+		mechDialogue.text = "Upgrade and repair here!";
+
+		workshop.SetActive(true);
+		Button repairBtn = contentParent.transform.Find("Repair Button").GetComponent<Button>();
+		Button nextBtn = contentParent.transform.Find("Next Button").GetComponent<Button>();
+		repairBtn.onClick.AddListener(() => {
+			if (money < 100) {
+				mechDialogue.text = "Get yo broke ass outta here";
+			} else {
+				mechDialogue.text = "An excellent choice";
+				health += 20;
+			}
+		});
+		// nextBtn.onClick.AddListener(go to next level);
+	}
+
+	public void GameOver() {
+		Debug.Log("game over");
 		GameObject contentParent = gameOver.transform.Find("Failed Image").Find("Dynamic Text").gameObject;
 		Text levelNumText = contentParent.transform.Find("Level Number").GetComponent<Text>();
 		Text DeathCauseText = contentParent.transform.Find("Cause Text").GetComponent<Text>();
 		Text FinalCashText = contentParent.transform.Find("TC Text").GetComponent<Text>();
 
-		levelNumText.text = "YOU ENDURED FOR " + level + " DAYS";
-		if (health == 0) {
+		if (level == 1) {
+			levelNumText.text = "YOU ENDURED FOR " + level + " DAY";
+		} else {
+			levelNumText.text = "YOU ENDURED FOR " + level + " DAYS";
+		}
+
+		if (health <= 0) {
 			DeathCauseText.text = "BEFORE WRECKING YOUR TRUCK";
 		}
 		// if (all items destroyed) {
@@ -114,8 +148,8 @@ public class BoardManager : MonoBehaviour {
 
 		gameOver.SetActive(true);
 
-		Button menuBtn = contentParent.transform.Find("Menu Button").GetComponent<Button>();
-		Button restartBtn = contentParent.transform.Find("Restart Button").GetComponent<Button>();
+		Button menuBtn = gameOver.transform.Find("Failed Image").Find("Menu Button").GetComponent<Button>();
+		Button restartBtn = gameOver.transform.Find("Failed Image").Find("Restart Button").GetComponent<Button>();
 		// menuBtn.onClick.AddListener(go to menu);
 		// restartBtn.onClick.AddListener(restart game);
 	}
