@@ -729,6 +729,7 @@ GameObject:
   - component: {fileID: 1082902049}
   - component: {fileID: 104563558}
   - component: {fileID: 104563557}
+  - component: {fileID: 104563559}
   - component: {fileID: 104563556}
   - component: {fileID: 104563555}
   m_Layer: 0
@@ -874,6 +875,20 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+--- !u!114 &104563559
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 104563554}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67a3032d1bf6145a7b02d6a95f73c477, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectilePrefab: {fileID: 1596742332477316, guid: 4272589b39d384027910678db85aa5cc,
+    type: 2}
+  PROJ_VELOCITY: 2
 --- !u!1 &104755686
 GameObject:
   m_ObjectHideFlags: 0

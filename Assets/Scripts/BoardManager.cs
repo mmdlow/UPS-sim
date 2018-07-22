@@ -178,4 +178,7 @@ public class BoardManager : MonoBehaviour {
 		if (actualGameTime == 0) {} ;
 		timer.text = actualGameTime.ToString();
 	}
+	public bool IsDoingSetup() {
+		return doingSetup;
+	}
 }
