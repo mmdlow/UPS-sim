@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class DirectionIndicatorController : MonoBehaviour {
 
-	// Use this for initialization
 	GameObject player;
 	GameObject dropzone;
 

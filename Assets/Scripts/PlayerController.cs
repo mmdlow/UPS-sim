@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour {
     private Rigidbody2D rb;
     public static GameObject instance;
     public GameObject directionIndicatorPrefab;
-    private GameObject directionIndicator;
+    public GameObject directionIndicator;
 
 	void Awake() {
 		if (instance == null) {
