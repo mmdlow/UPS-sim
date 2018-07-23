@@ -19,7 +19,6 @@ public class PlayerController : MonoBehaviour {
     public static GameObject instance;
     public GameObject directionIndicatorPrefab;
     private GameObject directionIndicator;
-    private GameObject canvas;
 
 	void Awake() {
 		if (instance == null) {
@@ -30,7 +29,6 @@ public class PlayerController : MonoBehaviour {
 
         directionIndicator = Instantiate(directionIndicatorPrefab);
         directionIndicator.transform.parent = this.gameObject.transform;
-        GameObject shooter = GameObject.Find("Shooter");
 	}
 
     void Start () {
