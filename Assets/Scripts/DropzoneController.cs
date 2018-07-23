@@ -84,9 +84,4 @@ public class DropzoneController : MonoBehaviour {
             ItemManager.instance.RemoveItem(item);
 		}
 	}
-
-	//void OnDestroy() {
-	//	MapPinManager.instance.RemovePin(smallPin);
-	//	MapPinManager.instance.RemovePin(bigPin);
-	//}
 }
