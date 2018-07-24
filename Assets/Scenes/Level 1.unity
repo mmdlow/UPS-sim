@@ -122707,6 +122707,7 @@ MonoBehaviour:
   projectilePrefab: {fileID: 1596742332477316, guid: 4272589b39d384027910678db85aa5cc,
     type: 2}
   PROJ_VELOCITY: 10
+  material: {fileID: 2100000, guid: 1fd57121bbdaf67438ed9951b49a1a4b, type: 2}
 --- !u!60 &1438050073
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -122776,6 +122777,7 @@ MonoBehaviour:
   damageDisplay: {fileID: 1679893266}
   directionIndicatorPrefab: {fileID: 1554353960561918, guid: e3f4324d8337f4762942b4dc918a3c07,
     type: 2}
+  directionIndicator: {fileID: 0}
 --- !u!50 &1438050075
 Rigidbody2D:
   serializedVersion: 4
