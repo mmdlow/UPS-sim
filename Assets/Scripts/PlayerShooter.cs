@@ -44,8 +44,8 @@ public class PlayerShooter : MonoBehaviour {
 		//Debug.Log(angle);
 		//Vector3 point0 = Quaternion.AngleAxis(angle, Vector3.up) * direction;
 		angle = 20;
-		Vector3 point0 = dropzone.transform.position;
-		Vector3 point2 = FindSideVector(ANGLE, transform.position, dropzone.transform.position);
+		Vector3 point0 = FindOuterVector(ANGLE, transform.position, dropzone.transform.position);
+		Vector3 point2 = FindInnerVector(ANGLE, transform.position, dropzone.transform.position);
 		Debug.Log("p0: " + point0);
 		Debug.Log("p2: " + point2);
 		positions[0] = point0;
@@ -67,7 +67,7 @@ public class PlayerShooter : MonoBehaviour {
 .----)   |   |  `----.|  |\  \----.|  |____   \    /\    /       |  `--'  '--.|  `--'  |  /  _____  \   |  |     |  |____ |  |\  \----.|  |\   | |  | |  `--'  | |  |\   | .----)   |   
 |_______/     \______|| _| `._____||_______|   \__/  \__/         \_____\_____\\______/  /__/     \__\  |__|     |_______|| _| `._____||__| \__| |__|  \______/  |__| \__| |_______/    
 
-				Welcome to Trigonometry 101
+				Back to Trigonometry 101
 
 							*  <-- endpoint    }
 						   /|  }			   }
@@ -87,21 +87,23 @@ public class PlayerShooter : MonoBehaviour {
 			<theta = angle of endpoint to startpoint to X
 			<alpha = angle of endpoint to startpoint to endpoint2
 	 */
-	Vector3 FindSideVector(float alpha, Vector3 startPoint, Vector3 endPoint) {
-		Vector3 endPoint2 = new Vector3(0, 0, -1);
+	Vector3 FindInnerVector(float alpha, Vector3 startPoint, Vector3 endPoint) {
 		alpha = (Mathf.PI/180) * alpha; // convert alpha to radians
 		float deltaY = Mathf.Abs(startPoint.y - endPoint.y); // height of triangle
 		float deltaX = Mathf.Abs(startPoint.x - endPoint.x); // base of triangle
 		float theta = Mathf.Atan2(deltaY, deltaX);
 		float deltaY2 = deltaX * Mathf.Tan(theta - alpha);
-		if (endPoint.y > startPoint.y) {
-			endPoint2.y = deltaY2;
-			endPoint2.x = endPoint.x;
-		} else {
-			endPoint2.y = -1 * deltaY2;
-			endPoint2.x = endPoint.x;
-		}
-		return endPoint2;
+		float newY = endPoint.y > startPoint.y ? startPoint.y + deltaY2 : startPoint.y - deltaY2;
+		return new Vector3(endPoint.x, newY, -1);
+	}
+	Vector3 FindOuterVector(float alpha, Vector3 startPoint, Vector3 endPoint) {
+		alpha = (Mathf.PI/180) * alpha; // convert alpha to radians
+		float deltaY = Mathf.Abs(startPoint.y - endPoint.y); // height of triangle
+		float deltaX = Mathf.Abs(startPoint.x - endPoint.x); // base of triangle
+		float theta = Mathf.Atan2(deltaX, deltaY);
+		float deltaX2 = deltaY * Mathf.Tan(theta - alpha);
+		float newX = endPoint.x > startPoint.x ? startPoint.x + deltaX2 : startPoint.x - deltaX2;
+		return new Vector3(newX, endPoint.y, -1);
 	}
 	
 	void FixedUpdate () {
