@@ -19,6 +19,9 @@ public class PlayerController : MonoBehaviour {
     public static GameObject instance;
     public GameObject directionIndicatorPrefab;
     public GameObject directionIndicator;
+    public PlayerShooter playerShooter;
+    private GameObject dropzone;
+    private float CHANGE_INDICATOR_DISTANCE = 8f;
 
 	void Awake() {
 		if (instance == null) {
@@ -35,14 +38,12 @@ public class PlayerController : MonoBehaviour {
         health = BoardManager.instance.health; // Use health field in game manager
         rb = GetComponent<Rigidbody2D>();
         healthDisplay.text = health.ToString();
+        ItemManager.instance.onPriorityItemChange += UpdatePriorityItem;
+		playerShooter = GetComponent<PlayerShooter>();
     }  
 
     void Update() {
     }
-
-    private float distanceToPriorityItem(GameObject item) {
-        return Vector3.Distance(transform.position, item.transform.position);
-    } 
 
     IEnumerator DisplayDamage () {
         damageDisplay.CrossFadeAlpha(1, 0f, false);
@@ -109,5 +110,37 @@ public class PlayerController : MonoBehaviour {
         Debug.DrawLine((Vector3)rb.position, (Vector3)rb.GetRelativePoint(relativeForce), Color.red);
 
         rb.AddForce(rb.GetRelativeVector(relativeForce));
+
+        ShowPlayerShooterOrDirectionIndicator();
     }
+
+    void ShowPlayerShooterOrDirectionIndicator() {
+        if (dropzone == null) {
+            directionIndicator.SetActive(false);
+            playerShooter.enabled = false;
+        } else {
+            // show which depending on distance
+            Debug.Log(Vector3.Distance(transform.position, dropzone.transform.position));
+            if (Vector3.Distance(transform.position, dropzone.transform.position) > CHANGE_INDICATOR_DISTANCE) {
+                // DIC should be shown if not already
+                if (!directionIndicator.activeInHierarchy) {
+                    directionIndicator.SetActive(true);
+                    playerShooter.enabled = false;
+                }
+            } else {
+                // PS should be shown if not already
+                if (!playerShooter.enabled) {
+                    playerShooter.enabled = true;
+                    directionIndicator.SetActive(false);
+                }
+            }
+        }
+    }
+	void UpdatePriorityItem(GameObject priorityItem) {
+		if (priorityItem == null) {
+			dropzone = null;
+		} else {
+			dropzone = priorityItem.transform.GetChild(0).gameObject;
+		}
+	}
 }

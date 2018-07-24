@@ -21,10 +21,8 @@ public class DirectionIndicatorController : MonoBehaviour {
 	}
 	void UpdateCurrentItem(GameObject priorityItem) {
 		if (priorityItem == null) {
-			this.gameObject.SetActive(false);
 			dropzone = null;
 		} else {
-			this.gameObject.SetActive(true);
 			dropzone = priorityItem.transform.GetChild(0).gameObject;
 		}
 	}

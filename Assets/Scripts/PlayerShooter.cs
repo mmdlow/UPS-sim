@@ -12,7 +12,6 @@ public class PlayerShooter : MonoBehaviour {
 	private bool firing = false;
 	private GameObject priorityItem;
     private GameObject directionIndicator;
-	private DirectionIndicatorController dic;
 	private Image powerBarImage;
 	private float fillAmount = 0f;
 	private float deltaFill = 0.02f;
@@ -46,9 +45,10 @@ public class PlayerShooter : MonoBehaviour {
         line.colorGradient = gradient;
 	}
 	void OnEnable() {
-		//line.enabled = true;
+		line.enabled = true;
 	}
 	void OnDisable() {
+		line.enabled = false;
 	}
 	void UpdateLine(float angle) {
 		if (priorityItem == null) return;
