@@ -7,7 +7,7 @@ public class PlayerShooter : MonoBehaviour {
 
 	private Rigidbody2D rb;
 	public GameObject projectilePrefab;
-	public float PROJ_VELOCITY = 12f;
+	public float PROJ_VELOCITY = 5f;
 	private bool fired = false;
 	private bool firing = false;
 	private GameObject priorityItem;
@@ -20,6 +20,9 @@ public class PlayerShooter : MonoBehaviour {
 	private GameObject dropzone;
 	private Vector3[] positions;
 	public Material material;
+	private float angle;
+	private Vector3 outerVector;
+	private Vector3 innerVector;
 	void Start () {
         rb = GetComponent<Rigidbody2D>();
 		ItemManager.instance.onPriorityItemChange += UpdateCurrentItem;
@@ -52,12 +55,12 @@ public class PlayerShooter : MonoBehaviour {
 	}
 	void UpdateLine(float angle) {
 		if (priorityItem == null) return;
-		Vector3 point0 = FindOuterVector(angle/2, transform.position, dropzone.transform.position);
-		Vector3 point2 = FindInnerVector(angle/2, transform.position, dropzone.transform.position);
-		positions[0] = point0;
+		outerVector = FindOuterVector(angle/2, transform.position, dropzone.transform.position);
+		innerVector = FindInnerVector(angle/2, transform.position, dropzone.transform.position);
+		positions[0] = outerVector;
 		positions[1] = transform.position;
 		positions[1].z = -1;
-		positions[2] = point2;
+		positions[2] = innerVector;
 		line.SetPositions(positions);
 	}
 
@@ -98,6 +101,7 @@ public class PlayerShooter : MonoBehaviour {
 		float newY = endPoint.y > startPoint.y ? startPoint.y + deltaY2 : startPoint.y - deltaY2;
 		return new Vector3(endPoint.x, newY, -1);
 	}
+
 	Vector3 FindOuterVector(float alpha, Vector3 startPoint, Vector3 endPoint) {
 		alpha = (Mathf.PI/180) * alpha; // convert alpha to radians
 		float deltaY = Mathf.Abs(startPoint.y - endPoint.y); // height of triangle
@@ -107,8 +111,16 @@ public class PlayerShooter : MonoBehaviour {
 		float newX = endPoint.x > startPoint.x ? startPoint.x + deltaX2 : startPoint.x - deltaX2;
 		return new Vector3(newX, endPoint.y, -1);
 	}
+
+    Vector3 FindRandomVectorInBetween(float angle, Vector3 startPoint, Vector3 endPoint) {
+        float newAlpha = Random.Range(0, angle / 2);
+        bool outside = Random.value > 0.5f;
+        Vector3 newVector = outside ? FindOuterVector(newAlpha, startPoint, endPoint) : FindInnerVector(newAlpha, startPoint, endPoint);
+		return newVector;
+    }
 	
 	void FixedUpdate () {
+		angle = (rb.velocity.magnitude/4f)*120f;
 		if (!firing && Input.GetButton("Shoot") && fired == false) {
 			// Begin firing sequence
             firing = true;
@@ -119,14 +131,17 @@ public class PlayerShooter : MonoBehaviour {
 			UpdateFillAmount();
             if (!Input.GetButton("Shoot")) {
                 // End firing sequence
-                Shoot(priorityItem, powerBarImage.fillAmount);
+                Shoot(priorityItem, 
+					  powerBarImage.fillAmount,
+					  FindRandomVectorInBetween(angle, transform.position, dropzone.transform.position) - transform.position
+				);
                 firing = false;
                 powerBarImage.enabled = false;
             } else {
 				powerBarImage.fillAmount = fillAmount;
 			}
 		}
-		UpdateLine((rb.velocity.magnitude/4f)*120f);
+		UpdateLine(angle);
 	}
 
 	// Ensure that Type in Image component is set to Filled
@@ -151,11 +166,11 @@ public class PlayerShooter : MonoBehaviour {
 	}
 
 	// power is between 0 and 1
-	void Shoot(GameObject item, float power) {
-		GameObject projectile = Instantiate(projectilePrefab, transform.position, transform.rotation); 
+	void Shoot(GameObject item, float power, Vector3 direction) {
+		GameObject projectile = Instantiate(projectilePrefab, transform.position, transform.rotation);
 		projectile.GetComponent<ProjectileController>().SetItem(item);
 		Rigidbody2D prb = projectile.GetComponent<Rigidbody2D>();
-        prb.velocity = PROJ_VELOCITY * power * rb.transform.up;
+        prb.velocity = PROJ_VELOCITY * power * direction;
 	}
 
 	void UpdateCurrentItem(GameObject priorityItem) {
