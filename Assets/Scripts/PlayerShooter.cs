@@ -20,7 +20,7 @@ public class PlayerShooter : MonoBehaviour {
 	private LineRenderer line;
 	private GameObject dropzone;
 	private Vector3[] positions;
-	public float ANGLE = 10;
+	public Material material;
 	void Start () {
         rb = GetComponent<Rigidbody2D>();
 		ItemManager.instance.onPriorityItemChange += UpdateCurrentItem;
@@ -33,6 +33,17 @@ public class PlayerShooter : MonoBehaviour {
 		line.useWorldSpace = true;
 		positions = new Vector3[3];
 		line.positionCount = positions.Length;
+        float alpha = 1.0f;
+		line.material = new Material(material);
+        Gradient gradient = new Gradient();
+        gradient.SetKeys(
+            new GradientColorKey[] { new GradientColorKey(Color.green, 0.0f), 
+									new GradientColorKey(Color.red, 1.0f), 
+									new GradientColorKey(Color.green, 0.0f) },
+            new GradientAlphaKey[] { new GradientAlphaKey(alpha, 0.0f), new GradientAlphaKey(alpha, 1.0f) }
+        );
+		line.sortingLayerName = "Buildings";
+        line.colorGradient = gradient;
 	}
 	void OnEnable() {
 		//line.enabled = true;
@@ -41,21 +52,12 @@ public class PlayerShooter : MonoBehaviour {
 	}
 	void UpdateLine(float angle) {
 		if (priorityItem == null) return;
-		//Debug.Log(angle);
-		//Vector3 point0 = Quaternion.AngleAxis(angle, Vector3.up) * direction;
-		angle = 20;
-		Vector3 point0 = FindOuterVector(ANGLE, transform.position, dropzone.transform.position);
-		Vector3 point2 = FindInnerVector(ANGLE, transform.position, dropzone.transform.position);
-		Debug.Log("p0: " + point0);
-		Debug.Log("p2: " + point2);
+		Vector3 point0 = FindOuterVector(angle/2, transform.position, dropzone.transform.position);
+		Vector3 point2 = FindInnerVector(angle/2, transform.position, dropzone.transform.position);
 		positions[0] = point0;
 		positions[1] = transform.position;
-		positions[2] = point2;
-
-		positions[0].z = -1;
 		positions[1].z = -1;
-		positions[2].z = -1;
-		
+		positions[2] = point2;
 		line.SetPositions(positions);
 	}
 
