@@ -120,7 +120,6 @@ public class PlayerController : MonoBehaviour {
             playerShooter.enabled = false;
         } else {
             // show which depending on distance
-            Debug.Log(Vector3.Distance(transform.position, dropzone.transform.position));
             if (Vector3.Distance(transform.position, dropzone.transform.position) > CHANGE_INDICATOR_DISTANCE) {
                 // DIC should be shown if not already
                 if (!directionIndicator.activeInHierarchy) {
