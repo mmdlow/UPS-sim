@@ -21,8 +21,6 @@ public class PlayerShooter : MonoBehaviour {
 	private Vector3[] positions;
 	public Material material;
 	private float angle;
-	private Vector3 outerVector;
-	private Vector3 innerVector;
 	void Start () {
         rb = GetComponent<Rigidbody2D>();
 		ItemManager.instance.onPriorityItemChange += UpdateCurrentItem;
@@ -55,12 +53,10 @@ public class PlayerShooter : MonoBehaviour {
 	}
 	void UpdateLine(float angle) {
 		if (priorityItem == null) return;
-		outerVector = FindOuterVector(angle/2, transform.position, dropzone.transform.position);
-		innerVector = FindInnerVector(angle/2, transform.position, dropzone.transform.position);
-		positions[0] = outerVector;
+		positions[0] = FindOuterVector(angle/2, transform.position, dropzone.transform.position);
+		positions[2] = FindInnerVector(angle/2, transform.position, dropzone.transform.position);
 		positions[1] = transform.position;
 		positions[1].z = -1;
-		positions[2] = innerVector;
 		line.SetPositions(positions);
 	}
 
@@ -120,7 +116,7 @@ public class PlayerShooter : MonoBehaviour {
     }
 	
 	void FixedUpdate () {
-		angle = (rb.velocity.magnitude/4f)*120f;
+		angle = (rb.velocity.magnitude/4f)*150f;
 		if (!firing && Input.GetButton("Shoot") && fired == false) {
 			// Begin firing sequence
             firing = true;

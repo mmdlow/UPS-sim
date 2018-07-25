@@ -9,14 +9,12 @@ public class DropzoneController : MonoBehaviour {
 	public MapPinManager worldmap;
 	private BoxCollider2D boxCol;
 	public GameObject item;
-	private int MIN_HEIGHT = 50;
-	private int MAX_HEIGHT = 100;
-	private int MIN_WIDTH = 50;
-	private int MAX_WIDTH = 100;
+	private int MIN_HEIGHT = 20;
+	private int MAX_HEIGHT = 50;
+	private int MIN_WIDTH = 20;
+	private int MAX_WIDTH = 50;
     private LineRenderer outline; // Line Renderer
 
-	// public GameObject locationPinBig;
-	// public GameObject locationPinSmall;
 	public GameObject bigPin;
 	public GameObject smallPin;
 
