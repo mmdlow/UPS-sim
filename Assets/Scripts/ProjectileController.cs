@@ -6,8 +6,12 @@ public class ProjectileController : MonoBehaviour {
 
 	private GameObject item;
 	private SpriteRenderer spriteR;
+	private int DELAY = 3;
 	void Awake () {
 		spriteR = gameObject.GetComponent<SpriteRenderer>();
+	}
+	void Start() {
+		Destroy(gameObject, DELAY);
 	}
 	
 	void Update () {
