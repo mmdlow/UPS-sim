@@ -78,8 +78,10 @@ public class DropzoneController : MonoBehaviour {
 	}
 
 	void OnTriggerEnter2D(Collider2D other) {
-		if (item != null) {
-            ItemManager.instance.RemoveItem(item);
+		if (other.gameObject.name == "Projectile(Clone)" || other.gameObject.name == "Projectile") {
+            if (item != null) {
+                ItemManager.instance.RemoveItem(item);
+            }
 		}
 	}
 }

@@ -171,6 +171,8 @@ public class PlayerShooter : MonoBehaviour {
 
 	void UpdateCurrentItem(GameObject priorityItem) {
 		this.priorityItem = priorityItem;
-		this.dropzone = priorityItem.GetComponent<ItemController>().dropzone;
+		if (priorityItem != null) {
+            this.dropzone = priorityItem.GetComponent<ItemController>().dropzone;
+		}
 	}
 }
