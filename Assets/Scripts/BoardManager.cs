@@ -18,6 +18,8 @@ public class BoardManager : MonoBehaviour {
 	int money = 0;
 	int level = 1;
 	int repairCost = 100;
+	int upSpeedCost = 500;
+	int upDurbCost = 500;
 	bool doingSetup;
 	GameObject levelStart;
 	GameObject levelPassed;
@@ -120,15 +122,37 @@ public class BoardManager : MonoBehaviour {
 
 		workshop.SetActive(true);
 		Button repairBtn = contentParent.transform.Find("Repair Button").GetComponent<Button>();
+		Button upSpeedBtn = contentParent.transform.Find("Upgrade Speed Button").GetComponent<Button>();
+		Button upDurbBtn = contentParent.transform.Find("Upgrade Durability Button").GetComponent<Button>();
 		Button nextBtn = contentParent.transform.Find("Next Button").GetComponent<Button>();
+		
 		repairBtn.onClick.AddListener(() => {
-			if (money < 100) {
-				mechDialogue.text = "Get yo broke ass outta here";
+			if (money < repairCost) {
+				mechDialogue.text = "Not enough cash";
 			} else {
 				mechDialogue.text = "An excellent choice";
 				health += 20;
 			}
 		});
+
+		upSpeedBtn.onClick.AddListener(() => {
+			if (money < upSpeedCost) {
+				mechDialogue.text = "Ur mom gay";
+			} else {
+				mechDialogue.text = "k can";
+				// Increase speed of player
+			}
+		});
+
+		upDurbBtn.onClick.AddListener(() => {
+			if (money < upDurbCost) {
+				mechDialogue.text = "diu lei lo mo";
+			} else {
+				mechDialogue.text = "yay";
+				// Increase durability of player
+			}
+		});
+
 		// nextBtn.onClick.AddListener(go to next level);
 	}
 
