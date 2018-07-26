@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour {
 	}
 
     void Start () {
-        health = BoardManager.instance.health; // Use health field in game manager
+        health = GameManager.instance.health; // Use health field in game manager
         rb = GetComponent<Rigidbody2D>();
         healthDisplay.text = health.ToString();
         ItemManager.instance.onPriorityItemChange += UpdatePriorityItem;
@@ -67,7 +67,7 @@ public class PlayerController : MonoBehaviour {
 
         if (health <= 0) {
             healthDisplay.text = "0";
-            BoardManager.instance.GameOver();
+            GameManager.instance.GameOver();
             return;
         }
         if (health < 100 && health > 25) healthDisplay.color = Color.white;

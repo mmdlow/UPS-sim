@@ -46,7 +46,9 @@ public class PlayerShooter : MonoBehaviour {
         line.colorGradient = gradient;
 	}
 	void OnEnable() {
-		line.enabled = true;
+		if (line != null) {
+			line.enabled = true;
+		}
 	}
 	void OnDisable() {
 		line.enabled = false;
