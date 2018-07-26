@@ -11,6 +11,7 @@ public class BoardManager : MonoBehaviour {
 	public static BoardManager instance = null;
 
 	public ItemManager itemManager;
+	public AIManager aiManager;
 	public float gameTime = 90f;
 	public Text timer;
 	public int health = 100;
@@ -36,6 +37,10 @@ public class BoardManager : MonoBehaviour {
 
 		if (ItemManager.instance == null) {
 			Instantiate(itemManager);
+		}
+
+		if (AIManager.instance == null) {
+			Instantiate(aiManager);
 		}
 	}
 
@@ -128,6 +133,7 @@ public class BoardManager : MonoBehaviour {
 	}
 
 	public void GameOver() {
+		AIManager.instance.ClearLevelAI();
 		Debug.Log("game over");
 		GameObject contentParent = gameOver.transform.Find("Failed Image").Find("Dynamic Text").gameObject;
 		Text levelNumText = contentParent.transform.Find("Level Number").GetComponent<Text>();
