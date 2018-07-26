@@ -4,18 +4,14 @@ using UnityEngine;
 
 public class ProjectileController : MonoBehaviour {
 
-	private GameObject item;
+	public GameObject item;
 	private SpriteRenderer spriteR;
 	private int DELAY = 3;
 	void Awake () {
 		spriteR = gameObject.GetComponent<SpriteRenderer>();
 	}
 	void Start() {
-		Destroy(gameObject, DELAY);
-	}
-	
-	void Update () {
-		
+		this.transform.parent = item.transform;
 	}
 	
 	// Item this projectile represents
