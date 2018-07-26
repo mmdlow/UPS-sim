@@ -18,6 +18,9 @@ public class DropzoneController : MonoBehaviour {
 	public GameObject bigPin;
 	public GameObject smallPin;
 
+	private GameObject incoming;
+	private bool rejected;
+
 	public static void InitReachablePositions() {
 		reachablePositions = new List<Vector3Int>();
 		GameObject ground = GameObject.Find("Ground");
@@ -77,11 +80,35 @@ public class DropzoneController : MonoBehaviour {
 		this.item = item;
 	}
 
-	void OnTriggerEnter2D(Collider2D other) {
-		if (other.gameObject.name == "Projectile(Clone)" || other.gameObject.name == "Projectile") {
-            if (item != null) {
-                ItemManager.instance.RemoveItem(item);
+	IEnumerator OnTriggerEnter2D(Collider2D other) {
+		if (other.gameObject.GetComponent<ProjectileController>() != null) {
+			GameObject otherItem = other.gameObject.GetComponent<ProjectileController>().item;
+            if (item != null && item == otherItem) {
+				// item entering
+				incoming = otherItem;
+				rejected = false;
+                // ItemManager.instance.RemoveItem(item);
+				yield return new WaitForSeconds(2);
+				if (!rejected) {
+					// item did not exit (success)
+					ItemManager.instance.RemoveItem(item);
+				} else {
+					// item did exit (fail)
+
+				}
+                incoming = null;
+                rejected = false;
             }
 		}
+	}
+	void OnTriggerExit2D(Collider2D other) {
+		if (other.gameObject.GetComponent<ProjectileController>() != null) {
+			GameObject otherItem = other.gameObject.GetComponent<ProjectileController>().item;
+            if (incoming != null && incoming == otherItem) {
+				// item exiting
+				rejected = true;
+            }
+		}
+		
 	}
 }

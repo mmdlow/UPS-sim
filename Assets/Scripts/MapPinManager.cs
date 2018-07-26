@@ -42,7 +42,6 @@ public class MapPinManager : MonoBehaviour {
 	}
 
 	void UpdatePinPriority(GameObject priorityItem) {
-		Debug.Log("Updating pin priority, locations count: " + locations.Count);
 		for (int i = 0; i < locations.Count; i++) {
 			Vector3 itemLoc = locations[i];
 			Vector3 piLoc = priorityItem != null ? priorityItem.GetComponent<ItemController>().GetDropzone().GetComponent<DropzoneController>().transform.position : new Vector3(-999, -999, -999);
