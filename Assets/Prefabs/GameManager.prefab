@@ -51,6 +51,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 574d6bbccefa849efa6549f42c61a785, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boardManager: {fileID: 0}
+  boardManager: {fileID: 114473372727875732, guid: f433861cb87b3426892068c60aa962aa,
+    type: 2}
   health: 100
   doingSetup: 0
