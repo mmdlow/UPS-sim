@@ -75,6 +75,8 @@ public class GameManager : MonoBehaviour {
 			levelItemDrbText.text += item.GetComponent<ItemController>().GetItemDurability() + "\n";
 		}
 
+		ItemManager.instance.onItemRemove += TriggerLevelPassed;
+
 		levelStart.SetActive(true);
 
 		inventory = GameObject.Find("Inventory");
@@ -83,6 +85,11 @@ public class GameManager : MonoBehaviour {
 		messages = GameObject.Find("Messages");
 		Button levelStartBtn = contentParent.transform.Find("Level Start Button").GetComponent<Button>();
 		levelStartBtn.onClick.AddListener(() => HideLevelStart());
+	}
+	void TriggerLevelPassed(GameObject item) {
+		if (ItemManager.instance.items.Count == 0) {
+			LevelPassed();
+		}
 	}
 	void LevelPassed() {
 		AIManager.instance.ClearLevelAI();
