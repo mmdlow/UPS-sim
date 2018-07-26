@@ -54,6 +54,15 @@ public class DropzoneController : MonoBehaviour {
 		smallPin = transform.GetChild(1).gameObject;
 
 		InitBoxCol();
+		outline.enabled = false;
+		ItemManager.instance.onPriorityItemChange += ActivateVisible;
+	}
+	void ActivateVisible(GameObject item) {
+		if (item == this.item) {
+			outline.enabled = true;
+		} else {
+			outline.enabled = false;
+		}
 	}
 
 	void InitBoxCol() {
@@ -62,7 +71,7 @@ public class DropzoneController : MonoBehaviour {
 		int width = Random.Range(MIN_WIDTH, MAX_WIDTH);
 		boxCol.size = new Vector3(height, width, 0f);
 
-        LineRenderer outline = GetComponent<LineRenderer>();
+        outline = GetComponent<LineRenderer>();
 		Vector3[] positions = new Vector3[5];
         positions[0] = new Vector3(0.5f*(boxCol.offset.x + boxCol.size.x), 0.5f*(boxCol.offset.y - boxCol.size.y), -1);
         positions[1] = new Vector3(0.5f*(boxCol.offset.x - boxCol.size.x), 0.5f*(boxCol.offset.y - boxCol.size.y), -1);
@@ -109,6 +118,8 @@ public class DropzoneController : MonoBehaviour {
 				rejected = true;
             }
 		}
-		
+	}
+	void OnDestroy() {
+		ItemManager.instance.onPriorityItemChange -= ActivateVisible;
 	}
 }
