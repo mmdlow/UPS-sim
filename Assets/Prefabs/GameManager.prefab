@@ -19,8 +19,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4729012307723712}
-  - component: {fileID: 114593235881517624}
-  - component: {fileID: 114567344791485886}
+  - component: {fileID: 114660546086528116}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -41,23 +40,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114567344791485886
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1972761851953420}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc637dc8ca340439985580869a2224ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemManager: {fileID: 114359045731070540, guid: bc7b404cee0fa4f6aaa38f0cad2408ad,
-    type: 2}
-  gameTime: 90
-  timer: {fileID: 0}
-  health: 100
---- !u!114 &114593235881517624
+--- !u!114 &114660546086528116
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -68,5 +51,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 574d6bbccefa849efa6549f42c61a785, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boardManager: {fileID: 114473372727875732, guid: f433861cb87b3426892068c60aa962aa,
-    type: 2}
+  boardManager: {fileID: 0}
+  health: 100
+  doingSetup: 0
