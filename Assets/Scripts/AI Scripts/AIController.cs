@@ -18,6 +18,8 @@ public class AIController : MonoBehaviour {
 	public float damageConstant = 2f;
 
 	bool damaged = false;
+	bool beenHitByPlayer = false;
+	bool dead = false;
 
 	void Awake() {
 		rb = GetComponent<Rigidbody2D>();
@@ -31,6 +33,10 @@ public class AIController : MonoBehaviour {
 	}
 
 	void FixedUpdate() {
+		if (dead) {
+			StopCoroutine("FollowPath");
+			return;
+		}
 		if (!damaged) {
 			Steer();
 			transform.position = Vector3.MoveTowards(transform.position, currentWaypoint, speed);
@@ -43,14 +49,24 @@ public class AIController : MonoBehaviour {
 	}
 
 	void OnCollisionEnter2D(Collision2D col) {
-		damaged = true;
-		int damage = Mathf.RoundToInt(damageConstant * col.relativeVelocity.magnitude);
-		health -= damage;
-		if (health > 0) {
-			StartCoroutine("Recover");
-		} else {
-			StopCoroutine("FollowPath");
-			Debug.Log("Vehicle totalled");
+
+		if (col.gameObject.GetComponent<PlayerController>() != null && !dead) {
+			if (!beenHitByPlayer) {
+				StatsManager.instance.vehiclesDamaged++;
+				Debug.Log("Vehicles hit: " + StatsManager.instance.vehiclesDamaged);
+				beenHitByPlayer = true;
+			}
+			damaged = true;
+			int damage = Mathf.RoundToInt(damageConstant * col.relativeVelocity.magnitude);
+			health -= damage;
+			if (health > 0) {
+				StartCoroutine("Recover");
+			} else {
+				StopCoroutine("FollowPath");
+				StatsManager.instance.vehiclesTotalled++;
+				Debug.Log("Vehicles totalled: " + StatsManager.instance.vehiclesTotalled);
+				dead = true;
+			}
 		}
 	}
 

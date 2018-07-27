@@ -5,6 +5,10 @@ public class StatsManager : MonoBehaviour {
 	
 	public static StatsManager instance = null;
 	public int successfulDeliveries = 0;
+	public int vehiclesDamaged = 0;
+	public int vehiclesTotalled = 0;
+	public int pedestriansHit = 0;
+	public int money = 0;
 
 	void Awake() {
 		if (instance == null) {
@@ -24,9 +28,4 @@ public class StatsManager : MonoBehaviour {
 		Debug.Log("Failed to deliver " + item.GetComponent<ItemController>().GetItemName());
 		successfulDeliveries--;
 	}
-    // packages delivered
-    // vehicles damaged
-    // vehicles totalled
-    // pedestrians hit
-    // money
 }
