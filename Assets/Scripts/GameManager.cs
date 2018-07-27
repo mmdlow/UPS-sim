@@ -35,6 +35,7 @@ public class GameManager : MonoBehaviour {
 	Text levelItemNamesText;
 	Text levelItemDrbText;
 	GameObject contentParent;
+	private int DELAY_END_GAME = 3;
 	void Awake() {
 		if (instance == null) {
 			instance = this;
@@ -75,7 +76,7 @@ public class GameManager : MonoBehaviour {
 			levelItemDrbText.text += item.GetComponent<ItemController>().GetItemDurability() + "\n";
 		}
 
-		ItemManager.instance.onItemRemove += TriggerLevelPassed;
+		ItemManager.instance.onItemFired += TriggerLevelPassed;
 
 		levelStart.SetActive(true);
 
@@ -88,7 +89,7 @@ public class GameManager : MonoBehaviour {
 	}
 	void TriggerLevelPassed(GameObject item) {
 		if (ItemManager.instance.items.Count == 0) {
-			LevelPassed();
+			Invoke("LevelPassed", DELAY_END_GAME);
 		}
 	}
 	void LevelPassed() {

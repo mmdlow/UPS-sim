@@ -169,6 +169,7 @@ public class PlayerShooter : MonoBehaviour {
 		projectile.GetComponent<ProjectileController>().SetItem(item);
 		Rigidbody2D prb = projectile.GetComponent<Rigidbody2D>();
         prb.velocity = PROJ_VELOCITY * power * direction;
+		ItemManager.instance.FireItem(item);
 	}
 
 	void UpdateCurrentItem(GameObject priorityItem) {

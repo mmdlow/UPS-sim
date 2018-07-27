@@ -20,6 +20,7 @@ public class DropzoneController : MonoBehaviour {
 
 	private GameObject incoming;
 	private bool rejected;
+	public static int SETTLING_DELAY = 2;
 
 	public static void InitReachablePositions() {
 		reachablePositions = new List<Vector3Int>();
@@ -97,7 +98,7 @@ public class DropzoneController : MonoBehaviour {
 				incoming = otherItem;
 				rejected = false;
                 // ItemManager.instance.RemoveItem(item);
-				yield return new WaitForSeconds(2);
+				yield return new WaitForSeconds(SETTLING_DELAY);
 				if (!rejected) {
 					// item did not exit (success)
 					ItemManager.instance.RemoveItem(item);
