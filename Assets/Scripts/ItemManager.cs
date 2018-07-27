@@ -8,13 +8,14 @@ public class ItemManager : MonoBehaviour {
 	public static ItemManager instance = null;
 
 	public GameObject itemPrefab;
-	private int MAX_ITEMS = 1;
-	private int MIN_ITEMS = 1;
+	private int MAX_ITEMS = 2;
+	private int MIN_ITEMS = 2;
 	public GameObject priorityItem = null;
 	public delegate void ItemChangeHandler(GameObject item);
 	public event ItemChangeHandler onPriorityItemChange;
 	public event ItemChangeHandler onItemAdd;
 	public event ItemChangeHandler onItemRemove;
+	public event ItemChangeHandler onItemFired;
 	public List<GameObject> items = new List<GameObject>();
 	public Sprite[] sprites; // Item sprites to choose from
 
@@ -69,8 +70,14 @@ public class ItemManager : MonoBehaviour {
 		onItemAdd(item);
 	}
 
-	public void RemoveItem(GameObject item) {
+	// item fired from player
+	public void FireItem(GameObject item) {
 		items.Remove(item);
+		onItemFired(item);
+	}
+
+	// item hits dropzone and is removed (after fired)
+	public void RemoveItem(GameObject item) {
 		onItemRemove(item);
 		if (priorityItem == item) {
 			ChangePriorityItem(null);
@@ -79,4 +86,5 @@ public class ItemManager : MonoBehaviour {
 		}
 		Destroy(item);
 	}
+	// item does not hit dropzone or hits then exits (after fired)
 }

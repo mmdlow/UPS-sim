@@ -6,12 +6,16 @@ public class ProjectileController : MonoBehaviour {
 
 	public GameObject item;
 	private SpriteRenderer spriteR;
-	private int DELAY = 3;
 	void Awake () {
 		spriteR = gameObject.GetComponent<SpriteRenderer>();
 	}
 	void Start() {
 		this.transform.parent = item.transform;
+		Invoke("RemoveMissedItem", DropzoneController.SETTLING_DELAY + 1);
+	}
+
+	void RemoveMissedItem() {
+		ItemManager.instance.RemoveItem(item);
 	}
 	
 	// Item this projectile represents
