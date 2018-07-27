@@ -195,7 +195,7 @@ public class GameManager : MonoBehaviour {
 		}
 
 		if (Input.GetButtonDown("Submit")) {
-			messages.GetComponent<MessageManager>().VehicleAlert(MessageManager.BREAKING);
+			//messages.GetComponent<MessageManager>().VehicleAlert(MessageManager.BREAKING);
 		}
 		//if (health == 0) GameOver();
 	}

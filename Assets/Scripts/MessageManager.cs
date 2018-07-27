@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,18 +9,16 @@ public class MessageManager : MonoBehaviour {
 	public static string BREAKING, BROKEN, DELIVERED, FLAWLESS, COLLATERAL, KILL;
 	public static MessageManager instance = null;
 	public int fadeTime = 5;
-	public GameObject msgParent;
-	public GameObject deliveryLog;
-	public GameObject messageLog;
-	Text delOutput;
-	Text msgOutput;
-	List<GameObject> messages = new List<GameObject>();
+	List<string> messages = new List<string>();
+	Dictionary<string, int> dict = new Dictionary<string, int>();
+	Text output;
+	private string SayPersistentlyPriorityItemHash = null;
 
 	void Awake() {
 		if (instance == null) {
 			instance = this;
 		} else if (instance != this) {
-			Destroy(gameObject); // enforce singleton pattern wrt BoardManager
+			Destroy(gameObject); // enforce singleton pattern 
 		}
 
 		BREAKING = "breaking";
@@ -28,108 +27,64 @@ public class MessageManager : MonoBehaviour {
 		FLAWLESS = "flawless";
 		COLLATERAL = "collateral";
 		KILL = "kill";
-		delOutput = deliveryLog.GetComponentInChildren<Text>();
+		output = GetComponent<Text>();
+		ItemManager.instance.onPriorityItemChange += SayPersistentlyPriorityItem;
+		Say("infinite", int.MaxValue);
+		Say("three", 3);
+		Say("item xxxxxxxxxxxxxx delivered flawlessly", 20);
+		SayPersistentlyPriorityItem(null);
 	}
 
 	void Start() {
-		ItemManager.instance.onPriorityItemChange += UpdateDeliveryOutput;
-		messageLog.SetActive(false);
-
-		delOutput.text = "Select an item in Inventory";
+		Refresh();
 	}
 
-	IEnumerator FadeOut(GameObject msgLog) {
-		yield return new WaitForSeconds(fadeTime);
-		// In the future, the message log will actually fade out
-		msgLog.SetActive(false);
-		
-		int msgIndex = messages.IndexOf(msgLog);
-		messages.RemoveAt(msgIndex);
-		Destroy(msgLog);
-		if (messages.Count > 0) {
-			for (int i = msgIndex; i < messages.Count; i++) {
-				// Move bottom messages, if any, upwards to fill space
-				Vector3 oldPos = messages[i].transform.position;
-				Vector3 newPos = new Vector3(oldPos.x, oldPos.y + 0.23f, oldPos.z);
-				messages[i].transform.position = newPos;
+	// Reads list of messages from messages and refreshes the text output.
+	void Refresh() {
+		output.text = string.Join("\n", messages.ToArray());
+	}
+	
+	// adds message to end of list, returns index
+	public string Say(string message, int timeout) {
+		messages.Add(message);
+        string messageHash = Guid.NewGuid().ToString("n").Substring(0, 8);
+		dict[messageHash] = messages.Count - 1;
+		if (timeout < int.MaxValue) {
+			// set clearAfter
+			StartCoroutine(clearAfter(messageHash, timeout));
+		}
+		Refresh();
+		return messageHash;
+	}
+	
+	// persistent
+	void SayPersistentlyPriorityItem(GameObject item) {
+		string message = (item == null ? "Pick an item from the inventory!" :
+										 "Now delivering: " + item.GetComponent<ItemController>().GetItemName());
+		if (SayPersistentlyPriorityItemHash == null) {
+			SayPersistentlyPriorityItemHash = Say(message, int.MaxValue);
+		} else {
+			SayAt(SayPersistentlyPriorityItemHash, message);
+		}
+	}
+
+	void SayAt(string messageHash, string newMessage) {
+		int index = dict[messageHash];
+		messages[index] = newMessage;
+		Refresh();
+	}
+	IEnumerator clearAfter(string messageHash, int timeout) {
+		yield return new WaitForSeconds(timeout);
+		int index = dict[messageHash];
+		messages.RemoveAt(index);
+		// messages after index are automatically moved forward
+		// so update the dict
+		List<string> keys = new List<string>(dict.Keys);
+		foreach(string key in keys) {
+			if (dict[key] >= index) {
+				dict[key]--;
 			}
 		}
-	}
-
-	public void UpdateDeliveryOutput(GameObject item) {
-		if (item == null) {
-			delOutput.text = "Select a new item!";
-			return;
-		}
-		string itemName = item.GetComponent<ItemController>().GetItemName();
-		delOutput.text = "Now delivering: " + itemName;
-	}
-
-	public void ItemAlert(GameObject item, string type) {
-
-		string itemName = item.GetComponent<ItemController>().GetItemName();
-		GameObject newMsgLog = AddNewMessageLog();
-		msgOutput = newMsgLog.GetComponentInChildren<Text>();
-		
-		switch (type) {
-			case "breaking":
-				msgOutput.text = itemName + " is breaking!";
-				break;
-			case "broken":
-				msgOutput.text = itemName + " has broken";
-				break;
-			case "delivered":
-				msgOutput.text = itemName + " delivered";
-				break;
-			case "flawless":
-				msgOutput.text = itemName + " flawlessly delivered!";
-				break;
-			default:
-				Debug.LogWarning("Invalid message type detected");
-				break;
-		}
-		newMsgLog.SetActive(true);
-		StartCoroutine(FadeOut(newMsgLog));
-	}
-
-	public void VehicleAlert(string type) {
-
-		GameObject newMsgLog = AddNewMessageLog();
-		msgOutput = newMsgLog.GetComponentInChildren<Text>();
-
-		switch (type) {
-			case "breaking":
-				msgOutput.text = "Vehicle heavily damaged!";
-				break;
-			case "collateral":
-				msgOutput.text = "You totalled another car";
-				break;
-			case "kill":
-				msgOutput.text = "You killed a pedestrian";
-				break;
-			default:
-				Debug.LogWarning("Invalid message type detected");
-				break;
-		}
-		newMsgLog.SetActive(true);
-		StartCoroutine(FadeOut(newMsgLog));
-	}
-
-	private GameObject AddNewMessageLog() {
-		GameObject newMsgLog;
-		newMsgLog = Instantiate(messageLog);
-		newMsgLog.transform.SetParent(msgParent.transform);
-		newMsgLog.transform.localPosition = Vector3.zero;
-		newMsgLog.transform.localRotation = Quaternion.identity;
-		newMsgLog.transform.localScale = Vector3.one;
-		if (messages.Count > 0) {
-			Vector3 oldPos = messages[messages.Count - 1].transform.position;
-			newMsgLog.transform.position = new Vector3(oldPos.x, oldPos.y - 0.23f, oldPos.z);
-		} else {
-			newMsgLog.transform.position = messageLog.transform.position;
-		}
-		newMsgLog.SetActive(false);
-		messages.Add(newMsgLog);
-		return newMsgLog;
+		Refresh();
 	}
 }
