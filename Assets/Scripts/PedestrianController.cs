@@ -33,16 +33,14 @@ public class PedestrianController : MonoBehaviour {
 			Steer();
 			Move();
 			CheckWayPointDistance();
-		} else {
-			rb.velocity = new Vector3(0, 0, 0);
-		}
+		} 
 	}
 	
-	// Update is called once per frame
 	void OnTriggerEnter2D(Collider2D col) {
 		if (col.name == "Pedestrian Char") return;
 		anim.SetBool("Alive", false);
 		alive = false;
+        rb.velocity = new Vector3(0, 0, 0);
 	}
 
 	void Move() {
