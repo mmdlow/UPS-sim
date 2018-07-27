@@ -185,6 +185,10 @@ public class GameManager : MonoBehaviour {
 				worldmap.SetActive(!worldmap.activeInHierarchy);
 			}
 		}
+
+		if (Input.GetButtonDown("Submit")) {
+			messages.GetComponent<MessageManager>().VehicleAlert(MessageManager.BREAKING);
+		}
 		//if (health == 0) GameOver();
 	}
 

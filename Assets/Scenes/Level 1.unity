@@ -124388,6 +124388,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeTime: 5
+  msgParent: {fileID: 1873346139}
   deliveryLog: {fileID: 763992196}
   messageLog: {fileID: 268298623}
 --- !u!224 &1896766154 stripped

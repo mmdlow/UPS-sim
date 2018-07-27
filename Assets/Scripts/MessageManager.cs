@@ -7,6 +7,7 @@ public class MessageManager : MonoBehaviour {
 
 	public static string BREAKING, BROKEN, DELIVERED, FLAWLESS, COLLATERAL, KILL;
 	public int fadeTime = 5;
+	public GameObject msgParent;
 	public GameObject deliveryLog;
 	public GameObject messageLog;
 	Text delOutput;
@@ -34,20 +35,17 @@ public class MessageManager : MonoBehaviour {
 		yield return new WaitForSeconds(fadeTime);
 		// In the future, the message log will actually fade out
 		msgLog.SetActive(false);
-		if (messages.Count > 1) {
-			int msgIndex = messages.BinarySearch(msgLog);
-			messages.RemoveAt(msgIndex);
-			Destroy(msgLog);
-			if (messages.Count > 1) {
-				for (int i = msgIndex; i < messages.Count - 1; i++) {
-					// Move bottom messages, if any, upwards to fill space
-					Vector3 oldPos = messages[i].transform.position;
-					Vector3 newPos = new Vector3(oldPos.x, oldPos.y + 1, oldPos.z);
-					messages[i].transform.position = Vector3.MoveTowards(oldPos, newPos, 5);
-				}
+		
+		int msgIndex = messages.IndexOf(msgLog);
+		messages.RemoveAt(msgIndex);
+		Destroy(msgLog);
+		if (messages.Count > 0) {
+			for (int i = msgIndex; i < messages.Count; i++) {
+				// Move bottom messages, if any, upwards to fill space
+				Vector3 oldPos = messages[i].transform.position;
+				Vector3 newPos = new Vector3(oldPos.x, oldPos.y + 0.23f, oldPos.z);
+				messages[i].transform.position = newPos;
 			}
-		} else {
-			messages.RemoveAt(0);
 		}
 	}
 
@@ -61,20 +59,10 @@ public class MessageManager : MonoBehaviour {
 	}
 
 	public void ItemAlert(GameObject item, string type) {
+
 		string itemName = item.GetComponent<ItemController>().GetItemName();
-		
-		GameObject newMsgLog;
-		if (messages.Count > 0) {
-			newMsgLog = Instantiate(messageLog);
-			newMsgLog.transform.SetParent(transform);
-			Vector3 oldPos = messages[messages.Count - 1].transform.position;
-			newMsgLog.transform.position = new Vector3(oldPos.x, oldPos.y - 1, oldPos.z);
-			newMsgLog.SetActive(false);
-		} else {
-			newMsgLog = messageLog;
-		}
+		GameObject newMsgLog = AddNewMessageLog();
 		msgOutput = newMsgLog.GetComponentInChildren<Text>();
-		messages.Add(newMsgLog);
 		
 		switch (type) {
 			case "breaking":
@@ -99,19 +87,8 @@ public class MessageManager : MonoBehaviour {
 
 	public void VehicleAlert(string type) {
 
-		GameObject newMsgLog;
-		if (messages.Count > 0) {
-			newMsgLog = Instantiate(messageLog);
-			newMsgLog.transform.SetParent(transform);
-			Vector3 oldPos = messages[messages.Count - 1].transform.position;
-			Debug.Log(oldPos);
-			newMsgLog.transform.position = new Vector3(oldPos.x, oldPos.y - 1, 0);
-			newMsgLog.SetActive(false);
-		} else {
-			newMsgLog = messageLog;
-		}
+		GameObject newMsgLog = AddNewMessageLog();
 		msgOutput = newMsgLog.GetComponentInChildren<Text>();
-		messages.Add(newMsgLog);
 
 		switch (type) {
 			case "breaking":
@@ -129,5 +106,23 @@ public class MessageManager : MonoBehaviour {
 		}
 		newMsgLog.SetActive(true);
 		StartCoroutine(FadeOut(newMsgLog));
+	}
+
+	private GameObject AddNewMessageLog() {
+		GameObject newMsgLog;
+		newMsgLog = Instantiate(messageLog);
+		newMsgLog.transform.SetParent(msgParent.transform);
+		newMsgLog.transform.localPosition = Vector3.zero;
+		newMsgLog.transform.localRotation = Quaternion.identity;
+		newMsgLog.transform.localScale = Vector3.one;
+		if (messages.Count > 0) {
+			Vector3 oldPos = messages[messages.Count - 1].transform.position;
+			newMsgLog.transform.position = new Vector3(oldPos.x, oldPos.y - 0.23f, oldPos.z);
+		} else {
+			newMsgLog.transform.position = messageLog.transform.position;
+		}
+		newMsgLog.SetActive(false);
+		messages.Add(newMsgLog);
+		return newMsgLog;
 	}
 }
