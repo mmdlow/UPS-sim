@@ -6,13 +6,21 @@ using UnityEngine.UI;
 
 public class MessageManager : MonoBehaviour {
 
-	public static string BREAKING, BROKEN, DELIVERED, FLAWLESS, COLLATERAL, KILL;
+	enum PreparedMessage {
+		BREAKING,
+		BROKEN,
+		DELIVERED,
+		FLAWLESS,
+		COLLATERAL,
+		KILL
+	}
 	public static MessageManager instance = null;
 	public int fadeTime = 5;
 	List<string> messages = new List<string>();
 	Dictionary<string, int> dict = new Dictionary<string, int>();
 	Text output;
 	private string SayPersistentlyPriorityItemHash = null;
+	RectTransform rect;
 
 	void Awake() {
 		if (instance == null) {
@@ -20,28 +28,23 @@ public class MessageManager : MonoBehaviour {
 		} else if (instance != this) {
 			Destroy(gameObject); // enforce singleton pattern 
 		}
-
-		BREAKING = "breaking";
-		BROKEN = "broken";
-		DELIVERED = "delivered";
-		FLAWLESS = "flawless";
-		COLLATERAL = "collateral";
-		KILL = "kill";
 		output = GetComponent<Text>();
-		ItemManager.instance.onPriorityItemChange += SayPersistentlyPriorityItem;
-		Say("infinite", int.MaxValue);
-		Say("three", 3);
-		Say("item xxxxxxxxxxxxxx delivered flawlessly", 20);
-		SayPersistentlyPriorityItem(null);
 	}
 
 	void Start() {
+		//rect = transform.GetChild(0).GetComponent<RectTransform>();
 		Refresh();
+
+		ItemManager.instance.onPriorityItemChange += SayPersistentlyPriorityItem;
+
+		SayPersistentlyPriorityItem(null);
 	}
 
 	// Reads list of messages from messages and refreshes the text output.
 	void Refresh() {
 		output.text = string.Join("\n", messages.ToArray());
+		//rect.sizeDelta = new Vector2(rect.sizeDelta.x, messages.Count*35f);
+		//rect.localPosition = new Vector3(rect.localPosition.x, rect.sizeDelta.y, rect.localPosition.z);
 	}
 	
 	// adds message to end of list, returns index
@@ -55,6 +58,30 @@ public class MessageManager : MonoBehaviour {
 		}
 		Refresh();
 		return messageHash;
+	}
+	void SayPreparedMessage(PreparedMessage pm) {
+		string message = "";
+		switch(pm) {
+			case PreparedMessage.BREAKING:
+				message = "An item is breaking soon!";
+				break;
+			case PreparedMessage.BROKEN:
+				message = "You broke an item!";
+				break;
+			case PreparedMessage.COLLATERAL:
+				message = "You hit another vehicle!";
+				break;
+			case PreparedMessage.DELIVERED:
+				message = "Delivery made.";
+				break;
+			case PreparedMessage.FLAWLESS:
+				message = "Delivered flawlessly!";
+				break;
+			case PreparedMessage.KILL:
+				message = "Uh-oh, you ran over somebody!";
+				break;
+		}
+		Say(message, 5);
 	}
 	
 	// persistent
