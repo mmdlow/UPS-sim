@@ -16,6 +16,7 @@ public class ItemManager : MonoBehaviour {
 	public event ItemChangeHandler onItemAdd;
 	public event ItemChangeHandler onItemRemove;
 	public event ItemChangeHandler onItemFired;
+	public event ItemChangeHandler onItemMissed;
 	public List<GameObject> items = new List<GameObject>();
 	public Sprite[] sprites; // Item sprites to choose from
 
@@ -86,5 +87,9 @@ public class ItemManager : MonoBehaviour {
 		}
 		Destroy(item);
 	}
+
 	// item does not hit dropzone or hits then exits (after fired)
+	public void MissedItem(GameObject item) {
+		onItemMissed(item);
+	}
 }

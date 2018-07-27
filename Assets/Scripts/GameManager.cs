@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour {
 
 	public static GameManager instance = null;
 	public BoardManager boardManager;
+	public StatsManager statsManager;
 	public int health = 100;
 	int money = 0;
 	int level = 1;
@@ -46,6 +47,10 @@ public class GameManager : MonoBehaviour {
 
 		if (BoardManager.instance == null) {
 			Instantiate(boardManager);
+		}
+
+		if (StatsManager.instance == null) {
+			Instantiate(statsManager);
 		}
 
 		levelStart = GameObject.Find("Level Start Screen");
@@ -87,11 +92,17 @@ public class GameManager : MonoBehaviour {
 		Button levelStartBtn = contentParent.transform.Find("Level Start Button").GetComponent<Button>();
 		levelStartBtn.onClick.AddListener(() => HideLevelStart());
 	}
+
 	void TriggerLevelPassed(GameObject item) {
 		if (ItemManager.instance.items.Count == 0) {
-			Invoke("LevelPassed", DELAY_END_GAME);
+			if (StatsManager.instance.successfulDeliveries > 0) {
+				Invoke("LevelPassed", DELAY_END_GAME);
+			} else {
+				Invoke("GameOver", DELAY_END_GAME);
+			}
 		}
 	}
+
 	void LevelPassed() {
 		AIManager.instance.ClearLevelAI();
 

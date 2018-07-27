@@ -104,7 +104,6 @@ public class DropzoneController : MonoBehaviour {
 					ItemManager.instance.RemoveItem(item);
 				} else {
 					// item did exit (fail)
-
 				}
                 incoming = null;
                 rejected = false;
