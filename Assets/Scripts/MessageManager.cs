@@ -13,6 +13,7 @@ public class MessageManager : MonoBehaviour {
 	Dictionary<string, int> dict = new Dictionary<string, int>();
 	Text output;
 	private string SayPersistentlyPriorityItemHash = null;
+	RectTransform rect;
 
 	void Awake() {
 		if (instance == null) {
@@ -28,20 +29,22 @@ public class MessageManager : MonoBehaviour {
 		COLLATERAL = "collateral";
 		KILL = "kill";
 		output = GetComponent<Text>();
-		ItemManager.instance.onPriorityItemChange += SayPersistentlyPriorityItem;
-		Say("infinite", int.MaxValue);
-		Say("three", 3);
-		Say("item xxxxxxxxxxxxxx delivered flawlessly", 20);
-		SayPersistentlyPriorityItem(null);
 	}
 
 	void Start() {
+		rect = transform.GetChild(0).GetComponent<RectTransform>();
 		Refresh();
+
+		ItemManager.instance.onPriorityItemChange += SayPersistentlyPriorityItem;
+
+		SayPersistentlyPriorityItem(null);
 	}
 
 	// Reads list of messages from messages and refreshes the text output.
 	void Refresh() {
 		output.text = string.Join("\n", messages.ToArray());
+		//rect.sizeDelta = new Vector2(rect.sizeDelta.x, messages.Count*35f);
+		//rect.localPosition = new Vector3(rect.localPosition.x, rect.sizeDelta.y, rect.localPosition.z);
 	}
 	
 	// adds message to end of list, returns index
