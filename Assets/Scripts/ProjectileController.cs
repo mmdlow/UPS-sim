@@ -6,6 +6,7 @@ public class ProjectileController : MonoBehaviour {
 
 	public GameObject item;
 	private SpriteRenderer spriteR;
+
 	void Awake () {
 		spriteR = gameObject.GetComponent<SpriteRenderer>();
 	}
@@ -15,6 +16,7 @@ public class ProjectileController : MonoBehaviour {
 	}
 
 	void RemoveMissedItem() {
+		ItemManager.instance.MissedItem(item);
 		ItemManager.instance.RemoveItem(item);
 	}
 	
