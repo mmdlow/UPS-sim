@@ -6,7 +6,14 @@ using UnityEngine.UI;
 
 public class MessageManager : MonoBehaviour {
 
-	public static string BREAKING, BROKEN, DELIVERED, FLAWLESS, COLLATERAL, KILL;
+	enum PreparedMessage {
+		BREAKING,
+		BROKEN,
+		DELIVERED,
+		FLAWLESS,
+		COLLATERAL,
+		KILL
+	}
 	public static MessageManager instance = null;
 	public int fadeTime = 5;
 	List<string> messages = new List<string>();
@@ -21,13 +28,6 @@ public class MessageManager : MonoBehaviour {
 		} else if (instance != this) {
 			Destroy(gameObject); // enforce singleton pattern 
 		}
-
-		BREAKING = "breaking";
-		BROKEN = "broken";
-		DELIVERED = "delivered";
-		FLAWLESS = "flawless";
-		COLLATERAL = "collateral";
-		KILL = "kill";
 		output = GetComponent<Text>();
 	}
 
@@ -58,6 +58,30 @@ public class MessageManager : MonoBehaviour {
 		}
 		Refresh();
 		return messageHash;
+	}
+	void SayPreparedMessage(PreparedMessage pm) {
+		string message = "";
+		switch(pm) {
+			case PreparedMessage.BREAKING:
+				message = "An item is breaking soon!";
+				break;
+			case PreparedMessage.BROKEN:
+				message = "You broke an item!";
+				break;
+			case PreparedMessage.COLLATERAL:
+				message = "You hit another vehicle!";
+				break;
+			case PreparedMessage.DELIVERED:
+				message = "Delivery made.";
+				break;
+			case PreparedMessage.FLAWLESS:
+				message = "Delivered flawlessly!";
+				break;
+			case PreparedMessage.KILL:
+				message = "Uh-oh, you ran over somebody!";
+				break;
+		}
+		Say(message, 5);
 	}
 	
 	// persistent
