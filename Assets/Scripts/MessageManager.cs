@@ -32,7 +32,7 @@ public class MessageManager : MonoBehaviour {
 	}
 
 	void Start() {
-		rect = transform.GetChild(0).GetComponent<RectTransform>();
+		//rect = transform.GetChild(0).GetComponent<RectTransform>();
 		Refresh();
 
 		ItemManager.instance.onPriorityItemChange += SayPersistentlyPriorityItem;
