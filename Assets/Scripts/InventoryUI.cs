@@ -45,7 +45,7 @@ public class InventoryUI : MonoBehaviour {
 
 	/* Loops through inventory slots and updates slot item integrities based
 	on damage sustained by player*/
-	void UpdateItemIntegrities(int damage) {
+	void UpdateItemIntegrities(float damage) {
 		for (int i = 0; i < slots.Length; i++) {
 			if (slots[i].GetSlotItem() != null) {
 				slots[i].UpdateItemIntegrity(damage);

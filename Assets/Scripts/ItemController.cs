@@ -62,7 +62,7 @@ public class ItemController : MonoBehaviour {
 		return dropzone;
 	}
 
-	public int UpdateIntegrity(int playerDamage) {
+	public int UpdateIntegrity(float playerDamage) {
 		itemIntegrity -= Mathf.RoundToInt(playerDamage * itemBreakFactor);
 		if (itemIntegrity <= 25) Debug.Log("Warning! " + itemName + " at risk");
 		return itemIntegrity;

@@ -45,7 +45,7 @@ public class InventorySlot : MonoBehaviour {
         priorityAlert.enabled = false;
 	}
 
-	public void UpdateItemIntegrity(int playerDamage) {
+	public void UpdateItemIntegrity(float playerDamage) {
 		nameDisplay.text = itemName + "\n" + slotItem.GetComponent<ItemController>().UpdateIntegrity(playerDamage) + "%";
 	}
 

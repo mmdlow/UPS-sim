@@ -6,16 +6,16 @@ public class PlayerController : MonoBehaviour {
 
     GameManager gameManager;
 
-    public delegate void OnSustainDamage(int damage);
+    public delegate void OnSustainDamage(float damage);
     public OnSustainDamage onSustainDamageCallback;
 
     public float acceleration;
     public float steering;
-    public float damageConstant = 2f;
+    public float damageConstant = 3f;
     public Text healthDisplay;
     public Text damageDisplay;
     private Rigidbody2D rb;
-    public static GameObject instance;
+    public static PlayerController instance;
     public GameObject directionIndicatorPrefab;
     public GameObject directionIndicator;
     public PlayerShooter playerShooter;
@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour {
 
 	void Awake() {
 		if (instance == null) {
-			instance = this.gameObject;
+			instance = this;
 		} else if (instance != this) {
 			Destroy(this.gameObject); // enforce singleton pattern 
 		}
@@ -56,7 +56,7 @@ public class PlayerController : MonoBehaviour {
 
         // For updating item integrities upon sustaining player damage
         if (onSustainDamageCallback != null) {
-            onSustainDamageCallback(damage);
+            onSustainDamageCallback(col.relativeVelocity.magnitude);
         }
 
         if (damage > 0) {
