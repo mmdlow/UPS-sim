@@ -122367,7 +122367,6 @@ MonoBehaviour:
   acceleration: 7
   steering: 7
   damageConstant: 1
-  health: 100
   healthDisplay: {fileID: 89835846}
   damageDisplay: {fileID: 1679893266}
   directionIndicatorPrefab: {fileID: 1554353960561918, guid: e3f4324d8337f4762942b4dc918a3c07,

@@ -12,7 +12,6 @@ public class PlayerController : MonoBehaviour {
     public float acceleration;
     public float steering;
     public float damageConstant = 2f;
-    public int health;
     public Text healthDisplay;
     public Text damageDisplay;
     private Rigidbody2D rb;
@@ -35,9 +34,8 @@ public class PlayerController : MonoBehaviour {
 	}
 
     void Start () {
-        health = GameManager.instance.health; // Use health field in game manager
         rb = GetComponent<Rigidbody2D>();
-        healthDisplay.text = health.ToString();
+        healthDisplay.text = GameManager.instance.health.ToString();
         ItemManager.instance.onPriorityItemChange += UpdatePriorityItem;
 		playerShooter = GetComponent<PlayerShooter>();
     }  
@@ -54,7 +52,7 @@ public class PlayerController : MonoBehaviour {
     void OnCollisionEnter2D (Collision2D col) {
 
         int damage = Mathf.RoundToInt(damageConstant * col.relativeVelocity.magnitude);
-        health -= damage;
+        GameManager.instance.health -= damage;
 
         // For updating item integrities upon sustaining player damage
         if (onSustainDamageCallback != null) {
@@ -66,14 +64,14 @@ public class PlayerController : MonoBehaviour {
             StartCoroutine(DisplayDamage());
         }
 
-        if (health <= 0) {
+        if (GameManager.instance.health <= 0) {
             healthDisplay.text = "0";
             GameManager.instance.GameOver();
             return;
         }
-        if (health < 100 && health > 25) healthDisplay.color = Color.white;
-        else if (health <= 25) healthDisplay.color = Color.red;
-        healthDisplay.text = health.ToString();
+        if (GameManager.instance.health < 100 && GameManager.instance.health > 25) healthDisplay.color = Color.white;
+        else if (GameManager.instance.health <= 25) healthDisplay.color = Color.red;
+        healthDisplay.text = GameManager.instance.health.ToString();
     }
 
     void FixedUpdate () {

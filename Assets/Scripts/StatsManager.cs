@@ -4,6 +4,7 @@ using System.Collections;
 public class StatsManager : MonoBehaviour {
 	
 	public static StatsManager instance = null;
+
 	public int successfulDeliveries = 0;
 	public int vehiclesDamaged = 0;
 	public int vehiclesTotalled = 0;

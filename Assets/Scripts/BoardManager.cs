@@ -12,6 +12,7 @@ public class BoardManager : MonoBehaviour {
 	public ItemManager itemManager;
 	public AIManager aiManager;
 	public float gameTime = 90f;
+	public float numLevelItems = 0;
 	public Text timer;
 
 	void Awake() {
@@ -32,6 +33,7 @@ public class BoardManager : MonoBehaviour {
 
 	void Start() {
 		timer = GameObject.Find("Timer").GetComponent<Text>();
+		numLevelItems = ItemManager.instance.items.Count;
 	}
 
 	void Update() {
