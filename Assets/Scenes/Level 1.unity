@@ -123562,7 +123562,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 31, y: 53.000004}
+  m_AnchoredPosition: {x: 31, y: 53}
   m_SizeDelta: {x: 50, y: 15}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1523131419
@@ -124387,7 +124387,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc9384239dfda284497463a2d915341f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deliveryOutput: {fileID: 763992196}
+  fadeTime: 5
+  deliveryLog: {fileID: 763992196}
   messageLog: {fileID: 268298623}
 --- !u!224 &1896766154 stripped
 RectTransform:
@@ -124651,7 +124652,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -60, y: 53.000004}
+  m_AnchoredPosition: {x: -60, y: 53}
   m_SizeDelta: {x: 50, y: 15}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1970004076
@@ -125070,7 +125071,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: FLAWLESSLY delivered A GIANT PIECE OF SHIT!
+  m_Text: 
 --- !u!222 &2117501151
 CanvasRenderer:
   m_ObjectHideFlags: 0

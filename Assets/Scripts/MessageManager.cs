@@ -42,7 +42,7 @@ public class MessageManager : MonoBehaviour {
 				for (int i = msgIndex; i < messages.Count - 1; i++) {
 					// Move bottom messages, if any, upwards to fill space
 					Vector3 oldPos = messages[i].transform.position;
-					Vector3 newPos = new Vector3(oldPos.x, oldPos.y + 36, oldPos.z);
+					Vector3 newPos = new Vector3(oldPos.x, oldPos.y + 1, oldPos.z);
 					messages[i].transform.position = Vector3.MoveTowards(oldPos, newPos, 5);
 				}
 			}
@@ -68,7 +68,7 @@ public class MessageManager : MonoBehaviour {
 			newMsgLog = Instantiate(messageLog);
 			newMsgLog.transform.SetParent(transform);
 			Vector3 oldPos = messages[messages.Count - 1].transform.position;
-			newMsgLog.transform.position = new Vector3(oldPos.x, oldPos.y - 36, oldPos.z);
+			newMsgLog.transform.position = new Vector3(oldPos.x, oldPos.y - 1, oldPos.z);
 			newMsgLog.SetActive(false);
 		} else {
 			newMsgLog = messageLog;
@@ -105,7 +105,7 @@ public class MessageManager : MonoBehaviour {
 			newMsgLog.transform.SetParent(transform);
 			Vector3 oldPos = messages[messages.Count - 1].transform.position;
 			Debug.Log(oldPos);
-			newMsgLog.transform.position = new Vector3(oldPos.x, oldPos.y - 36, 0);
+			newMsgLog.transform.position = new Vector3(oldPos.x, oldPos.y - 1, 0);
 			newMsgLog.SetActive(false);
 		} else {
 			newMsgLog = messageLog;
