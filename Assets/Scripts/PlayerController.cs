@@ -52,6 +52,7 @@ public class PlayerController : MonoBehaviour {
     }
 
     void OnCollisionEnter2D (Collision2D col) {
+
         int damage = Mathf.RoundToInt(damageConstant * col.relativeVelocity.magnitude);
         health -= damage;
 
