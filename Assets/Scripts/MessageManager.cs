@@ -79,7 +79,15 @@ public class MessageManager : MonoBehaviour {
 				message = "Delivered flawlessly!";
 				break;
 			case PreparedMessage.KILL:
-				message = "Uh-oh, you ran over somebody!";
+				string[] messages = {
+					"Oh, the Humanity!",
+					"Uh-oh, you ran over somebody!",
+					"Welp, there goes another one.",
+					"Somebody was run over!",
+					"Why are my wheels turning red? Hmm...",
+					"I wonder what that bump was."
+				};
+				message = messages[UnityEngine.Random.Range(0, messages.Length)];
 				break;
 			case PreparedMessage.MISSED:
 				message = "You missed! Slow down next time";
