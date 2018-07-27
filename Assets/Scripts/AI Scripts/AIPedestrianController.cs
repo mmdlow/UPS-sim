@@ -17,7 +17,7 @@ public class AIPedestrianController : MonoBehaviour {
 	public int health = 20;
 	public float damageConstant = 2f;
 
-	bool alive = false;
+	bool alive = true;
 
 	void Awake() {
 		rb = GetComponent<Rigidbody2D>();
@@ -42,7 +42,12 @@ public class AIPedestrianController : MonoBehaviour {
 	}
 
 	void OnTriggerEnter2D(Collider2D col) {
-		if (col.name == "Pedestrian Char") return;
+		if (col.gameObject.GetComponent<AIPedestrianController>() != null) return;
+		if (col.name.StartsWith("Tilemap")) return;
+		if (alive && col.gameObject.GetComponent<PlayerController>() != null) {
+			StatsManager.instance.pedestriansHit++;
+			Debug.Log("Pedestrians hit: " + StatsManager.instance.pedestriansHit);
+		}
 		anim.SetBool("Alive", false);
 		alive = false;
 	}
