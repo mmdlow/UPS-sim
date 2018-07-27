@@ -8,7 +8,8 @@ public class ItemManager : MonoBehaviour {
 	public static ItemManager instance = null;
 
 	public GameObject itemPrefab;
-	public int maxSpace = 9;
+	private int MAX_ITEMS = 1;
+	private int MIN_ITEMS = 1;
 	public GameObject priorityItem = null;
 	public delegate void ItemChangeHandler(GameObject item);
 	public event ItemChangeHandler onPriorityItemChange;
@@ -43,7 +44,7 @@ public class ItemManager : MonoBehaviour {
 
 	public void InitLevelItems() {
 		List<string[]> itemNamesDurabilities = ReadItemNames();
-		int numItems = Random.Range(3, maxSpace);
+		int numItems = Random.Range(MIN_ITEMS, MAX_ITEMS+1);
 		for (int i=0; i<numItems; i++) {
             int randomIndex = Random.Range(0, itemNamesDurabilities.Count);
             string[] s = itemNamesDurabilities[randomIndex];   // s[0] is name, s[1] is durability
