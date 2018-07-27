@@ -10,7 +10,7 @@ public class InventoryUI : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		ItemManager.instance.onItemAdd += UpdateUI;
-		ItemManager.instance.onItemRemove += UpdateUI;
+		ItemManager.instance.onItemFired += UpdateUI;
 		ItemManager.instance.onPriorityItemChange += UpdatePriorityIndicator;
 
 		slots = GetComponentsInChildren<InventorySlot>();

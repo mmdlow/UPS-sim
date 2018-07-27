@@ -8,7 +8,7 @@ public class PlayerShooter : MonoBehaviour {
 	private Rigidbody2D rb;
 	public GameObject projectilePrefab;
 	public float PROJ_VELOCITY = 5f;
-	private bool fired = false;
+	private bool canFire = true;
 	private bool firing = false;
 	private GameObject priorityItem;
     private GameObject directionIndicator;
@@ -119,7 +119,7 @@ public class PlayerShooter : MonoBehaviour {
 	
 	void FixedUpdate () {
 		angle = (rb.velocity.magnitude/4f)*150f;
-		if (!firing && Input.GetButton("Shoot") && fired == false) {
+		if (!firing && Input.GetButton("Shoot") && canFire) {
 			// Begin firing sequence
             firing = true;
             fillAmount = 0f;
@@ -129,6 +129,7 @@ public class PlayerShooter : MonoBehaviour {
 			UpdateFillAmount();
             if (!Input.GetButton("Shoot")) {
                 // End firing sequence
+                canFire = false;
                 Shoot(priorityItem, 
 					  powerBarImage.fillAmount,
 					  FindRandomVectorInBetween(angle, transform.position, dropzone.transform.position) - transform.position
@@ -173,6 +174,7 @@ public class PlayerShooter : MonoBehaviour {
 	}
 
 	void UpdateCurrentItem(GameObject priorityItem) {
+		canFire = true;
 		this.priorityItem = priorityItem;
 		if (priorityItem != null) {
             this.dropzone = priorityItem.GetComponent<ItemController>().dropzone;

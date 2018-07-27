@@ -76,7 +76,7 @@ public class GameManager : MonoBehaviour {
 			levelItemDrbText.text += item.GetComponent<ItemController>().GetItemDurability() + "\n";
 		}
 
-		ItemManager.instance.onItemFired += TriggerLevelPassed;
+		ItemManager.instance.onItemRemove += TriggerLevelPassed;
 
 		levelStart.SetActive(true);
 
