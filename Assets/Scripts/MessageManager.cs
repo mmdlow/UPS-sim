@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class MessageManager : MonoBehaviour {
 
 	public static string BREAKING, BROKEN, DELIVERED, FLAWLESS, COLLATERAL, KILL;
+	public static MessageManager instance = null;
 	public int fadeTime = 5;
 	public GameObject msgParent;
 	public GameObject deliveryLog;
@@ -15,6 +16,12 @@ public class MessageManager : MonoBehaviour {
 	List<GameObject> messages = new List<GameObject>();
 
 	void Awake() {
+		if (instance == null) {
+			instance = this;
+		} else if (instance != this) {
+			Destroy(gameObject); // enforce singleton pattern wrt BoardManager
+		}
+
 		BREAKING = "breaking";
 		BROKEN = "broken";
 		DELIVERED = "delivered";
