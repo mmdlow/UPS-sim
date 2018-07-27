@@ -41,6 +41,7 @@ public class PedestrianController : MonoBehaviour {
 		anim.SetBool("Alive", false);
 		alive = false;
         rb.velocity = new Vector3(0, 0, 0);
+		MessageManager.instance.SayPreparedMessage(MessageManager.PreparedMessage.KILL, 5);
 	}
 
 	void Move() {

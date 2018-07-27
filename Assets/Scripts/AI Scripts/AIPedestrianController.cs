@@ -46,6 +46,7 @@ public class AIPedestrianController : MonoBehaviour {
 		if (col.name.StartsWith("Tilemap")) return;
 		if (alive && col.gameObject.GetComponent<PlayerController>() != null) {
 			StatsManager.instance.pedestriansHit++;
+			MessageManager.instance.SayPreparedMessage(MessageManager.PreparedMessage.KILL, 5);
 			Debug.Log("Pedestrians hit: " + StatsManager.instance.pedestriansHit);
 		}
 		anim.SetBool("Alive", false);
