@@ -6,9 +6,11 @@ public class AIManager : MonoBehaviour {
 
 	public static AIManager instance = null;
 	public GameObject carPrefab;
+	public GameObject pedPrefab;
 	public int population = 100;
 	public Sprite[] sprites;
 	public Queue<GameObject> cars = new Queue<GameObject>();
+	public Queue<GameObject> guys = new Queue<GameObject>();
 
 	void Awake() {
 		if (instance == null) {
@@ -22,8 +24,10 @@ public class AIManager : MonoBehaviour {
 	public void InitLevelAI() {
 		for (int i = 0; i < population; i++) {
 			GameObject car = Instantiate(carPrefab);
+			GameObject guy = Instantiate(pedPrefab);
 			car.GetComponent<AIController>().SetSprite(sprites[Random.Range(0, sprites.Length)]);
 			cars.Enqueue(car);
+			guys.Enqueue(guy);
 		}
 	}
 
@@ -31,6 +35,10 @@ public class AIManager : MonoBehaviour {
 		while (cars.Count > 0) {
 			GameObject car = cars.Dequeue();
 			Destroy(car);
+		}
+		while (guys.Count > 0) {
+			GameObject guy = guys.Dequeue();
+			Destroy(guy);
 		}
 	}
 }

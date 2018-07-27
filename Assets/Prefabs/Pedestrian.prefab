@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 95563352236614100}
   - component: {fileID: 50966494786261826}
   - component: {fileID: 60480399509076490}
-  - component: {fileID: 114498801660463962}
+  - component: {fileID: 114903969572671914}
   m_Layer: 0
   m_Name: Pedestrian Char
   m_TagString: Untagged
@@ -285,21 +285,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &114498801660463962
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1169557635409224}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa664c045fab6b14fa2d28f8963874aa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  path: {fileID: 4995020053326338}
-  velocity: 0.3
-  steering: 1
-  turnTrigger: 0.05
 --- !u!114 &114808899498134260
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -312,6 +297,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lineColor: {r: 0, g: 0, b: 0, a: 0}
+--- !u!114 &114903969572671914
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1169557635409224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2a46212bee3f2b449734d3bc0bca2e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  steering: 3
+  speed: 0.01
+  recoverTime: 3
+  health: 20
+  damageConstant: 2
 --- !u!212 &212646285976620740
 SpriteRenderer:
   m_ObjectHideFlags: 1
