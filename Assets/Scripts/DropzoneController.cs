@@ -102,6 +102,7 @@ public class DropzoneController : MonoBehaviour {
 				if (!rejected) {
 					// item did not exit (success)
 					ItemManager.instance.RemoveItem(item);
+					MessageManager.instance.SayPreparedMessage(MessageManager.PreparedMessage.DELIVERED, 5);
 				} else {
 					// item did exit (fail)
 				}

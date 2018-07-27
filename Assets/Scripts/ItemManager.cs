@@ -77,7 +77,7 @@ public class ItemManager : MonoBehaviour {
 		onItemFired(item);
 	}
 
-	// item hits dropzone and is removed (after fired)
+	// item is removed (after fired) whether it hits dropzone or not
 	public void RemoveItem(GameObject item) {
 		onItemRemove(item);
 		if (priorityItem == item) {
@@ -91,5 +91,6 @@ public class ItemManager : MonoBehaviour {
 	// item does not hit dropzone or hits then exits (after fired)
 	public void MissedItem(GameObject item) {
 		onItemMissed(item);
+		MessageManager.instance.SayPreparedMessage(MessageManager.PreparedMessage.MISSED, 5);
 	}
 }

@@ -6,13 +6,14 @@ using UnityEngine.UI;
 
 public class MessageManager : MonoBehaviour {
 
-	enum PreparedMessage {
+	public enum PreparedMessage {
 		BREAKING,
 		BROKEN,
 		DELIVERED,
 		FLAWLESS,
 		COLLATERAL,
-		KILL
+		KILL,
+		MISSED
 	}
 	public static MessageManager instance = null;
 	public int fadeTime = 5;
@@ -47,7 +48,7 @@ public class MessageManager : MonoBehaviour {
 		//rect.localPosition = new Vector3(rect.localPosition.x, rect.sizeDelta.y, rect.localPosition.z);
 	}
 	
-	// adds message to end of list, returns index
+	// adds message to end of list, returns hash of message that matches its index
 	public string Say(string message, int timeout) {
 		messages.Add(message);
         string messageHash = Guid.NewGuid().ToString("n").Substring(0, 8);
@@ -59,7 +60,7 @@ public class MessageManager : MonoBehaviour {
 		Refresh();
 		return messageHash;
 	}
-	void SayPreparedMessage(PreparedMessage pm) {
+	public void SayPreparedMessage(PreparedMessage pm, int timeout) {
 		string message = "";
 		switch(pm) {
 			case PreparedMessage.BREAKING:
@@ -80,8 +81,14 @@ public class MessageManager : MonoBehaviour {
 			case PreparedMessage.KILL:
 				message = "Uh-oh, you ran over somebody!";
 				break;
+			case PreparedMessage.MISSED:
+				message = "You missed! Slow down next time";
+				break;
+			default:
+				Debug.LogError("Error: Prepared message not found in enums: " + pm);
+				break;
 		}
-		Say(message, 5);
+		Say(message, timeout);
 	}
 	
 	// persistent
@@ -95,12 +102,12 @@ public class MessageManager : MonoBehaviour {
 		}
 	}
 
-	void SayAt(string messageHash, string newMessage) {
+	private void SayAt(string messageHash, string newMessage) {
 		int index = dict[messageHash];
 		messages[index] = newMessage;
 		Refresh();
 	}
-	IEnumerator clearAfter(string messageHash, int timeout) {
+	private IEnumerator clearAfter(string messageHash, int timeout) {
 		yield return new WaitForSeconds(timeout);
 		int index = dict[messageHash];
 		messages.RemoveAt(index);
