@@ -772,6 +772,7 @@ GameObject:
   - component: {fileID: 104755687}
   - component: {fileID: 104755689}
   - component: {fileID: 104755688}
+  - component: {fileID: 104755690}
   m_Layer: 5
   m_Name: Failed Image
   m_TagString: Untagged
@@ -834,6 +835,17 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 104755686}
+--- !u!114 &104755690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 104755686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdbae8af8a97aa14d8faa4b06a2ce43c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &133349564
 Prefab:
   m_ObjectHideFlags: 0

@@ -107,6 +107,7 @@ public class GameManager : MonoBehaviour {
 	}
 
 	void LevelPassed() {
+		Debug.Log("level passed");
 		AIManager.instance.ClearLevelAI();
 		LevelPassed levelPassedComp = levelPassed.GetComponentInChildren<LevelPassed>();
 		levelPassedComp.InitScreen();
@@ -115,31 +116,10 @@ public class GameManager : MonoBehaviour {
 
 	public void GameOver() {
 		Debug.Log("game over");
-		GameObject contentParent = gameOver.transform.Find("Failed Image").Find("Dynamic Text").gameObject;
-		Text levelNumText = contentParent.transform.Find("Level Number").GetComponent<Text>();
-		Text DeathCauseText = contentParent.transform.Find("Cause Text").GetComponent<Text>();
-		Text FinalCashText = contentParent.transform.Find("TC Text").GetComponent<Text>();
-
-		if (level == 1) {
-			levelNumText.text = "YOU ENDURED FOR " + level + " DAY";
-		} else {
-			levelNumText.text = "YOU ENDURED FOR " + level + " DAYS";
-		}
-
-		if (health <= 0) {
-			DeathCauseText.text = "BEFORE WRECKING YOUR TRUCK";
-		}
-		if (StatsManager.instance.successfulDeliveries == 0) {
-		 	DeathCauseText.text = "BEFORE FAILING ALL DELIVERIES";			
-		}
-		FinalCashText.text = "$" + money;
-
+		AIManager.instance.ClearLevelAI();
+		GameOver gameOverComp = gameOver.GetComponentInChildren<GameOver>();
+		gameOverComp.InitScreen();
 		gameOver.SetActive(true);
-
-		Button menuBtn = gameOver.transform.Find("Failed Image").Find("Menu Button").GetComponent<Button>();
-		Button restartBtn = gameOver.transform.Find("Failed Image").Find("Restart Button").GetComponent<Button>();
-		// menuBtn.onClick.AddListener(go to menu);
-		// restartBtn.onClick.AddListener(restart game);
 	}
 
 	public void Upgrade() {
@@ -150,7 +130,7 @@ public class GameManager : MonoBehaviour {
 
 	void HideLevelStart() {
 		doingSetup = false;
-		GameObject.Find("Level Start Screen").SetActive(false);
+		levelStart.SetActive(false);
 		inventory.SetActive(false);
 		worldmap.SetActive(false);
 	}
