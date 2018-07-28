@@ -37,7 +37,6 @@ public class InventoryUI : MonoBehaviour {
 			if (slotItem != null && slotItem == ItemManager.instance.priorityItem) {
 				slots[i].SetPriorityAlert();
 			} else {
-				string name = slotItem != null ? slotItem.GetComponent<ItemController>().GetItemName() : "NULL" ;
 				slots[i].UnsetPriorityAlert();
 			}
 		}

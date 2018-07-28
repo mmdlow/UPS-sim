@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 /*
 	GameManager manages every instance of this game. There should only ever one
@@ -17,16 +18,18 @@ public class GameManager : MonoBehaviour {
 	public BoardManager boardManager;
 	public StatsManager statsManager;
 	public bool doingSetup;
+	public bool paused = false;
 	public int maxHealth = 100;
 	public int health = 100;
 	public int money = 0;
-	public int level = 1;
+	public int level = 0;
 
 	GameObject contentParent;
 	GameObject levelStart;
 	GameObject levelPassed;
 	GameObject workshop;
 	GameObject gameOver;
+	GameObject pauseScreen;
 	GameObject inventory;
 	GameObject worldmap;
 	GameObject minimap;
@@ -61,6 +64,7 @@ public class GameManager : MonoBehaviour {
 		levelPassed = GameObject.Find("Level Passed Screen");
 		workshop = GameObject.Find("Workshop Screen");
 		gameOver = GameObject.Find("Game Over Screen");
+		pauseScreen = GameObject.Find("Pause Screen");
 
 		inventory = GameObject.Find("Inventory");
 		worldmap = GameObject.Find("Worldmap");
@@ -69,10 +73,32 @@ public class GameManager : MonoBehaviour {
 
 		levelPassed.SetActive(false);
 		workshop.SetActive(false);
-		gameOver.SetActive(false);	
+		gameOver.SetActive(false);
+		pauseScreen.SetActive(false);
+
+		InitGame();
 	}
 
-	void Start() {
+	void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode) {
+		level++;
+		InitGame();
+	}
+
+	void OnEnable() {
+		SceneManager.sceneLoaded += OnLevelFinishedLoading;
+	}
+
+	void OnDisable() {
+		SceneManager.sceneLoaded -= OnLevelFinishedLoading;
+	}
+
+	void InitGame() {
+		Debug.Log(level);
+		if (BoardManager.instance == null) {
+			Instantiate(boardManager);
+		}
+		StatsManager.instance.ResetStats();
+
 		doingSetup = true;
 
 		ItemManager.instance.onItemRemove += TriggerLevelPassed;
@@ -89,6 +115,7 @@ public class GameManager : MonoBehaviour {
 			} else {
 				Invoke("GameOver", DELAY_END_GAME);
 			}
+			ItemManager.instance.onItemRemove -= TriggerLevelPassed;
 		}
 	}
 
@@ -100,12 +127,29 @@ public class GameManager : MonoBehaviour {
 		levelPassed.SetActive(true);	
 	}
 
+	void PauseGame() {
+		paused = true;
+		Time.timeScale = 0;
+		pauseScreen.SetActive(true);
+		inventory.SetActive(false);
+		worldmap.SetActive(false);
+		minimap.SetActive(true);
+		messages.SetActive(true);
+	}
+
+	public void UnpauseGame() {
+		paused = false;
+		Time.timeScale = 1;
+		pauseScreen.SetActive(false);
+	}
+
 	public void GameOver() {
 		Debug.Log("game over");
 		AIManager.instance.ClearLevelAI();
 		GameOver gameOverComp = gameOver.GetComponentInChildren<GameOver>();
 		gameOverComp.InitScreen();
 		gameOver.SetActive(true);
+		//enabled = false;
 	}
 
 	public void Upgrade() {
@@ -122,22 +166,43 @@ public class GameManager : MonoBehaviour {
 	}
 
 	void Update() {
-		if (Input.GetButtonDown("Inventory")) {
-			inventory.SetActive(!inventory.activeInHierarchy);
-			minimap.SetActive(!minimap.activeInHierarchy);
-			messages.SetActive(!messages.activeInHierarchy);
+		if (!doingSetup) {
+			if (!paused) {
+				if (Input.GetButtonDown("Inventory")) {
+					inventory.SetActive(!inventory.activeInHierarchy);
+					minimap.SetActive(!minimap.activeInHierarchy);
+					messages.SetActive(!messages.activeInHierarchy);
 
-			if (inventory.activeSelf) worldmap.SetActive(true);
-			else worldmap.SetActive(false);
+					// Enable pausing when inventory is opened
+					if (inventory.activeSelf) {
+						worldmap.SetActive(true);
+						Time.timeScale = 0;
+						//paused = true;
+					} else {
+						worldmap.SetActive(false);
+						Time.timeScale = 1;
+						//paused = false;
+					}
+				}
+				// Allow for toggling of worldmap when inventory is active
+				if (inventory.activeSelf) {
+					if (Input.GetButtonDown("Worldmap")) {
+						worldmap.SetActive(!worldmap.activeInHierarchy);
+						minimap.SetActive(!minimap.activeInHierarchy);
+					}
+				}
+			}
 
-		}
-		// Allow for toggling of worldmap when inventory is active
-		if (inventory.activeSelf) {
-			if (Input.GetButtonDown("Worldmap")) {
-				worldmap.SetActive(!worldmap.activeInHierarchy);
+			//if (health == 0) GameOver();
+
+			if (Input.GetButtonDown("Pause")) {
+				if (!pauseScreen.activeSelf) {
+					PauseGame();
+				} else {
+					UnpauseGame();
+				}
 			}
 		}
-		//if (health == 0) GameOver();
 	}
 
 	public bool IsDoingSetup() {
@@ -145,5 +210,11 @@ public class GameManager : MonoBehaviour {
 	}
 	public bool GetMature() {
 		return MATURE;
+	}
+
+	public void ClearManagers() {
+		Destroy(AIManager.instance.gameObject);
+		Destroy(ItemManager.instance.gameObject);
+		Destroy(BoardManager.instance.gameObject);
 	}
 }

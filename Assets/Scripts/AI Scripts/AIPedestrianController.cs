@@ -8,7 +8,7 @@ public class AIPedestrianController : MonoBehaviour {
 	Vector3[] path;
 	Vector3 currentWaypoint;
 	int targetIndex;
-	Rigidbody2D rb;
+	//Rigidbody2D rb;
 	Animator anim;
 
 	public float steering = 3f;
@@ -22,7 +22,7 @@ public class AIPedestrianController : MonoBehaviour {
 	private SpeechBubbleController bubble;
 
 	void Awake() {
-		rb = GetComponent<Rigidbody2D>();
+		//rb = GetComponent<Rigidbody2D>();
 		grid = GameObject.Find("Pathfinder").GetComponent<TileGrid>();
 	}
 

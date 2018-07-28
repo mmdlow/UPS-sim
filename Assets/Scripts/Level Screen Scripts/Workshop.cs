@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Workshop : MonoBehaviour {
 
@@ -126,6 +127,8 @@ public class Workshop : MonoBehaviour {
 		repairBtn.onClick.RemoveAllListeners();
 		nextBtn.onClick.RemoveAllListeners();
 		// Go to next level
+		GameManager.instance.ClearManagers();
+		SceneManager.LoadScene("Level 1");
 	}
 
 	public void InitWorkshop() {
