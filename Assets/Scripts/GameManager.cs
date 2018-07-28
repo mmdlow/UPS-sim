@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour {
 	public BoardManager boardManager;
 	public StatsManager statsManager;
 	public bool doingSetup;
+	public bool paused = false;
 	public int maxHealth = 100;
 	public int health = 100;
 	public int money = 0;
@@ -105,6 +106,7 @@ public class GameManager : MonoBehaviour {
 		GameOver gameOverComp = gameOver.GetComponentInChildren<GameOver>();
 		gameOverComp.InitScreen();
 		gameOver.SetActive(true);
+		//enabled = false;
 	}
 
 	public void Upgrade() {
@@ -121,22 +123,33 @@ public class GameManager : MonoBehaviour {
 	}
 
 	void Update() {
-		if (Input.GetButtonDown("Inventory")) {
-			inventory.SetActive(!inventory.activeInHierarchy);
-			minimap.SetActive(!minimap.activeInHierarchy);
-			messages.SetActive(!messages.activeInHierarchy);
+		if (!doingSetup) {
+			if (Input.GetButtonDown("Inventory")) {
+				inventory.SetActive(!inventory.activeInHierarchy);
+				minimap.SetActive(!minimap.activeInHierarchy);
+				messages.SetActive(!messages.activeInHierarchy);
 
-			if (inventory.activeSelf) worldmap.SetActive(true);
-			else worldmap.SetActive(false);
+				// Enable pausing when inventory is opened
+				if (!paused) {
+					Time.timeScale = 0;
+					paused = true;
+				} else {
+					Time.timeScale = 1;
+					paused = false;
+				}
 
-		}
-		// Allow for toggling of worldmap when inventory is active
-		if (inventory.activeSelf) {
-			if (Input.GetButtonDown("Worldmap")) {
-				worldmap.SetActive(!worldmap.activeInHierarchy);
+				if (inventory.activeSelf) worldmap.SetActive(true);
+				else worldmap.SetActive(false);
+
 			}
+			// Allow for toggling of worldmap when inventory is active
+			if (inventory.activeSelf) {
+				if (Input.GetButtonDown("Worldmap")) {
+					worldmap.SetActive(!worldmap.activeInHierarchy);
+				}
+			}
+			//if (health == 0) GameOver();
 		}
-		//if (health == 0) GameOver();
 	}
 
 	public bool IsDoingSetup() {

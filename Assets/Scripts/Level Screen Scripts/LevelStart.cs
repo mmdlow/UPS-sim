@@ -10,8 +10,8 @@ public class LevelStart : MonoBehaviour {
 	Text levelMoneyText;
 	Button levelStartBtn;
 	
-	public Text levelItemNamesText;
-	public Text levelItemDrbText;
+	Text levelItemNamesText;
+	Text levelItemDrbText;
 
 	void Awake() {
 		levelNumText = transform.Find("Level Number").GetComponent<Text>();
