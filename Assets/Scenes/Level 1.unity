@@ -113856,6 +113856,7 @@ GameObject:
   - component: {fileID: 713771769}
   - component: {fileID: 713771771}
   - component: {fileID: 713771770}
+  - component: {fileID: 713771772}
   m_Layer: 5
   m_Name: Workshop Image
   m_TagString: Untagged
@@ -113924,6 +113925,26 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 713771768}
+--- !u!114 &713771772
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 713771768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf2ea6665775bb845abfb0f8d54842f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speedLvl: 1
+  durbLvl: 1
+  maxLvl: 5
+  repairCost: 100
+  upSpeedCost: 500
+  upDurbCost: 500
+  healthIncr: 20
+  speedIncr: 1
+  durbIncr: 0.5
 --- !u!1 &751006522
 GameObject:
   m_ObjectHideFlags: 0
@@ -122935,7 +122956,7 @@ GameObject:
   - component: {fileID: 1523131420}
   - component: {fileID: 1523131419}
   m_Layer: 5
-  m_Name: Upgrade Durability Cost
+  m_Name: Durability Cost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -123875,7 +123896,7 @@ GameObject:
   - component: {fileID: 1970004077}
   - component: {fileID: 1970004076}
   m_Layer: 5
-  m_Name: Upgrade Speed Cost
+  m_Name: Speed Cost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

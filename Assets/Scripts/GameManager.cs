@@ -17,20 +17,14 @@ public class GameManager : MonoBehaviour {
 	public BoardManager boardManager;
 	public StatsManager statsManager;
 	public bool doingSetup;
+	public int maxHealth = 100;
 	public int health = 100;
 	public int money = 0;
 	public int level = 1;
-	public int repairCost = 100;
-	public int speedUpgradeCost = 500;
-	public int durbUpgradeCost = 500;
 	public int vehDamagedPenalty = 10;
 	public int vehTotalledPenalty = 20;
 	public int pedsKilledPenalty = 30;
 	public int successBonus = 100;
-	public int upSpeedCost = 500;
-	public int upDurbCost = 500;
-	public int speedLvl = 1;
-	public int durbLvl = 1;
 
 	GameObject contentParent;
 	GameObject levelStart;
@@ -177,73 +171,9 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void Upgrade() {
-		GameObject contentParent = workshop.transform.Find("Workshop Image").gameObject;
-		Text healthText = contentParent.transform.Find("Health Text").GetComponent<Text>();
-		Text cashText = contentParent.transform.Find("Cash Text").GetComponent<Text>();
-		Text mechDialogue = contentParent.transform.Find("Mechanic Text").GetComponent<Text>();
-
-		healthText.text = health.ToString();
-		cashText.text = money.ToString();
-		mechDialogue.text = "Upgrade and repair here!";
-
+		Workshop upgrades = workshop.GetComponentInChildren<Workshop>();
+		upgrades.InitWorkshop();
 		workshop.SetActive(true);
-		Button repairBtn = contentParent.transform.Find("Repair Button").GetComponent<Button>();
-		Button upSpeedBtn = contentParent.transform.Find("Upgrade Speed Button").GetComponent<Button>();
-		Button upDurbBtn = contentParent.transform.Find("Upgrade Durability Button").GetComponent<Button>();
-		Button nextBtn = contentParent.transform.Find("Next Button").GetComponent<Button>();
-		if (speedLvl >= 5) upSpeedBtn.gameObject.SetActive(false);
-		if (durbLvl >= 5) upDurbBtn.gameObject.SetActive(false);
-		Text speedLvlText = upSpeedBtn.gameObject.transform.Find("Value").GetComponent<Text>();
-		Text durbLvlText = upDurbBtn.gameObject.transform.Find("Value").GetComponent<Text>();
-		speedLvlText.text = "LVL " + speedLvl + " -> " + (speedLvl + 1).ToString();
-		durbLvlText.text = "LVL " + durbLvl + " -> " + (durbLvl + 1).ToString();
-
-		repairBtn.onClick.AddListener(() => {
-			if (health >= 100) {
-				mechDialogue.text = "Already at full health!";
-				return;
-			}
-			if (money < 100) {
-				mechDialogue.text = "Get yo broke ass outta here";
-			} else {
-				mechDialogue.text = "An excellent choice";
-				health += 20;
-				money -= 20;
-				healthText.text = health.ToString();
-				cashText.text = money.ToString();
-			}
-		});
-		upSpeedBtn.onClick.AddListener(() => {
-			if (speedLvl >= 5) {
-				mechDialogue.text = "Can't upgrade further";
-				return;
-			}
-			if (money < upSpeedCost) {
-				mechDialogue.text = "Ur mom gay";
-			} else {
-				mechDialogue.text = "k can";
-				speedLvl++;
-				PlayerController.instance.acceleration += 1;
-				speedLvlText.text = "LVL " + speedLvl + " -> " + (speedLvl + 1).ToString();
-				// Increase speed of player
-			}
-		});
- 		upDurbBtn.onClick.AddListener(() => {
- 			if (durbLvl >= 5) {
-				mechDialogue.text = "Can't upgrade further";
-				return;
-			}
-			if (money < upDurbCost) {
-				mechDialogue.text = "diu lei lo mo";
-			} else {
-				mechDialogue.text = "yay";
-				durbLvl++;
-				PlayerController.instance.damageConstant -= 0.5f;
-				durbLvlText.text = "LVL " + durbLvl + " -> " + (durbLvl + 1).ToString();
-				// Increase durability of player
-			}
-		});
-		// nextBtn.onClick.AddListener(go to next level);
 	}
 
 	void HideLevelStart() {
