@@ -33,11 +33,14 @@ public class SpeechBubbleController : MonoBehaviour {
 		StartCoroutine(clearAfter(timeout));
 	}
 	public void SayPreparedMessage(PreparedMessage pm) {
+		bool mature = GameManager.instance.GetMature();
+		Debug.Log(mature);
+		Debug.Log(GameManager.instance.MATURE);
 		string message = "";
 		string[] messages = {};
 		switch(pm) {
 			case PreparedMessage.HITVEH:
-				messages = new string[] {
+				messages = mature ? new string[] {
 					"Oi u fookin wanker",
 					"Im gonna fuk u up m8",
 					"Hey you, go SUCK an enormous bag of cocks!",
@@ -46,27 +49,45 @@ public class SpeechBubbleController : MonoBehaviour {
 					"Out of my way u fukin twat",
 					"Sir, are you blind, retarded, or both?",
 					"Kan ni na bei chao chi bai"
+				} : new string[] {
+					"Oi u bastard",
+					"Im gonna beat the piss out of you",
+					"Why don't you stick that stick shift up your",
+					"Seriously?!",
+					"Wa lao eh"
 				};
                 message = messages[UnityEngine.Random.Range(0, messages.Length)];
 				break;
 			case PreparedMessage.KILLPED:
-				messages = new string[] {
+				messages = mature ? new string[] {
 					"Motherfuc-",
 					"Son of a bitc-",
 					"Are you fucking kidding m-",
-					"Aww fuck I can't believe you've done this...",
-					"Hey fuck you too buddy",
+					"Its too early, I haven't even fuc-",
+					"Hello darkness my old friend...",
+					"Wa si liao ah...",
+				} : new string[] {
+					"Run over by a truck, just like the gypsy sai-",
+					"Hello darkness my old friend...",
+					"Why don't you stick that stick shift up your",
+					"Seriously?!",
 					"Wa si liao ah...",
 				};
                 message = messages[UnityEngine.Random.Range(0, messages.Length)];
 				break;
 			case PreparedMessage.KILLVEH:
-				messages = new string[] {
+				messages = mature ? new string[] {
 					"Ahh fuck me.",
 					"Aww fuck I can't believe you've done this...",
 					"Hey fuck you too buddy",
 					"Chi Bai crash my car for what",
-					"Walao want to die isit"
+					"Walao want to die isit",
+					"NBCB, new car some more..."
+				} : new string[] {
+					"New car some more...",
+					"I can't believe you've done this...",
+					"You son of a",
+					"You stupid motherfu-"
 				};
                 message = messages[UnityEngine.Random.Range(0, messages.Length)];
 				break;

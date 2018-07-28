@@ -143,4 +143,7 @@ public class GameManager : MonoBehaviour {
 	public bool IsDoingSetup() {
 		return doingSetup;
 	}
+	public bool GetMature() {
+		return MATURE;
+	}
 }
