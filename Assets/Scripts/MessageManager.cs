@@ -14,10 +14,11 @@ public class MessageManager : MonoBehaviour {
 		KILL,
 		MISSED,
 		HITVEH,
-		TOTALLEDVEH
+		TOTALLEDVEH,
+		LOWHEALTH,
+		TAKINGDAMAGE
 	}
 	public static MessageManager instance = null;
-	public int fadeTime = 5;
 	List<string> messages = new List<string>();
 	Dictionary<string, int> dict = new Dictionary<string, int>();
 	Text output;
@@ -98,13 +99,27 @@ public class MessageManager : MonoBehaviour {
 					"Uh-oh, you ran over somebody!",
 					"Welp, there goes another one.",
 					"Somebody was run over!",
-					"Why are my wheels turning red? Hmm...",
-					"I wonder what that bump was."
+					"Why are the wheels turning red? Hmm...",
+					"Wonder what that bump was...",
+					"Let's hope no one saw that."
 				};
 				message = messages[UnityEngine.Random.Range(0, messages.Length)];
 				break;
 			case PreparedMessage.MISSED:
 				message = "You missed! Slow down next time";
+				break;
+			case PreparedMessage.LOWHEALTH:
+				message = "Your health is low, watch out!";
+				break;
+			case PreparedMessage.TAKINGDAMAGE:
+				messages = new string[] {
+					"Ouch!",
+					"Oof!",
+					"That was painful.",
+					"Be careful!",
+					"Your goods are taking damage!",
+				};
+				message = messages[UnityEngine.Random.Range(0, messages.Length)];
 				break;
 			default:
 				Debug.LogError("Error: Prepared message not found in enums: " + pm);
