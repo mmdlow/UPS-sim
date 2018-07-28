@@ -37,6 +37,7 @@ public class GameManager : MonoBehaviour {
 	Text levelMoneyText;
 	Text levelItemNamesText;
 	Text levelItemDrbText;
+	public bool MATURE = true;
 
 	private int DELAY_END_GAME = 3;
 

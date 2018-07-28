@@ -41,9 +41,11 @@ public class SpeechBubbleController : MonoBehaviour {
 					"Oi u fookin wanker",
 					"Im gonna fuk u up m8",
 					"Hey you, go SUCK an enormous bag of cocks!",
+					"I hope you choke on a buffet of dicks.",
 					"Who let this retard on the road",
 					"Out of my way u fukin twat",
-					"Sir, are you blind, retarded, or both?"
+					"Sir, are you blind, retarded, or both?",
+					"Kan ni na bei chao chi bai"
 				};
                 message = messages[UnityEngine.Random.Range(0, messages.Length)];
 				break;
@@ -53,7 +55,8 @@ public class SpeechBubbleController : MonoBehaviour {
 					"Son of a bitc-",
 					"Are you fucking kidding m-",
 					"Aww fuck I can't believe you've done this...",
-					"Hey fuck you too buddy"
+					"Hey fuck you too buddy",
+					"Wa si liao ah...",
 				};
                 message = messages[UnityEngine.Random.Range(0, messages.Length)];
 				break;
@@ -62,6 +65,8 @@ public class SpeechBubbleController : MonoBehaviour {
 					"Ahh fuck me.",
 					"Aww fuck I can't believe you've done this...",
 					"Hey fuck you too buddy",
+					"Chi Bai crash my car for what",
+					"Walao want to die isit"
 				};
                 message = messages[UnityEngine.Random.Range(0, messages.Length)];
 				break;
