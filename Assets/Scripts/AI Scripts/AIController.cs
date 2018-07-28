@@ -20,6 +20,8 @@ public class AIController : MonoBehaviour {
 	bool damaged = false;
 	bool beenHitByPlayer = false;
 	bool dead = false;
+	public SpeechBubbleController sbcPrefab;
+	private SpeechBubbleController bubble;
 
 	void Awake() {
 		rb = GetComponent<Rigidbody2D>();
@@ -30,6 +32,8 @@ public class AIController : MonoBehaviour {
 		transform.position = grid.GetRandomRoadPosition();
 		currentWaypoint = transform.position;
 		GetNewDestination();
+		bubble = Instantiate(sbcPrefab, transform.position + new Vector3(0.2f, 0.1f, 0), transform.rotation) as SpeechBubbleController;
+		bubble.transform.parent = gameObject.transform;
 	}
 
 	void FixedUpdate() {
@@ -57,15 +61,18 @@ public class AIController : MonoBehaviour {
 				Debug.Log("Vehicles hit: " + StatsManager.instance.vehiclesDamaged);
 				beenHitByPlayer = true;
 			}
+			bubble.SayPreparedMessage(SpeechBubbleController.PreparedMessage.HITVEH);
 			damaged = true;
 			int damage = Mathf.RoundToInt(damageConstant * col.relativeVelocity.magnitude);
 			health -= damage;
 			if (health > 0) {
 				StartCoroutine("Recover");
+				
 			} else {
 				StopCoroutine("FollowPath");
 				StatsManager.instance.vehiclesTotalled++;
 				MessageManager.instance.SayPreparedMessage(MessageManager.PreparedMessage.TOTALLEDVEH, 5);
+                bubble.SayPreparedMessage(SpeechBubbleController.PreparedMessage.KILLVEH);
 				Debug.Log("Vehicles totalled: " + StatsManager.instance.vehiclesTotalled);
 				dead = true;
 			}

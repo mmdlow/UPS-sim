@@ -123710,7 +123710,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc9384239dfda284497463a2d915341f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fadeTime: 5
 --- !u!224 &1896766154 stripped
 RectTransform:
   m_PrefabParentObject: {fileID: 224672538943775486, guid: 7ada99562c7d081468f53f9b38d98992,

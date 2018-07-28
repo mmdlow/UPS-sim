@@ -52,7 +52,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   carPrefab: {fileID: 1243560927303280, guid: 650c3336648a3764b9f565ebaacc9032, type: 2}
-  pedPrefab: {fileID: 1169557635409224, guid: 527f26e856d088640a5f3ee2407eeb70, type: 2}
+  pedPrefab: {fileID: 1386287313279086, guid: 14776e2b3931148c8a81951320ad2c56, type: 2}
   population: 100
   sprites:
   - {fileID: 21300000, guid: 59f86b7ba739ec540a28f844ffb78aba, type: 3}
