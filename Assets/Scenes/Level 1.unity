@@ -114356,6 +114356,7 @@ GameObject:
   - component: {fileID: 876199075}
   - component: {fileID: 876199077}
   - component: {fileID: 876199076}
+  - component: {fileID: 876199078}
   m_Layer: 5
   m_Name: Passed Image
   m_TagString: Untagged
@@ -114417,6 +114418,21 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 876199074}
+--- !u!114 &876199078
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 876199074}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d615ebaf63239784fa202e60f31d8d5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vehDamagedPenalty: 10
+  vehTotalledPenalty: 20
+  pedsKilledPenalty: 30
+  successBonus: 100
 --- !u!1 &884670856
 GameObject:
   m_ObjectHideFlags: 0
@@ -123731,7 +123747,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc9384239dfda284497463a2d915341f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fadeTime: 5
 --- !u!224 &1896766154 stripped
 RectTransform:
   m_PrefabParentObject: {fileID: 224672538943775486, guid: 7ada99562c7d081468f53f9b38d98992,

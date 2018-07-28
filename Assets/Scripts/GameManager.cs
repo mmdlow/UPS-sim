@@ -21,10 +21,6 @@ public class GameManager : MonoBehaviour {
 	public int health = 100;
 	public int money = 0;
 	public int level = 1;
-	public int vehDamagedPenalty = 10;
-	public int vehTotalledPenalty = 20;
-	public int pedsKilledPenalty = 30;
-	public int successBonus = 100;
 
 	GameObject contentParent;
 	GameObject levelStart;
@@ -112,33 +108,9 @@ public class GameManager : MonoBehaviour {
 
 	void LevelPassed() {
 		AIManager.instance.ClearLevelAI();
-
-		GameObject contentParent = levelPassed.transform.Find("Passed Image").Find("Dynamic Text").gameObject;
-		Text levelNumText = contentParent.transform.Find("Level Number").GetComponent<Text>();
-		Text PDText = contentParent.transform.Find("PD Text").GetComponent<Text>();
-		Text VDText = contentParent.transform.Find("VD Text").GetComponent<Text>();
-		Text VTText = contentParent.transform.Find("VT Text").GetComponent<Text>();
-		Text PHText = contentParent.transform.Find("PH Text").GetComponent<Text>();
-		Text CEText = contentParent.transform.Find("CE Text").GetComponent<Text>();
-		Text TCText = contentParent.transform.Find("TC Text").GetComponent<Text>();
-
-		levelNumText.text = "DAY " + level + " SUMMARY";
-		PDText.text = StatsManager.instance.successfulDeliveries + "/" + BoardManager.instance.numLevelItems;
-		VDText.text = StatsManager.instance.vehiclesDamaged.ToString();
-		VTText.text = StatsManager.instance.vehiclesTotalled.ToString();
-		PHText.text = StatsManager.instance.pedestriansHit.ToString();
-		int moneyEarned = StatsManager.instance.successfulDeliveries * successBonus
-						- StatsManager.instance.vehiclesDamaged * vehDamagedPenalty
-						- StatsManager.instance.vehiclesTotalled * vehTotalledPenalty
-						- StatsManager.instance.pedestriansHit * pedsKilledPenalty;
-		if (moneyEarned < 0) moneyEarned = 0;
-		money += moneyEarned;
-		CEText.text = "$" + moneyEarned;
-		TCText.text = "$" + money;
-
-		levelPassed.SetActive(true);
-		Button nextBtn = levelPassed.transform.Find("Passed Image").Find("Next Button").GetComponent<Button>();
-		nextBtn.onClick.AddListener(Upgrade);
+		LevelPassed levelPassedComp = levelPassed.GetComponentInChildren<LevelPassed>();
+		levelPassedComp.InitScreen();
+		levelPassed.SetActive(true);	
 	}
 
 	public void GameOver() {
@@ -171,8 +143,8 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void Upgrade() {
-		Workshop upgrades = workshop.GetComponentInChildren<Workshop>();
-		upgrades.InitWorkshop();
+		Workshop workshopComp = workshop.GetComponentInChildren<Workshop>();
+		workshopComp.InitWorkshop();
 		workshop.SetActive(true);
 	}
 

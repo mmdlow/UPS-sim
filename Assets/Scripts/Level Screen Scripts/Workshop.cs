@@ -119,13 +119,22 @@ public class Workshop : MonoBehaviour {
 		}
 	}
 
+	void ExitWorkshop() {
+		Debug.Log("Exiting workshop");
+		upSpeedBtn.onClick.RemoveAllListeners();
+		upDurbBtn.onClick.RemoveAllListeners();
+		repairBtn.onClick.RemoveAllListeners();
+		nextBtn.onClick.RemoveAllListeners();
+		// Go to next level
+	}
+
 	public void InitWorkshop() {
 		healthText.text = GameManager.instance.health.ToString();
 		cashText.text = GameManager.instance.money.ToString();
 		mechDialogue.text = "Upgrade and repair here!";
 		RefreshStatLevels();
 		repairBtn.onClick.AddListener(Repair);
-		// nextBtn.onClick.AddListener(go to next level);
+		nextBtn.onClick.AddListener(ExitWorkshop);
 
 		if (speedLvl >= maxLvl) {
 			upSpeedBtn.gameObject.SetActive(false);
