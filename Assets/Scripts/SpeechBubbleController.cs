@@ -40,7 +40,7 @@ public class SpeechBubbleController : MonoBehaviour {
 				messages = new string[] {
 					"Oi u fookin wanker",
 					"Im gonna fuk u up m8",
-					"Hey you go SUCK an enormous bag of cocks",
+					"Hey you, go SUCK an enormous bag of cocks!",
 					"Who let this retard on the road",
 					"Out of my way u fukin twat",
 					"Sir, are you blind, retarded, or both?"
