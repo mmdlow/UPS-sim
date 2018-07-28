@@ -9,7 +9,7 @@ public class AIController : MonoBehaviour {
 	Vector3[] path;
 	Vector3 currentWaypoint;
 	int targetIndex;
-	Rigidbody2D rb;
+	//Rigidbody2D rb;
 
 	public float steering = 3f;
 	public float speed = 0.01f;
@@ -24,7 +24,7 @@ public class AIController : MonoBehaviour {
 	private SpeechBubbleController bubble;
 
 	void Awake() {
-		rb = GetComponent<Rigidbody2D>();
+		//rb = GetComponent<Rigidbody2D>();
 		grid = GameObject.Find("Pathfinder").GetComponent<TileGrid>();
 	}
 

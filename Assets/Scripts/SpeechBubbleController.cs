@@ -14,7 +14,7 @@ public class SpeechBubbleController : MonoBehaviour {
 	}
 	void Awake() {
 		tm = GetComponent<TextMesh>();
-		this.gameObject.GetComponent<MeshRenderer>().sortingLayerName = "Units";
+		this.gameObject.GetComponent<MeshRenderer>().sortingLayerName = "Speech bubbles";
 	}
 	void Start () {
 		gameObject.SetActive(false);
