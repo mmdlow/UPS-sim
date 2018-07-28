@@ -60,40 +60,25 @@ public class GameManager : MonoBehaviour {
 		levelPassed = GameObject.Find("Level Passed Screen");
 		workshop = GameObject.Find("Workshop Screen");
 		gameOver = GameObject.Find("Game Over Screen");
-		levelPassed.SetActive(false);
-		workshop.SetActive(false);
-		gameOver.SetActive(false);
-
-		// Get content parent for levelStart
-		contentParent = levelStart.transform.Find("Level Image").gameObject;
-		levelNumText = contentParent.transform.Find("Level Number").GetComponent<Text>();
-		levelHealthText = contentParent.transform.Find("Level Health").GetComponent<Text>();
-		levelMoneyText = contentParent.transform.Find("Level Money").GetComponent<Text>();
-		levelItemNamesText = contentParent.transform.Find("Level Item Names").GetComponent<Text>();
-		levelItemDrbText = contentParent.transform.Find("Level Item Drb").GetComponent<Text>();
-		levelNumText.text = "DAY " + level;
-		levelHealthText.text = health.ToString();
-		levelMoneyText.text = money.ToString();
-	}
-
-	void Start() {
-		doingSetup = true;
-
-		foreach(GameObject item in ItemManager.instance.items) {
-			levelItemNamesText.text += item.GetComponent<ItemController>().GetItemName() + "\n";
-			levelItemDrbText.text += item.GetComponent<ItemController>().GetItemDurability() + "\n";
-		}
-
-		ItemManager.instance.onItemRemove += TriggerLevelPassed;
-
-		levelStart.SetActive(true);
 
 		inventory = GameObject.Find("Inventory");
 		worldmap = GameObject.Find("Worldmap");
 		minimap = GameObject.Find("Minimap");
 		messages = GameObject.Find("Messages");
-		Button levelStartBtn = contentParent.transform.Find("Level Start Button").GetComponent<Button>();
-		levelStartBtn.onClick.AddListener(() => HideLevelStart());
+
+		levelPassed.SetActive(false);
+		workshop.SetActive(false);
+		gameOver.SetActive(false);	
+	}
+
+	void Start() {
+		doingSetup = true;
+
+		ItemManager.instance.onItemRemove += TriggerLevelPassed;
+
+		LevelStart levelStartComp = levelStart.GetComponentInChildren<LevelStart>();
+		levelStartComp.InitScreen();
+		levelStart.SetActive(true);
 	}
 
 	void TriggerLevelPassed(GameObject item) {
@@ -128,7 +113,7 @@ public class GameManager : MonoBehaviour {
 		workshop.SetActive(true);
 	}
 
-	void HideLevelStart() {
+	public void HideLevelStart() {
 		doingSetup = false;
 		levelStart.SetActive(false);
 		inventory.SetActive(false);
