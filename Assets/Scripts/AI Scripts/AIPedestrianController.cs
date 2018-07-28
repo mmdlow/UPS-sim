@@ -18,6 +18,8 @@ public class AIPedestrianController : MonoBehaviour {
 	public float damageConstant = 2f;
 
 	bool alive = true;
+	public SpeechBubbleController sbcPrefab;
+	private SpeechBubbleController bubble;
 
 	void Awake() {
 		rb = GetComponent<Rigidbody2D>();
@@ -30,6 +32,8 @@ public class AIPedestrianController : MonoBehaviour {
 		transform.position = grid.GetRandomRoadPosition();
 		currentWaypoint = transform.position;
 		GetNewDestination();
+		bubble = Instantiate(sbcPrefab, transform) as SpeechBubbleController;
+		bubble.transform.parent = gameObject.transform;
 	}
 
 	void FixedUpdate () {
@@ -47,6 +51,7 @@ public class AIPedestrianController : MonoBehaviour {
 		if (alive && col.gameObject.GetComponent<PlayerController>() != null) {
 			StatsManager.instance.pedestriansHit++;
 			MessageManager.instance.SayPreparedMessage(MessageManager.PreparedMessage.KILL, 5);
+			bubble.SayPreparedMessage(SpeechBubbleController.PreparedMessage.KILLPED);
 			Debug.Log("Pedestrians hit: " + StatsManager.instance.pedestriansHit);
 		}
 		anim.SetBool("Alive", false);

@@ -110,6 +110,8 @@ MonoBehaviour:
   recoverTime: 3
   health: 20
   damageConstant: 2
+  sbcPrefab: {fileID: 114878479863066002, guid: 267403d9a7a7b432488a8f9c97840893,
+    type: 2}
 --- !u!212 &212180132355020092
 SpriteRenderer:
   m_ObjectHideFlags: 1

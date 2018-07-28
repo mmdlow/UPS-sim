@@ -88,14 +88,12 @@ public class MessageManager : MonoBehaviour {
 			case PreparedMessage.TOTALLEDVEH:
 				messages = new string[] {
 					"You destroyed another vehicle!",
-					"Another one bites the dust...",
 					"You totalled someone else's car!"
 				};
 				message = messages[UnityEngine.Random.Range(0, messages.Length)];
 				break;
 			case PreparedMessage.KILL:
 				messages = new string[] {
-					"Oh, the Humanity!",
 					"Uh-oh, you ran over somebody!",
 					"Welp, there goes another one.",
 					"Somebody was run over!",
@@ -113,9 +111,6 @@ public class MessageManager : MonoBehaviour {
 				break;
 			case PreparedMessage.TAKINGDAMAGE:
 				messages = new string[] {
-					"Ouch!",
-					"Oof!",
-					"That was painful.",
 					"Be careful!",
 					"Your goods are taking damage!",
 				};
