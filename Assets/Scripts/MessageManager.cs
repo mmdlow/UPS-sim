@@ -11,9 +11,10 @@ public class MessageManager : MonoBehaviour {
 		BROKEN,
 		DELIVERED,
 		FLAWLESS,
-		COLLATERAL,
 		KILL,
-		MISSED
+		MISSED,
+		HITVEH,
+		TOTALLEDVEH
 	}
 	public static MessageManager instance = null;
 	public int fadeTime = 5;
@@ -62,6 +63,7 @@ public class MessageManager : MonoBehaviour {
 	}
 	public void SayPreparedMessage(PreparedMessage pm, int timeout) {
 		string message = "";
+		string[] messages;
 		switch(pm) {
 			case PreparedMessage.BREAKING:
 				message = "An item is breaking soon!";
@@ -69,17 +71,29 @@ public class MessageManager : MonoBehaviour {
 			case PreparedMessage.BROKEN:
 				message = "You broke an item!";
 				break;
-			case PreparedMessage.COLLATERAL:
-				message = "You hit another vehicle!";
-				break;
 			case PreparedMessage.DELIVERED:
 				message = "Delivery made.";
 				break;
 			case PreparedMessage.FLAWLESS:
 				message = "Delivered flawlessly!";
 				break;
+			case PreparedMessage.HITVEH:
+				messages = new string[] {
+					"You hit another vehicle!",
+					"Another vehicle was hit!"
+				};
+				message = messages[UnityEngine.Random.Range(0, messages.Length)];
+				break;
+			case PreparedMessage.TOTALLEDVEH:
+				messages = new string[] {
+					"You destroyed another vehicle!",
+					"Another one bites the dust...",
+					"You totalled someone else's car!"
+				};
+				message = messages[UnityEngine.Random.Range(0, messages.Length)];
+				break;
 			case PreparedMessage.KILL:
-				string[] messages = {
+				messages = new string[] {
 					"Oh, the Humanity!",
 					"Uh-oh, you ran over somebody!",
 					"Welp, there goes another one.",
