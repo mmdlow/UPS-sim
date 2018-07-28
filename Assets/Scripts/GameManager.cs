@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 /*
 	GameManager manages every instance of this game. There should only ever one
@@ -21,7 +22,7 @@ public class GameManager : MonoBehaviour {
 	public int maxHealth = 100;
 	public int health = 100;
 	public int money = 0;
-	public int level = 1;
+	public int level = 0;
 
 	GameObject contentParent;
 	GameObject levelStart;
@@ -72,10 +73,31 @@ public class GameManager : MonoBehaviour {
 		levelPassed.SetActive(false);
 		workshop.SetActive(false);
 		gameOver.SetActive(false);
-		pauseScreen.SetActive(false);	
+		pauseScreen.SetActive(false);
+
+		InitGame();
 	}
 
-	void Start() {
+	void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode) {
+		level++;
+		InitGame();
+	}
+
+	void OnEnable() {
+		SceneManager.sceneLoaded += OnLevelFinishedLoading;
+	}
+
+	void OnDisable() {
+		SceneManager.sceneLoaded -= OnLevelFinishedLoading;
+	}
+
+	void InitGame() {
+		Debug.Log(level);
+		if (BoardManager.instance == null) {
+			Instantiate(boardManager);
+		}
+		StatsManager.instance.ResetStats();
+
 		doingSetup = true;
 
 		ItemManager.instance.onItemRemove += TriggerLevelPassed;
@@ -92,6 +114,7 @@ public class GameManager : MonoBehaviour {
 			} else {
 				Invoke("GameOver", DELAY_END_GAME);
 			}
+			ItemManager.instance.onItemRemove -= TriggerLevelPassed;
 		}
 	}
 
@@ -183,5 +206,11 @@ public class GameManager : MonoBehaviour {
 
 	public bool IsDoingSetup() {
 		return doingSetup;
+	}
+
+	public void ClearManagers() {
+		Destroy(AIManager.instance.gameObject);
+		Destroy(ItemManager.instance.gameObject);
+		Destroy(BoardManager.instance.gameObject);
 	}
 }

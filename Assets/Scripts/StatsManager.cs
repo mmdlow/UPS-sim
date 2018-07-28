@@ -9,7 +9,6 @@ public class StatsManager : MonoBehaviour {
 	public int vehiclesDamaged = 0;
 	public int vehiclesTotalled = 0;
 	public int pedestriansHit = 0;
-	public int money = 0;
 
 	void Awake() {
 		if (instance == null) {
@@ -28,5 +27,12 @@ public class StatsManager : MonoBehaviour {
 		// Message manager output
 		Debug.Log("Failed to deliver " + item.GetComponent<ItemController>().GetItemName());
 		successfulDeliveries--;
+	}
+
+	public void ResetStats() {
+		successfulDeliveries = 0;
+		vehiclesDamaged = 0;
+		vehiclesTotalled = 0;
+		pedestriansHit = 0;
 	}
 }
