@@ -52,6 +52,7 @@ public class PlayerController : MonoBehaviour {
     void OnCollisionEnter2D (Collision2D col) {
 
         int damage = Mathf.RoundToInt(damageConstant * col.relativeVelocity.magnitude);
+        MessageManager.instance.SayPreparedMessage(MessageManager.PreparedMessage.TAKINGDAMAGE, 5);
         GameManager.instance.health -= damage;
 
         // For updating item integrities upon sustaining player damage
@@ -70,7 +71,10 @@ public class PlayerController : MonoBehaviour {
             return;
         }
         if (GameManager.instance.health < 100 && GameManager.instance.health > 25) healthDisplay.color = Color.white;
-        else if (GameManager.instance.health <= 25) healthDisplay.color = Color.red;
+        else if (GameManager.instance.health <= 25) {
+            healthDisplay.color = Color.red;
+            MessageManager.instance.SayPreparedMessage(MessageManager.PreparedMessage.LOWHEALTH, 10);
+        }
         healthDisplay.text = GameManager.instance.health.ToString();
     }
 

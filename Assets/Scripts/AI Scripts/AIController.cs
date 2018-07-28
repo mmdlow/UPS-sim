@@ -53,6 +53,7 @@ public class AIController : MonoBehaviour {
 		if (col.gameObject.GetComponent<PlayerController>() != null && !dead) {
 			if (!beenHitByPlayer) {
 				StatsManager.instance.vehiclesDamaged++;
+				MessageManager.instance.SayPreparedMessage(MessageManager.PreparedMessage.HITVEH, 5);
 				Debug.Log("Vehicles hit: " + StatsManager.instance.vehiclesDamaged);
 				beenHitByPlayer = true;
 			}
@@ -64,6 +65,7 @@ public class AIController : MonoBehaviour {
 			} else {
 				StopCoroutine("FollowPath");
 				StatsManager.instance.vehiclesTotalled++;
+				MessageManager.instance.SayPreparedMessage(MessageManager.PreparedMessage.TOTALLEDVEH, 5);
 				Debug.Log("Vehicles totalled: " + StatsManager.instance.vehiclesTotalled);
 				dead = true;
 			}
