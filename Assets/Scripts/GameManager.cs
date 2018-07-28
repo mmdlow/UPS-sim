@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour {
 	GameObject levelPassed;
 	GameObject workshop;
 	GameObject gameOver;
+	GameObject pauseScreen;
 	GameObject inventory;
 	GameObject worldmap;
 	GameObject minimap;
@@ -61,6 +62,7 @@ public class GameManager : MonoBehaviour {
 		levelPassed = GameObject.Find("Level Passed Screen");
 		workshop = GameObject.Find("Workshop Screen");
 		gameOver = GameObject.Find("Game Over Screen");
+		pauseScreen = GameObject.Find("Pause Screen");
 
 		inventory = GameObject.Find("Inventory");
 		worldmap = GameObject.Find("Worldmap");
@@ -69,7 +71,8 @@ public class GameManager : MonoBehaviour {
 
 		levelPassed.SetActive(false);
 		workshop.SetActive(false);
-		gameOver.SetActive(false);	
+		gameOver.SetActive(false);
+		pauseScreen.SetActive(false);	
 	}
 
 	void Start() {
@@ -100,6 +103,22 @@ public class GameManager : MonoBehaviour {
 		levelPassed.SetActive(true);	
 	}
 
+	void PauseGame() {
+		paused = true;
+		Time.timeScale = 0;
+		pauseScreen.SetActive(true);
+		inventory.SetActive(false);
+		worldmap.SetActive(false);
+		minimap.SetActive(true);
+		messages.SetActive(true);
+	}
+
+	public void UnpauseGame() {
+		paused = false;
+		Time.timeScale = 1;
+		pauseScreen.SetActive(false);
+	}
+
 	public void GameOver() {
 		Debug.Log("game over");
 		AIManager.instance.ClearLevelAI();
@@ -124,31 +143,41 @@ public class GameManager : MonoBehaviour {
 
 	void Update() {
 		if (!doingSetup) {
-			if (Input.GetButtonDown("Inventory")) {
-				inventory.SetActive(!inventory.activeInHierarchy);
-				minimap.SetActive(!minimap.activeInHierarchy);
-				messages.SetActive(!messages.activeInHierarchy);
+			if (!paused) {
+				if (Input.GetButtonDown("Inventory")) {
+					inventory.SetActive(!inventory.activeInHierarchy);
+					minimap.SetActive(!minimap.activeInHierarchy);
+					messages.SetActive(!messages.activeInHierarchy);
 
-				// Enable pausing when inventory is opened
-				if (!paused) {
-					Time.timeScale = 0;
-					paused = true;
-				} else {
-					Time.timeScale = 1;
-					paused = false;
+					// Enable pausing when inventory is opened
+					if (inventory.activeSelf) {
+						worldmap.SetActive(true);
+						Time.timeScale = 0;
+						//paused = true;
+					} else {
+						worldmap.SetActive(false);
+						Time.timeScale = 1;
+						//paused = false;
+					}
 				}
-
-				if (inventory.activeSelf) worldmap.SetActive(true);
-				else worldmap.SetActive(false);
-
-			}
-			// Allow for toggling of worldmap when inventory is active
-			if (inventory.activeSelf) {
-				if (Input.GetButtonDown("Worldmap")) {
-					worldmap.SetActive(!worldmap.activeInHierarchy);
+				// Allow for toggling of worldmap when inventory is active
+				if (inventory.activeSelf) {
+					if (Input.GetButtonDown("Worldmap")) {
+						worldmap.SetActive(!worldmap.activeInHierarchy);
+						minimap.SetActive(!minimap.activeInHierarchy);
+					}
 				}
 			}
+
 			//if (health == 0) GameOver();
+
+			if (Input.GetButtonDown("Pause")) {
+				if (!pauseScreen.activeSelf) {
+					PauseGame();
+				} else {
+					UnpauseGame();
+				}
+			}
 		}
 	}
 
