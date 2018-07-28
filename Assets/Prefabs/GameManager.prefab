@@ -55,5 +55,12 @@ MonoBehaviour:
     type: 2}
   statsManager: {fileID: 114166417195291008, guid: 3173c26dc6ef883449adf89f777f1096,
     type: 2}
-  health: 100
   doingSetup: 0
+  maxHealth: 100
+  health: 100
+  money: 0
+  level: 1
+  vehDamagedPenalty: 10
+  vehTotalledPenalty: 20
+  pedsKilledPenalty: 30
+  successBonus: 100

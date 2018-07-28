@@ -772,6 +772,7 @@ GameObject:
   - component: {fileID: 104755687}
   - component: {fileID: 104755689}
   - component: {fileID: 104755688}
+  - component: {fileID: 104755690}
   m_Layer: 5
   m_Name: Failed Image
   m_TagString: Untagged
@@ -834,6 +835,17 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 104755686}
+--- !u!114 &104755690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 104755686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdbae8af8a97aa14d8faa4b06a2ce43c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &133349564
 Prefab:
   m_ObjectHideFlags: 0
@@ -113331,6 +113343,7 @@ GameObject:
   - component: {fileID: 512439233}
   - component: {fileID: 512439235}
   - component: {fileID: 512439234}
+  - component: {fileID: 512439236}
   m_Layer: 5
   m_Name: Level Image
   m_TagString: Untagged
@@ -113396,6 +113409,19 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 512439232}
+--- !u!114 &512439236
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 512439232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e28f4a6b1167bc4d8c503b1dd4b805e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelItemNamesText: {fileID: 0}
+  levelItemDrbText: {fileID: 0}
 --- !u!1 &556602121
 GameObject:
   m_ObjectHideFlags: 0
@@ -113856,6 +113882,7 @@ GameObject:
   - component: {fileID: 713771769}
   - component: {fileID: 713771771}
   - component: {fileID: 713771770}
+  - component: {fileID: 713771772}
   m_Layer: 5
   m_Name: Workshop Image
   m_TagString: Untagged
@@ -113924,6 +113951,26 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 713771768}
+--- !u!114 &713771772
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 713771768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf2ea6665775bb845abfb0f8d54842f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speedLvl: 1
+  durbLvl: 1
+  maxLvl: 5
+  repairCost: 100
+  upSpeedCost: 500
+  upDurbCost: 500
+  healthIncr: 20
+  speedIncr: 1
+  durbIncr: 0.5
 --- !u!1 &751006522
 GameObject:
   m_ObjectHideFlags: 0
@@ -114335,6 +114382,7 @@ GameObject:
   - component: {fileID: 876199075}
   - component: {fileID: 876199077}
   - component: {fileID: 876199076}
+  - component: {fileID: 876199078}
   m_Layer: 5
   m_Name: Passed Image
   m_TagString: Untagged
@@ -114396,6 +114444,21 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 876199074}
+--- !u!114 &876199078
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 876199074}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d615ebaf63239784fa202e60f31d8d5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vehDamagedPenalty: 10
+  vehTotalledPenalty: 20
+  pedsKilledPenalty: 30
+  successBonus: 100
 --- !u!1 &884670856
 GameObject:
   m_ObjectHideFlags: 0
@@ -122935,7 +122998,7 @@ GameObject:
   - component: {fileID: 1523131420}
   - component: {fileID: 1523131419}
   m_Layer: 5
-  m_Name: Upgrade Durability Cost
+  m_Name: Durability Cost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -123874,7 +123937,7 @@ GameObject:
   - component: {fileID: 1970004077}
   - component: {fileID: 1970004076}
   m_Layer: 5
-  m_Name: Upgrade Speed Cost
+  m_Name: Speed Cost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
