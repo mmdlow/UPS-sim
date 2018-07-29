@@ -7,7 +7,7 @@ public class SoundManager : MonoBehaviour {
 	public static Queue<AudioClip> clipQueue;
 
 	public AudioSource efxSource;
-	public AudioSource musicSource;
+	//public AudioSource musicSource;
 	public static SoundManager instance = null;
 
 	public float lowPitchRange = .9f;
@@ -37,5 +37,15 @@ public class SoundManager : MonoBehaviour {
 		for (int i = 0; i < currCount; i++) {
 			efxSource.PlayOneShot(clipQueue.Dequeue(), 0.8f);
 		}
+	}
+
+	public void PauseSound() {
+		efxSource.Pause();
+		//musicSource.Pause();
+	}
+
+	public void UnpauseSound() {
+		efxSource.UnPause();
+		//musicSource.UnPause();
 	}
 }

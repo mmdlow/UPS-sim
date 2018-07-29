@@ -169,12 +169,16 @@ public class GameManager : MonoBehaviour {
 		worldmap.SetActive(false);
 		minimap.SetActive(true);
 		messages.SetActive(true);
+		SoundManager.instance.PauseSound();
+		PlayerController.instance.MuteEngine();
 	}
 
 	public void UnpauseGame() {
 		paused = false;
 		Time.timeScale = 1;
 		pauseScreen.SetActive(false);
+		SoundManager.instance.UnpauseSound();
+		PlayerController.instance.UnmuteEngine();
 	}
 
 	public void GameOver() {
