@@ -55,12 +55,7 @@ MonoBehaviour:
     type: 2}
   statsManager: {fileID: 114166417195291008, guid: 3173c26dc6ef883449adf89f777f1096,
     type: 2}
+  passedSound: {fileID: 8300000, guid: e6dca564ccdecd046a46ccb58216769a, type: 3}
+  failedSound: {fileID: 8300000, guid: 008944d02b2e7854aaa770fa4ee0cbe3, type: 3}
   doingSetup: 0
-  maxHealth: 100
-  health: 100
-  money: 0
-  level: 1
-  vehDamagedPenalty: 10
-  vehTotalledPenalty: 20
-  pedsKilledPenalty: 30
-  successBonus: 100
+  paused: 0

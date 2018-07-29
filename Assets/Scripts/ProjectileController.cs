@@ -5,6 +5,7 @@ using UnityEngine;
 public class ProjectileController : MonoBehaviour {
 
 	public GameObject item;
+	public AudioClip failedSound;
 	private SpriteRenderer spriteR;
 
 	void Awake () {
@@ -16,6 +17,7 @@ public class ProjectileController : MonoBehaviour {
 	}
 
 	void RemoveMissedItem() {
+		SoundManager.instance.PlaySingle(failedSound);
 		ItemManager.instance.MissedItem(item);
 		ItemManager.instance.RemoveItem(item);
 	}

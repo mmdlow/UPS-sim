@@ -17,6 +17,8 @@ public class AIController : MonoBehaviour {
 	public int health = 20;
 	public float damageConstant = 2f;
 
+	public AudioClip hornSound;
+
 	bool damaged = false;
 	bool beenHitByPlayer = false;
 	bool dead = false;
@@ -55,6 +57,7 @@ public class AIController : MonoBehaviour {
 	void OnCollisionEnter2D(Collision2D col) {
 
 		if (col.gameObject.GetComponent<PlayerController>() != null && !dead) {
+			SoundManager.instance.RandomSfx(hornSound);
 			if (!beenHitByPlayer) {
 				StatsManager.instance.vehiclesDamaged++;
 				MessageManager.instance.SayPreparedMessage(MessageManager.PreparedMessage.HITVEH, 5);

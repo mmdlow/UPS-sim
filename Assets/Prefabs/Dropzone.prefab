@@ -83,6 +83,7 @@ MonoBehaviour:
   item: {fileID: 0}
   bigPin: {fileID: 0}
   smallPin: {fileID: 0}
+  successSound: {fileID: 8300000, guid: 5420f5da45ed0a0448cef52c7d0938b4, type: 3}
 --- !u!120 &120000238629634722
 LineRenderer:
   m_ObjectHideFlags: 1

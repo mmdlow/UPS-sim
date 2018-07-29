@@ -21,6 +21,10 @@ public class PlayerController : MonoBehaviour {
     public PlayerShooter playerShooter;
     private GameObject dropzone;
     private float CHANGE_INDICATOR_DISTANCE = 8f;
+    public AudioSource engineSound;
+    public AudioClip impactSound1;
+    public AudioClip impactSound2;
+    public AudioClip impactSound3;
 
 	void Awake() {
 		if (instance == null) {
@@ -38,9 +42,6 @@ public class PlayerController : MonoBehaviour {
         healthDisplay.text = GameManager.instance.GetHealth().ToString();
         ItemManager.instance.onPriorityItemChange += UpdatePriorityItem;
 		playerShooter = GetComponent<PlayerShooter>();
-    }  
-
-    void Update() {
     }
 
     IEnumerator DisplayDamage () {
@@ -50,6 +51,8 @@ public class PlayerController : MonoBehaviour {
     }
 
     void OnCollisionEnter2D (Collision2D col) {
+
+        SoundManager.instance.RandomSfx(impactSound1, impactSound2, impactSound3);
 
         int damage = Mathf.RoundToInt(damageConstant * col.relativeVelocity.magnitude);
         MessageManager.instance.SayPreparedMessage(MessageManager.PreparedMessage.TAKINGDAMAGE, 5);
@@ -87,6 +90,9 @@ public class PlayerController : MonoBehaviour {
 
         Vector2 speed = transform.up * (v * acceleration);
         rb.AddForce(speed);
+
+        // Engine sound
+        if (engineSound.clip != null) engineSound.pitch = 1 + Mathf.Abs(v / 2);
 
         float direction = Vector2.Dot(rb.velocity, rb.GetRelativeVector(Vector2.up));
         if (direction >= 0.0f) {

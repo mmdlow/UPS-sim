@@ -17,6 +17,8 @@ public class GameManager : MonoBehaviour {
 	public static GameManager instance = null;
 	public BoardManager boardManager;
 	public StatsManager statsManager;
+	public AudioClip passedSound;
+	public AudioClip failedSound;
 	public bool doingSetup;
 	public bool paused = false;
 	private int maxHealth = 100;
@@ -83,7 +85,6 @@ public class GameManager : MonoBehaviour {
 	}
 
 	void InitGame() {
-		Debug.Log("level" + level);
 		if (BoardManager.instance == null) {
 			Instantiate(boardManager);
 		}
@@ -120,7 +121,7 @@ public class GameManager : MonoBehaviour {
 	}
 
 	void LevelPassed() {
-		Debug.Log("level passed");
+		SoundManager.instance.PlaySingle(passedSound);
 		LevelPassed levelPassedComp = levelPassed.GetComponentInChildren<LevelPassed>();
 		levelPassedComp.InitScreen();
 		levelPassed.SetActive(true);	
@@ -144,6 +145,11 @@ public class GameManager : MonoBehaviour {
 
 	public void GameOver() {
 		Debug.Log("game over");
+<<<<<<< HEAD
+=======
+		SoundManager.instance.PlaySingle(failedSound);
+		AIManager.instance.ClearLevelAI();
+>>>>>>> 87e4a9a3f4df6f25cd8bfdacc6522ba8e88aad3c
 		GameOver gameOverComp = gameOver.GetComponentInChildren<GameOver>();
 		gameOverComp.InitScreen();
 		gameOver.SetActive(true);

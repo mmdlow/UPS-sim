@@ -8,21 +8,20 @@ public class AIPedestrianController : MonoBehaviour {
 	Vector3[] path;
 	Vector3 currentWaypoint;
 	int targetIndex;
-	//Rigidbody2D rb;
 	Animator anim;
+	bool alive = true;
 
+	public AudioClip splatSound;
 	public float steering = 3f;
 	public float speed = 0.01f;
 	public int recoverTime = 3;
 	public int health = 20;
 	public float damageConstant = 2f;
-
-	bool alive = true;
 	public SpeechBubbleController sbcPrefab;
 	private SpeechBubbleController bubble;
 
+
 	void Awake() {
-		//rb = GetComponent<Rigidbody2D>();
 		grid = GameObject.Find("Pathfinder").GetComponent<TileGrid>();
 	}
 
@@ -49,6 +48,7 @@ public class AIPedestrianController : MonoBehaviour {
 		if (col.gameObject.GetComponent<AIPedestrianController>() != null) return;
 		if (col.name.StartsWith("Tilemap")) return;
 		if (alive && col.gameObject.GetComponent<PlayerController>() != null) {
+			SoundManager.instance.RandomSfx(splatSound);
 			StatsManager.instance.pedestriansHit++;
 			MessageManager.instance.SayPreparedMessage(MessageManager.PreparedMessage.KILL, 5);
 			bubble.SayPreparedMessage(SpeechBubbleController.PreparedMessage.KILLPED);
