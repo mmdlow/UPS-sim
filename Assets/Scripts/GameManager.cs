@@ -108,24 +108,24 @@ public class GameManager : MonoBehaviour {
 				population = 100;
 				break;
 			case 2:
-				minItems = 3;
-				maxItems = 4;
-				population = 300;
+				minItems = 4;
+				maxItems = 3;
+				population = 130;
 				break;
 			case 3:
-				minItems = 6;
-				maxItems = 7;
-				population = 300;
+				minItems = 5;
+				maxItems = 6;
+				population = 160;
 				break;
 			case 4:
-				minItems = 8;
+				minItems = 7;
 				maxItems = 9;
-				population = 400;
+				population = 190;
 				break;
 			default:
 				minItems = 9;
 				maxItems = 9;
-				population = 400;
+				population = 300;
 				break;
 		}
 		ItemManager.instance.ClearAndLoad(minItems, maxItems);
@@ -154,6 +154,7 @@ public class GameManager : MonoBehaviour {
 	}
 
 	void LevelPassed() {
+		Time.timeScale = 0;
 		SoundManager.instance.PlaySingle(passedSound);
 		LevelPassed levelPassedComp = levelPassed.GetComponentInChildren<LevelPassed>();
 		levelPassedComp.InitScreen();
