@@ -6,8 +6,6 @@ public class InventorySlot : MonoBehaviour {
 	public Text nameDisplay;
 	public Image icon;
 	public Image priorityAlert; // Alert icon
-	public AudioClip hoverSound;
-	public AudioClip clickSound;
 
 	GameObject slotItem;
 	string itemName;
@@ -37,7 +35,6 @@ public class InventorySlot : MonoBehaviour {
 		prioritizeBtn.onClick.RemoveAllListeners();
 		prioritizeBtn.onClick.AddListener( delegate { 
 			ItemManager.instance.ChangePriorityItem(GetSlotItem());
-			SoundManager.instance.PlaySingle(clickSound);
 		});
 	}
 
