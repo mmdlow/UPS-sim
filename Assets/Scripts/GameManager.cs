@@ -134,6 +134,7 @@ public class GameManager : MonoBehaviour {
 		PlayerController.instance.ResetPosition();
 		
 		Time.timeScale = 0;
+		PlayerController.instance.MuteEngine();
 		LevelStart levelStartComp = levelStart.GetComponentInChildren<LevelStart>();
 		levelStartComp.ShowScreen();
 		levelStart.SetActive(true);
@@ -156,6 +157,7 @@ public class GameManager : MonoBehaviour {
 
 	void LevelPassed() {
 		Time.timeScale = 0;
+		PlayerController.instance.MuteEngine();
 		SoundManager.instance.PlaySingle(passedSound);
 		LevelPassed levelPassedComp = levelPassed.GetComponentInChildren<LevelPassed>();
 		levelPassedComp.InitScreen();

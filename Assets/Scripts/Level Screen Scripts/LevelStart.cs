@@ -37,6 +37,7 @@ public class LevelStart : MonoBehaviour {
 		levelStartBtn.onClick.RemoveAllListeners();
 		levelStartBtn.onClick.AddListener(() => {
             Time.timeScale = 1;
+            PlayerController.instance.UnmuteEngine();
 			GameManager.instance.HideLevelStart();
 			levelStartBtn.onClick.RemoveAllListeners();
 		});
