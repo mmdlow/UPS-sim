@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameOver : MonoBehaviour {
 
@@ -46,10 +47,12 @@ public class GameOver : MonoBehaviour {
 		FinalCashText.text = "$" + GameManager.instance.GetMoney();
 		menuBtn.onClick.AddListener(() => {
 			ExitScreen();
+			SceneManager.LoadScene("Main Menu");
 			// Back to main menu
 		});
 		restartBtn.onClick.AddListener(() => {
 			ExitScreen();
+			SceneManager.LoadScene("Level 1");
 			// Restart game;
 		});
 	}

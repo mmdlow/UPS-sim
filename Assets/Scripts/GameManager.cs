@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 /*
 	GameManager manages every instance of this game. There should only ever one
@@ -53,7 +52,7 @@ public class GameManager : MonoBehaviour {
 		} else if (instance != this) {
 			Destroy(gameObject); // enforce singleton pattern wrt GameManger
 		}
-		DontDestroyOnLoad(gameObject);
+		//DontDestroyOnLoad(gameObject);
 
 		if (BoardManager.instance == null) {
 			Instantiate(boardManager);
@@ -134,6 +133,7 @@ public class GameManager : MonoBehaviour {
 		PlayerController.instance.ResetPosition();
 		
 		Time.timeScale = 0;
+		PlayerController.instance.MuteEngine();
 		LevelStart levelStartComp = levelStart.GetComponentInChildren<LevelStart>();
 		levelStartComp.ShowScreen();
 		levelStart.SetActive(true);
@@ -156,6 +156,7 @@ public class GameManager : MonoBehaviour {
 
 	void LevelPassed() {
 		Time.timeScale = 0;
+		PlayerController.instance.MuteEngine();
 		SoundManager.instance.PlaySingle(passedSound);
 		LevelPassed levelPassedComp = levelPassed.GetComponentInChildren<LevelPassed>();
 		levelPassedComp.InitScreen();
@@ -170,12 +171,16 @@ public class GameManager : MonoBehaviour {
 		worldmap.SetActive(false);
 		minimap.SetActive(true);
 		messages.SetActive(true);
+		SoundManager.instance.PauseSound();
+		PlayerController.instance.MuteEngine();
 	}
 
 	public void UnpauseGame() {
 		paused = false;
 		Time.timeScale = 1;
 		pauseScreen.SetActive(false);
+		SoundManager.instance.UnpauseSound();
+		PlayerController.instance.UnmuteEngine();
 	}
 
 	public void GameOver() {
