@@ -34,8 +34,6 @@ public class SpeechBubbleController : MonoBehaviour {
 	}
 	public void SayPreparedMessage(PreparedMessage pm) {
 		bool mature = GameManager.instance.GetMature();
-		Debug.Log(mature);
-		Debug.Log(GameManager.instance.MATURE);
 		string message = "";
 		string[] messages = {};
 		switch(pm) {

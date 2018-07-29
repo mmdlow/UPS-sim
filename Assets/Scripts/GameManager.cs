@@ -19,10 +19,11 @@ public class GameManager : MonoBehaviour {
 	public StatsManager statsManager;
 	public bool doingSetup;
 	public bool paused = false;
-	public int maxHealth = 100;
-	public int health = 100;
-	public int money = 0;
-	public int level = 0;
+	private int maxHealth = 100;
+	private int health = 100;
+	private int money = 0;
+	private int level = 0;
+	private bool MATURE = true;
 
 	GameObject contentParent;
 	GameObject levelStart;
@@ -40,7 +41,6 @@ public class GameManager : MonoBehaviour {
 	Text levelMoneyText;
 	Text levelItemNamesText;
 	Text levelItemDrbText;
-	public bool MATURE = true;
 
 	private int DELAY_END_GAME = 3;
 
@@ -76,16 +76,19 @@ public class GameManager : MonoBehaviour {
 		gameOver.SetActive(false);
 		pauseScreen.SetActive(false);
 
-		InitGame();
+		SceneManager.sceneLoaded += OnLevelFinishedLoading;
+
+		//InitGame();
 	}
 
 	void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode) {
 		level++;
 		InitGame();
 	}
+	void Start() {
+	}
 
 	void OnEnable() {
-		SceneManager.sceneLoaded += OnLevelFinishedLoading;
 	}
 
 	void OnDisable() {
@@ -93,7 +96,7 @@ public class GameManager : MonoBehaviour {
 	}
 
 	void InitGame() {
-		Debug.Log(level);
+		Debug.Log("level" + level);
 		if (BoardManager.instance == null) {
 			Instantiate(boardManager);
 		}
@@ -208,13 +211,18 @@ public class GameManager : MonoBehaviour {
 	public bool IsDoingSetup() {
 		return doingSetup;
 	}
-	public bool GetMature() {
-		return MATURE;
-	}
 
 	public void ClearManagers() {
 		Destroy(AIManager.instance.gameObject);
 		Destroy(ItemManager.instance.gameObject);
 		Destroy(BoardManager.instance.gameObject);
 	}
+	public int GetMaxHealth() { return maxHealth; }
+	public int GetHealth() { return health; }
+	public int GetMoney() { return money; }
+	public int GetLevel() { return level; }
+	public bool GetMature() { return MATURE; }
+	public int SetHealth(int health) { this.health = health; return this.health; }
+	public int SetMoney(int money) { this.money = money; return this.money; }
+	public int SetLevel(int level) { this.level = level; return this.level; }
 }

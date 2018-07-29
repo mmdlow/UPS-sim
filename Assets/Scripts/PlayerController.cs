@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour {
 
     void Start () {
         rb = GetComponent<Rigidbody2D>();
-        healthDisplay.text = GameManager.instance.health.ToString();
+        healthDisplay.text = GameManager.instance.GetHealth().ToString();
         ItemManager.instance.onPriorityItemChange += UpdatePriorityItem;
 		playerShooter = GetComponent<PlayerShooter>();
     }  
@@ -53,7 +53,8 @@ public class PlayerController : MonoBehaviour {
 
         int damage = Mathf.RoundToInt(damageConstant * col.relativeVelocity.magnitude);
         MessageManager.instance.SayPreparedMessage(MessageManager.PreparedMessage.TAKINGDAMAGE, 5);
-        GameManager.instance.health -= damage;
+        int health = GameManager.instance.GetHealth();
+        health = GameManager.instance.SetHealth(health - damage);
 
         // For updating item integrities upon sustaining player damage
         if (onSustainDamageCallback != null) {
@@ -65,17 +66,19 @@ public class PlayerController : MonoBehaviour {
             StartCoroutine(DisplayDamage());
         }
 
-        if (GameManager.instance.health <= 0) {
+        if (health <= 0) {
             healthDisplay.text = "0";
             GameManager.instance.GameOver();
-            return;
-        }
-        if (GameManager.instance.health < 100 && GameManager.instance.health > 25) healthDisplay.color = Color.white;
-        else if (GameManager.instance.health <= 25) {
-            healthDisplay.color = Color.red;
-            MessageManager.instance.SayPreparedMessage(MessageManager.PreparedMessage.LOWHEALTH, 10);
-        }
-        healthDisplay.text = GameManager.instance.health.ToString();
+        } else {
+            if (health <= 100 && health > 25) {
+                healthDisplay.color = Color.white;
+            }
+            else {
+                healthDisplay.color = Color.red;
+                MessageManager.instance.SayPreparedMessage(MessageManager.PreparedMessage.LOWHEALTH, 10);
+            }
+            healthDisplay.text = health.ToString();
+        } 
     }
 
     void FixedUpdate () {

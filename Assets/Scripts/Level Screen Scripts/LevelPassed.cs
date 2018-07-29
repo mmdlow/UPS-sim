@@ -40,7 +40,7 @@ public class LevelPassed : MonoBehaviour {
 	}
 
 	public void InitScreen() {
-		levelNumText.text = "DAY " + GameManager.instance.level + " SUMMARY";
+		levelNumText.text = "DAY " + GameManager.instance.GetLevel() + " SUMMARY";
 		PDText.text = StatsManager.instance.successfulDeliveries + "/" + BoardManager.instance.numLevelItems;
 		VDText.text = StatsManager.instance.vehiclesDamaged.ToString();
 		VTText.text = StatsManager.instance.vehiclesTotalled.ToString();
@@ -50,9 +50,9 @@ public class LevelPassed : MonoBehaviour {
 						- StatsManager.instance.vehiclesTotalled * vehTotalledPenalty
 						- StatsManager.instance.pedestriansHit * pedsKilledPenalty;
 		if (moneyEarned < 0) moneyEarned = 0;
-		GameManager.instance.money += moneyEarned;
+		int money = GameManager.instance.SetMoney(GameManager.instance.GetMoney() + moneyEarned);
 		CEText.text = "$" + moneyEarned;
-		TCText.text = "$" + GameManager.instance.money;
+		TCText.text = "$" + money;
 
 		nextBtn.onClick.AddListener(ExitScreen);
 	}

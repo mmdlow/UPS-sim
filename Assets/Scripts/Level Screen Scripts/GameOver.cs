@@ -30,20 +30,20 @@ public class GameOver : MonoBehaviour {
 	}
 
 	public void InitScreen() {
-		if (GameManager.instance.level == 1) {
-			levelNumText.text = "YOU ENDURED FOR JUST " + GameManager.instance.level + " DAY";
+		if (GameManager.instance.GetLevel() == 1) {
+			levelNumText.text = "YOU ENDURED FOR JUST " + GameManager.instance.GetLevel() + " DAY";
 		} else {
-			levelNumText.text = "YOU ENDURED FOR " + GameManager.instance.level + " DAYS";
+			levelNumText.text = "YOU ENDURED FOR " + GameManager.instance.GetLevel() + " DAYS";
 		}
 
-		if (GameManager.instance.health <= 0) {
+		if (GameManager.instance.GetHealth() <= 0) {
 			DeathCauseText.text = "BEFORE WRECKING YOUR TRUCK";
 		}
 		if (StatsManager.instance.successfulDeliveries == 0) {
 		 	DeathCauseText.text = "BEFORE FAILING ALL DELIVERIES";			
 		}
 
-		FinalCashText.text = "$" + GameManager.instance.money;
+		FinalCashText.text = "$" + GameManager.instance.GetMoney();
 		menuBtn.onClick.AddListener(() => {
 			ExitScreen();
 			// Back to main menu
