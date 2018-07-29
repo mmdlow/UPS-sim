@@ -128,6 +128,7 @@ public class GameManager : MonoBehaviour {
 		BoardManager.instance.ClearAndLoad();
 		PlayerController.instance.ResetPosition();
 		
+		Time.timeScale = 0;
 		LevelStart levelStartComp = levelStart.GetComponentInChildren<LevelStart>();
 		levelStartComp.ShowScreen();
 		levelStart.SetActive(true);
