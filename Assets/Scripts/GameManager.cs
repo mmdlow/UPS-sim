@@ -144,6 +144,14 @@ public class GameManager : MonoBehaviour {
 		LoadLevel(++level);
 	}
 
+	public void TimerFinished(float itemNum) {
+		if (ItemManager.instance.items.Count == itemNum) {
+			Invoke("GameOver", DELAY_END_GAME);
+		} else {
+			Invoke("LevelPassed", DELAY_END_GAME);
+		}
+	}
+
 	void TriggerLevelPassed(GameObject item) {
 		if (ItemManager.instance.items.Count == 0) {
 			if (StatsManager.instance.successfulDeliveries > 0) {

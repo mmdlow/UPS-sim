@@ -45,7 +45,7 @@ public class BoardManager : MonoBehaviour {
 	void UpdateGameTime() {
 		if (gameTime > 0) gameTime -= Time.deltaTime;
 		int actualGameTime = Mathf.RoundToInt(gameTime);
-		if (actualGameTime == 0) {} ;
+		if (actualGameTime == 0) GameManager.instance.TimerFinished(numLevelItems);
 		timer.text = actualGameTime.ToString();
 	}
 	public void ClearAndLoad() {
