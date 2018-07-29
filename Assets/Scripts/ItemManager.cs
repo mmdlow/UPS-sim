@@ -8,8 +8,6 @@ public class ItemManager : MonoBehaviour {
 	public static ItemManager instance = null;
 
 	public GameObject itemPrefab;
-	private int MAX_ITEMS = 1;
-	private int MIN_ITEMS = 1;
 	public GameObject priorityItem = null;
 	public delegate void ItemChangeHandler(GameObject item);
 	public event ItemChangeHandler onPriorityItemChange;
@@ -20,6 +18,9 @@ public class ItemManager : MonoBehaviour {
 	public List<GameObject> items = new List<GameObject>();
 	public Sprite[] sprites; // Item sprites to choose from
 
+	private int MAX_ITEMS = 2;
+	private int MIN_ITEMS = 2;
+	
 	void Awake() {
 		if (instance == null) {
 			instance = this;
