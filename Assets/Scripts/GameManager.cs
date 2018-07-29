@@ -179,6 +179,8 @@ public class GameManager : MonoBehaviour {
 	public void UnpauseGame() {
 		paused = false;
 		Time.timeScale = 1;
+		pauseScreen.transform.Find("Pause Menu").gameObject.SetActive(true);
+		pauseScreen.transform.Find("Settings Menu").gameObject.SetActive(false);
 		pauseScreen.SetActive(false);
 		SoundManager.instance.UnpauseSound();
 		PlayerController.instance.UnmuteEngine();
