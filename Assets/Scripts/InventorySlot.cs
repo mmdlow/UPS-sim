@@ -3,11 +3,14 @@ using UnityEngine.UI;
 
 public class InventorySlot : MonoBehaviour {
 
+	public Text nameDisplay;
+	public Image icon;
+	public Image priorityAlert; // Alert icon
+	public AudioClip hoverSound;
+	public AudioClip clickSound;
+
 	GameObject slotItem;
 	string itemName;
-	public Image icon;
-	public Text nameDisplay;
-	public Image priorityAlert; // Alert icon
 	Button prioritizeBtn; // Slot object itself is a button
 
 	void Start() {
@@ -31,7 +34,10 @@ public class InventorySlot : MonoBehaviour {
 		//Only allow slot item to be prioritized if it actually contains an item
 		prioritizeBtn.interactable = true;
 		prioritizeBtn.onClick.RemoveAllListeners();
-		prioritizeBtn.onClick.AddListener( delegate { ItemManager.instance.ChangePriorityItem(GetSlotItem());});
+		prioritizeBtn.onClick.AddListener( delegate { 
+			ItemManager.instance.ChangePriorityItem(GetSlotItem());
+			SoundManager.instance.PlaySingle(clickSound);
+		});
 	}
 
 	public void ClearSlot() {
