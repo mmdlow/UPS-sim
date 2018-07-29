@@ -21,6 +21,7 @@ public class InventorySlot : MonoBehaviour {
 	}
 
 	public void SetItem(GameObject item) {
+		if (item == null) return;
 		slotItem = item;
 		itemName = slotItem.GetComponent<ItemController>().GetItemName();
 		icon.sprite = slotItem.GetComponent<ItemController>().GetItemIcon();
@@ -38,8 +39,8 @@ public class InventorySlot : MonoBehaviour {
 		slotItem = null;
 		itemName = null;
 		nameDisplay.text = null;
-		icon.sprite = null;
-		icon.enabled = false;
+        icon.sprite = null;
+        icon.enabled = false;
 		prioritizeBtn.interactable = false;
 		prioritizeBtn.onClick.RemoveAllListeners();
         priorityAlert.enabled = false;

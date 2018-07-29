@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour {
 	private int maxHealth = 100;
 	private int health = 100;
 	private int money = 0;
-	private int level = 0;
+	private int level = 1;
 	private bool MATURE = true;
 
 	GameObject contentParent;
@@ -75,24 +75,11 @@ public class GameManager : MonoBehaviour {
 		workshop.SetActive(false);
 		gameOver.SetActive(false);
 		pauseScreen.SetActive(false);
-
-		SceneManager.sceneLoaded += OnLevelFinishedLoading;
-
-		//InitGame();
 	}
 
-	void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode) {
-		level++;
-		InitGame();
-	}
 	void Start() {
-	}
-
-	void OnEnable() {
-	}
-
-	void OnDisable() {
-		SceneManager.sceneLoaded -= OnLevelFinishedLoading;
+		InitGame();
+		LoadLevel(level);
 	}
 
 	void InitGame() {
@@ -105,10 +92,20 @@ public class GameManager : MonoBehaviour {
 		doingSetup = true;
 
 		ItemManager.instance.onItemRemove += TriggerLevelPassed;
-
+	}
+	void LoadLevel(int level) {
+		ItemManager.instance.ClearAndLoad(1, 1);
+		AIManager.instance.ClearAndLoad(100);
+		BoardManager.instance.ClearAndLoad();
+		PlayerController.instance.ResetPosition();
+		
 		LevelStart levelStartComp = levelStart.GetComponentInChildren<LevelStart>();
-		levelStartComp.InitScreen();
+		levelStartComp.ShowScreen();
 		levelStart.SetActive(true);
+		
+	}
+	public void LoadNextLevel() {
+		LoadLevel(++level);
 	}
 
 	void TriggerLevelPassed(GameObject item) {
@@ -118,13 +115,12 @@ public class GameManager : MonoBehaviour {
 			} else {
 				Invoke("GameOver", DELAY_END_GAME);
 			}
-			ItemManager.instance.onItemRemove -= TriggerLevelPassed;
+			//ItemManager.instance.onItemRemove -= TriggerLevelPassed;
 		}
 	}
 
 	void LevelPassed() {
 		Debug.Log("level passed");
-		AIManager.instance.ClearLevelAI();
 		LevelPassed levelPassedComp = levelPassed.GetComponentInChildren<LevelPassed>();
 		levelPassedComp.InitScreen();
 		levelPassed.SetActive(true);	
@@ -148,7 +144,6 @@ public class GameManager : MonoBehaviour {
 
 	public void GameOver() {
 		Debug.Log("game over");
-		AIManager.instance.ClearLevelAI();
 		GameOver gameOverComp = gameOver.GetComponentInChildren<GameOver>();
 		gameOverComp.InitScreen();
 		gameOver.SetActive(true);
@@ -212,11 +207,6 @@ public class GameManager : MonoBehaviour {
 		return doingSetup;
 	}
 
-	public void ClearManagers() {
-		Destroy(AIManager.instance.gameObject);
-		Destroy(ItemManager.instance.gameObject);
-		Destroy(BoardManager.instance.gameObject);
-	}
 	public int GetMaxHealth() { return maxHealth; }
 	public int GetHealth() { return health; }
 	public int GetMoney() { return money; }

@@ -22,16 +22,19 @@ public class LevelStart : MonoBehaviour {
 		levelStartBtn = transform.Find("Level Start Button").GetComponent<Button>();
 	}
 
-	public void InitScreen() {
+	public void ShowScreen() {
 		levelNumText.text = "DAY " + GameManager.instance.GetLevel();
 		levelHealthText.text = GameManager.instance.GetHealth().ToString();
 		levelMoneyText.text = GameManager.instance.GetMoney().ToString();
 
+		levelItemNamesText.text = "";
+		levelItemDrbText.text = "";
 		foreach(GameObject item in ItemManager.instance.items) {
 			levelItemNamesText.text += item.GetComponent<ItemController>().GetItemName() + "\n";
 			levelItemDrbText.text += item.GetComponent<ItemController>().GetItemDurability() + "\n";
 		}
 
+		levelStartBtn.onClick.RemoveAllListeners();
 		levelStartBtn.onClick.AddListener(() => {
 			GameManager.instance.HideLevelStart();
 			levelStartBtn.onClick.RemoveAllListeners();

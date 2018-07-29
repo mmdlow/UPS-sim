@@ -12,6 +12,7 @@ public class BoardManager : MonoBehaviour {
 	public ItemManager itemManager;
 	public AIManager aiManager;
 	public float gameTime = 90f;
+	private float maxGameTime = 90f;
 	public float numLevelItems = 0;
 	public Text timer;
 
@@ -46,5 +47,8 @@ public class BoardManager : MonoBehaviour {
 		int actualGameTime = Mathf.RoundToInt(gameTime);
 		if (actualGameTime == 0) {} ;
 		timer.text = actualGameTime.ToString();
+	}
+	public void ClearAndLoad() {
+		gameTime = maxGameTime;
 	}
 }

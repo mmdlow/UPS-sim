@@ -127,8 +127,8 @@ public class Workshop : MonoBehaviour {
 		repairBtn.onClick.RemoveAllListeners();
 		nextBtn.onClick.RemoveAllListeners();
 		// Go to next level
-		GameManager.instance.ClearManagers();
-		SceneManager.LoadScene("Level 1");
+		GameManager.instance.LoadNextLevel();
+		transform.parent.gameObject.SetActive(false);
 	}
 
 	public void InitWorkshop() {

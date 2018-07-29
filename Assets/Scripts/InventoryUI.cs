@@ -6,20 +6,27 @@ public class InventoryUI : MonoBehaviour {
 
 	InventorySlot[] slots; // Array of inventory slots
 	PlayerController player;
+	public static InventoryUI instance = null;
 
-	// Use this for initialization
+	void Awake() {
+		if (instance == null) {
+			instance = this;
+		} else if (instance != this) {
+			Destroy(gameObject); // enforce singleton pattern
+		}
+	}
+
 	void Start () {
 		ItemManager.instance.onItemAdd += UpdateUI;
 		ItemManager.instance.onItemFired += UpdateUI;
 		ItemManager.instance.onPriorityItemChange += UpdatePriorityIndicator;
 
 		slots = GetComponentsInChildren<InventorySlot>();
-		UpdateUI(null);
 		player = GameObject.Find("Player").GetComponent<PlayerController>();
 		player.onSustainDamageCallback += UpdateItemIntegrities;
 	}
 	
-	void UpdateUI (GameObject item) {
+	public void UpdateUI (GameObject item) {
 		for (int i=0; i<slots.Length; i++) {
 			if (i < ItemManager.instance.items.Count) {
 				slots[i].SetItem(ItemManager.instance.items[i]);
@@ -49,6 +56,12 @@ public class InventoryUI : MonoBehaviour {
 			if (slots[i].GetSlotItem() != null) {
 				slots[i].UpdateItemIntegrity(damage);
 			}
+		}
+	}
+	public void Clear() {
+		for (int i=0; i<slots.Length; i++) {
+            slots[i].ClearSlot();
+			slots[i].UnsetPriorityAlert();
 		}
 	}
 }

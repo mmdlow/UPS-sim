@@ -148,4 +148,8 @@ public class PlayerController : MonoBehaviour {
 			dropzone = priorityItem.transform.GetChild(0).gameObject;
 		}
 	}
+    public void ResetPosition() {
+        transform.position = Vector3.zero;
+        transform.eulerAngles = Vector3.zero;
+    }
 }

@@ -58,10 +58,22 @@ public class MapPinManager : MonoBehaviour {
 		}
 	}
 	public void RemovePin(GameObject item) {
+		if (item == null) return;
 		GameObject smallPin = item.GetComponent<ItemController>().dropzone.GetComponent<DropzoneController>().smallPin;
 		GameObject bigPin = item.GetComponent<ItemController>().dropzone.GetComponent<DropzoneController>().bigPin;
 		bigPins.Remove(bigPin);
 		smallPins.Remove(smallPin);
 		locations.Remove(smallPin.transform.position);
+	}
+	public void Clear() {
+		for (int i=0; i<smallPins.Count; i++) {
+			Destroy(smallPins[i]);
+		}
+		for (int i=0; i<bigPins.Count; i++) {
+			Destroy(bigPins[i]);
+		}
+		locations.Clear();
+		bigPins.Clear();
+		smallPins.Clear();
 	}
 }

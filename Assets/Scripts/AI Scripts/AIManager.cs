@@ -7,7 +7,7 @@ public class AIManager : MonoBehaviour {
 	public static AIManager instance = null;
 	public GameObject carPrefab;
 	public GameObject pedPrefab;
-	public int population = 100;
+	private int population;
 	public Sprite[] sprites;
 	public Queue<GameObject> cars = new Queue<GameObject>();
 	public Queue<GameObject> guys = new Queue<GameObject>();
@@ -31,7 +31,13 @@ public class AIManager : MonoBehaviour {
 		}
 	}
 
-	public void ClearLevelAI() {
+	public void ClearAndLoad(int population) {
+		ClearLevelAI();
+		this.population = population;
+		InitLevelAI();
+	}
+
+	void ClearLevelAI() {
 		while (cars.Count > 0) {
 			GameObject car = cars.Dequeue();
 			Destroy(car);

@@ -49,8 +49,7 @@ public class DropzoneController : MonoBehaviour {
 			InitReachablePositions();
 		}
 		transform.position = GetRandomPosition();
-		worldmap = GameObject.Find("Worldmap").GetComponent<MapPinManager>();
-		worldmap.AddPin(this.gameObject);
+		MapPinManager.instance.AddPin(this.gameObject);
 		bigPin = transform.GetChild(0).gameObject;
 		smallPin = transform.GetChild(1).gameObject;
 

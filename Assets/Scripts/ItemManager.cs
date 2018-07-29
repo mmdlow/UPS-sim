@@ -8,8 +8,8 @@ public class ItemManager : MonoBehaviour {
 	public static ItemManager instance = null;
 
 	public GameObject itemPrefab;
-	private int MAX_ITEMS = 2;
-	private int MIN_ITEMS = 2;
+	private int MAX_ITEMS = 1;
+	private int MIN_ITEMS = 1;
 	public GameObject priorityItem = null;
 	public delegate void ItemChangeHandler(GameObject item);
 	public event ItemChangeHandler onPriorityItemChange;
@@ -26,10 +26,7 @@ public class ItemManager : MonoBehaviour {
 		} else if (instance != this) {
 			Destroy(gameObject); // enforce singleton pattern
 		}
-        InitLevelItems();
-	}
-
-	void Start() {
+        //InitLevelItems();
 	}
 
 	private List<string[]> ReadItemNames() {
@@ -65,7 +62,7 @@ public class ItemManager : MonoBehaviour {
 		}
 	}
 
-	public void AddItem(GameObject item) {
+	private void AddItem(GameObject item) {
 		// Might not work!
 		items.Add(item);
 		onItemAdd(item);
@@ -92,5 +89,18 @@ public class ItemManager : MonoBehaviour {
 	public void MissedItem(GameObject item) {
 		onItemMissed(item);
 		MessageManager.instance.SayPreparedMessage(MessageManager.PreparedMessage.MISSED, 5);
+	}
+	public void ClearAndLoad(int minItems, int maxItems) {
+		while (this.items.Count > 0) {
+			RemoveItem(items[items.Count-1]);
+		}
+		this.items.Clear();
+		InventoryUI.instance.Clear();
+		MapPinManager.instance.Clear();
+
+		MIN_ITEMS = minItems;
+		MAX_ITEMS = maxItems;
+		InitLevelItems();
+		InventoryUI.instance.UpdateUI(null);
 	}
 }

@@ -115658,39 +115658,14 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 224672538943775486, guid: 7ada99562c7d081468f53f9b38d98992,
-        type: 2}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 224672538943775486, guid: 7ada99562c7d081468f53f9b38d98992,
-        type: 2}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 224672538943775486, guid: 7ada99562c7d081468f53f9b38d98992,
-        type: 2}
-      propertyPath: m_LocalScale.z
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1546375999612716, guid: 7ada99562c7d081468f53f9b38d98992, type: 2}
-      propertyPath: m_Name
-      value: Slot (1)
-      objectReference: {fileID: 0}
     - target: {fileID: 114747012331787812, guid: 7ada99562c7d081468f53f9b38d98992,
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1027074062}
-    - target: {fileID: 114747012331787812, guid: 7ada99562c7d081468f53f9b38d98992,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: UpdateItemPriorities
-      objectReference: {fileID: 0}
-    - target: {fileID: 114747012331787812, guid: 7ada99562c7d081468f53f9b38d98992,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
-      value: 1
+    - target: {fileID: 1546375999612716, guid: 7ada99562c7d081468f53f9b38d98992, type: 2}
+      propertyPath: m_Name
+      value: Slot (1)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7ada99562c7d081468f53f9b38d98992, type: 2}
