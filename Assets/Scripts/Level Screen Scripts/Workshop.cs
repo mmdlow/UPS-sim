@@ -6,6 +6,9 @@ using UnityEngine.SceneManagement;
 
 public class Workshop : MonoBehaviour {
 
+	public AudioClip canBuySound;
+	public AudioClip cantBuySound;
+
 	public int speedLvl = 1;
 	public int durbLvl = 1;
 	public int maxLvl = 5;
@@ -66,11 +69,15 @@ public class Workshop : MonoBehaviour {
 	void Repair() {
 		if (GameManager.instance.GetHealth() >= 100) {
 			mechDialogue.text = "Already at full health!";
+			SoundManager.instance.PlaySingle(cantBuySound);
+			return;
 		} else {
 			if (GameManager.instance.GetMoney() < repairCost) {
 				mechDialogue.text = "You don't have enough...";
+				SoundManager.instance.PlaySingle(cantBuySound);
 			} else {
 				mechDialogue.text = "An excellent choice";
+				SoundManager.instance.PlaySingle(canBuySound);
 				int diff = GameManager.instance.GetMaxHealth() - GameManager.instance.GetHealth();
 				if (diff < healthIncr) {
 					GameManager.instance.SetHealth(GameManager.instance.GetHealth() + diff);
@@ -87,11 +94,15 @@ public class Workshop : MonoBehaviour {
 	void UpgradeSpeed() {
 		if (speedLvl >= maxLvl) {
 			mechDialogue.text = "Can't upgrade further";
+			SoundManager.instance.PlaySingle(cantBuySound);
+			return;
 		} else {
 			if (GameManager.instance.GetMoney() < upSpeedCost) {
 				mechDialogue.text = "You're short on cash";
+				SoundManager.instance.PlaySingle(cantBuySound);
 			} else {
 				mechDialogue.text = "All good";
+				SoundManager.instance.PlaySingle(canBuySound);
 				speedLvl++;
 				PlayerController.instance.acceleration += speedIncr;
 				GameManager.instance.SetMoney(GameManager.instance.GetMoney() - upSpeedCost);
@@ -103,14 +114,17 @@ public class Workshop : MonoBehaviour {
 	}
 
 	void UpgradeDurability() {
-		if (durbLvl >= 5) {
+		if (durbLvl >= maxLvl) {
 			mechDialogue.text = "Can't upgrade further";
+			SoundManager.instance.PlaySingle(cantBuySound);
 			return;
 		}
 		if (GameManager.instance.GetMoney() < upDurbCost) {
 			mechDialogue.text = "Get some money first";
+			SoundManager.instance.PlaySingle(cantBuySound);
 		} else {
 			mechDialogue.text = "All good";
+			SoundManager.instance.PlaySingle(canBuySound);
 			durbLvl++;
 			PlayerController.instance.damageConstant -= durbIncr;
             GameManager.instance.SetMoney(GameManager.instance.GetMoney() - upDurbCost);
