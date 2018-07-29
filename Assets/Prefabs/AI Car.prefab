@@ -110,6 +110,7 @@ MonoBehaviour:
   recoverTime: 3
   health: 20
   damageConstant: 2
+  hornSound: {fileID: 8300000, guid: 18778452cda3a2547b811fdebff3e7f0, type: 3}
   sbcPrefab: {fileID: 114878479863066002, guid: 267403d9a7a7b432488a8f9c97840893,
     type: 2}
 --- !u!212 &212180132355020092

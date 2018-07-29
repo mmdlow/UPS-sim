@@ -92,7 +92,6 @@ public class GameManager : MonoBehaviour {
 	}
 
 	void InitGame() {
-		Debug.Log(level);
 		if (BoardManager.instance == null) {
 			Instantiate(boardManager);
 		}

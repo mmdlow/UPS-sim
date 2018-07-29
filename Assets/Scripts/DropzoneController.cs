@@ -22,6 +22,8 @@ public class DropzoneController : MonoBehaviour {
 	private bool rejected;
 	public static int SETTLING_DELAY = 2;
 
+	public AudioClip successSound;
+
 	public static void InitReachablePositions() {
 		reachablePositions = new List<Vector3Int>();
 		GameObject ground = GameObject.Find("Ground");
@@ -101,6 +103,7 @@ public class DropzoneController : MonoBehaviour {
 				yield return new WaitForSeconds(SETTLING_DELAY);
 				if (!rejected) {
 					// item did not exit (success)
+					SoundManager.instance.PlaySingle(successSound);
 					ItemManager.instance.RemoveItem(item);
 					MessageManager.instance.SayPreparedMessage(MessageManager.PreparedMessage.DELIVERED, 5);
 				} else {
