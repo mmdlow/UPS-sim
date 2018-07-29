@@ -61,7 +61,6 @@ public class AIController : MonoBehaviour {
 			if (!beenHitByPlayer) {
 				StatsManager.instance.vehiclesDamaged++;
 				MessageManager.instance.SayPreparedMessage(MessageManager.PreparedMessage.HITVEH, 5);
-				Debug.Log("Vehicles hit: " + StatsManager.instance.vehiclesDamaged);
 				beenHitByPlayer = true;
 			}
 			bubble.SayPreparedMessage(SpeechBubbleController.PreparedMessage.HITVEH);
@@ -76,7 +75,6 @@ public class AIController : MonoBehaviour {
 				StatsManager.instance.vehiclesTotalled++;
 				MessageManager.instance.SayPreparedMessage(MessageManager.PreparedMessage.TOTALLEDVEH, 5);
                 bubble.SayPreparedMessage(SpeechBubbleController.PreparedMessage.KILLVEH);
-				Debug.Log("Vehicles totalled: " + StatsManager.instance.vehiclesTotalled);
 				dead = true;
 			}
 		}

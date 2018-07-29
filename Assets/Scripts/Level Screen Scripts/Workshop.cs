@@ -64,41 +64,41 @@ public class Workshop : MonoBehaviour {
 	}
 
 	void Repair() {
-		if (GameManager.instance.health >= 100) {
+		if (GameManager.instance.GetHealth() >= 100) {
 			mechDialogue.text = "Already at full health!";
-			return;
-		}
-		if (GameManager.instance.money < repairCost) {
-			mechDialogue.text = "You don't have enough...";
 		} else {
-			mechDialogue.text = "An excellent choice";
-			int diff = GameManager.instance.maxHealth - GameManager.instance.health;
-			if (diff < healthIncr) {
-				GameManager.instance.health += diff;
+			if (GameManager.instance.GetMoney() < repairCost) {
+				mechDialogue.text = "You don't have enough...";
 			} else {
-				GameManager.instance.health += healthIncr;
+				mechDialogue.text = "An excellent choice";
+				int diff = GameManager.instance.GetMaxHealth() - GameManager.instance.GetHealth();
+				if (diff < healthIncr) {
+					GameManager.instance.SetHealth(GameManager.instance.GetHealth() + diff);
+				} else {
+					GameManager.instance.SetHealth(GameManager.instance.GetHealth() + healthIncr);
+				}
+				GameManager.instance.SetMoney(GameManager.instance.GetMoney() - repairCost);
+				healthText.text = GameManager.instance.GetHealth().ToString();
+				cashText.text = GameManager.instance.GetMoney().ToString();
 			}
-			GameManager.instance.money -= repairCost;
-			healthText.text = GameManager.instance.health.ToString();
-			cashText.text = GameManager.instance.money.ToString();
 		}
 	}
 
 	void UpgradeSpeed() {
 		if (speedLvl >= maxLvl) {
 			mechDialogue.text = "Can't upgrade further";
-			return;
-		}
-		if (GameManager.instance.money < upSpeedCost) {
-			mechDialogue.text = "You're short on cash";
 		} else {
-			mechDialogue.text = "All good";
-			speedLvl++;
-			PlayerController.instance.acceleration += speedIncr;
-			GameManager.instance.money -= upSpeedCost;
-			cashText.text = GameManager.instance.money.ToString();
-			RefreshStatLevels();
-			// Increase speed of player
+			if (GameManager.instance.GetMoney() < upSpeedCost) {
+				mechDialogue.text = "You're short on cash";
+			} else {
+				mechDialogue.text = "All good";
+				speedLvl++;
+				PlayerController.instance.acceleration += speedIncr;
+				GameManager.instance.SetMoney(GameManager.instance.GetMoney() - upSpeedCost);
+				cashText.text = GameManager.instance.GetMoney().ToString();
+				RefreshStatLevels();
+				// Increase speed of player
+			}
 		}
 	}
 
@@ -107,14 +107,14 @@ public class Workshop : MonoBehaviour {
 			mechDialogue.text = "Can't upgrade further";
 			return;
 		}
-		if (GameManager.instance.money < upDurbCost) {
+		if (GameManager.instance.GetMoney() < upDurbCost) {
 			mechDialogue.text = "Get some money first";
 		} else {
 			mechDialogue.text = "All good";
 			durbLvl++;
 			PlayerController.instance.damageConstant -= durbIncr;
-			GameManager.instance.money -= upDurbCost;
-			cashText.text = GameManager.instance.money.ToString();
+            GameManager.instance.SetMoney(GameManager.instance.GetMoney() - upDurbCost);
+			cashText.text = GameManager.instance.GetMoney().ToString();
 			RefreshStatLevels();
 			// Increase durability of player
 		}
@@ -132,8 +132,8 @@ public class Workshop : MonoBehaviour {
 	}
 
 	public void InitWorkshop() {
-		healthText.text = GameManager.instance.health.ToString();
-		cashText.text = GameManager.instance.money.ToString();
+		healthText.text = GameManager.instance.GetHealth().ToString();
+		cashText.text = GameManager.instance.GetMoney().ToString();
 		mechDialogue.text = "Upgrade and repair here!";
 		RefreshStatLevels();
 		repairBtn.onClick.AddListener(Repair);

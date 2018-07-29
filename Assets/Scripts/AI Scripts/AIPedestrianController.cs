@@ -52,7 +52,6 @@ public class AIPedestrianController : MonoBehaviour {
 			StatsManager.instance.pedestriansHit++;
 			MessageManager.instance.SayPreparedMessage(MessageManager.PreparedMessage.KILL, 5);
 			bubble.SayPreparedMessage(SpeechBubbleController.PreparedMessage.KILLPED);
-			Debug.Log("Pedestrians hit: " + StatsManager.instance.pedestriansHit);
 		}
 		anim.SetBool("Alive", false);
 		alive = false;

@@ -23,9 +23,9 @@ public class LevelStart : MonoBehaviour {
 	}
 
 	public void InitScreen() {
-		levelNumText.text = "DAY " + GameManager.instance.level;
-		levelHealthText.text = GameManager.instance.health.ToString();
-		levelMoneyText.text = GameManager.instance.money.ToString();
+		levelNumText.text = "DAY " + GameManager.instance.GetLevel();
+		levelHealthText.text = GameManager.instance.GetHealth().ToString();
+		levelMoneyText.text = GameManager.instance.GetMoney().ToString();
 
 		foreach(GameObject item in ItemManager.instance.items) {
 			levelItemNamesText.text += item.GetComponent<ItemController>().GetItemName() + "\n";
