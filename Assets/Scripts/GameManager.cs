@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 /*
 	GameManager manages every instance of this game. There should only ever one
@@ -53,7 +52,7 @@ public class GameManager : MonoBehaviour {
 		} else if (instance != this) {
 			Destroy(gameObject); // enforce singleton pattern wrt GameManger
 		}
-		DontDestroyOnLoad(gameObject);
+		//DontDestroyOnLoad(gameObject);
 
 		if (BoardManager.instance == null) {
 			Instantiate(boardManager);
