@@ -60,7 +60,6 @@ public class AIController : MonoBehaviour {
 			SoundManager.instance.RandomSfx(hornSound);
 			if (!beenHitByPlayer) {
 				StatsManager.instance.vehiclesDamaged++;
-				MessageManager.instance.SayPreparedMessage(MessageManager.PreparedMessage.HITVEH, 5);
 				beenHitByPlayer = true;
 			}
 			bubble.SayPreparedMessage(SpeechBubbleController.PreparedMessage.HITVEH);
@@ -73,7 +72,6 @@ public class AIController : MonoBehaviour {
 			} else {
 				StopCoroutine("FollowPath");
 				StatsManager.instance.vehiclesTotalled++;
-				MessageManager.instance.SayPreparedMessage(MessageManager.PreparedMessage.TOTALLEDVEH, 5);
                 bubble.SayPreparedMessage(SpeechBubbleController.PreparedMessage.KILLVEH);
 				dead = true;
 			}

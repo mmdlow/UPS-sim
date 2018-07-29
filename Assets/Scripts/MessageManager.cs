@@ -20,6 +20,7 @@ public class MessageManager : MonoBehaviour {
 	}
 	public static MessageManager instance = null;
 	List<string> messages = new List<string>();
+	List<IEnumerator> coroutines = new List<IEnumerator>();
 	Dictionary<string, int> dict = new Dictionary<string, int>();
 	Text output;
 	private string SayPersistentlyPriorityItemHash = null;
@@ -57,7 +58,9 @@ public class MessageManager : MonoBehaviour {
 		dict[messageHash] = messages.Count - 1;
 		if (timeout < int.MaxValue) {
 			// set clearAfter
-			StartCoroutine(clearAfter(messageHash, timeout));
+			IEnumerator ca = clearAfter(messageHash, timeout);
+			coroutines.Add(ca);
+			StartCoroutine(ca);
 		}
 		Refresh();
 		return messageHash;
@@ -140,7 +143,7 @@ public class MessageManager : MonoBehaviour {
 		Refresh();
 	}
 	private IEnumerator clearAfter(string messageHash, int timeout) {
-		yield return new WaitForSeconds(timeout);
+		yield return new WaitForSecondsRealtime(timeout);
 		int index = dict[messageHash];
 		messages.RemoveAt(index);
 		// messages after index are automatically moved forward
@@ -152,5 +155,12 @@ public class MessageManager : MonoBehaviour {
 			}
 		}
 		Refresh();
+	}
+	public void Clear() {
+		messages.Clear();
+		dict.Clear();
+		StopAllCoroutines();
+		SayPersistentlyPriorityItemHash = null;
+		SayPersistentlyPriorityItem(null);
 	}
 }

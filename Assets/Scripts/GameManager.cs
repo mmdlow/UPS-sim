@@ -131,6 +131,7 @@ public class GameManager : MonoBehaviour {
 		AIManager.instance.ClearAndLoad(population);
 		BoardManager.instance.ClearAndLoad();
 		PlayerController.instance.ResetPosition();
+		MessageManager.instance.Clear();
 		
 		Time.timeScale = 0;
 		PlayerController.instance.MuteEngine();
