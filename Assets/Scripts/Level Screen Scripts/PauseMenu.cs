@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour {
 
+	public SettingsMenu sm;
 	Button resumeBtn;
 	Button settingsBtn;
 	Button quitBtn;
@@ -23,7 +24,6 @@ public class PauseMenu : MonoBehaviour {
 	}
 
 	void Settings() {
-		Debug.Log("Going to settings");
 	}
 
 	void QuitGame() {
