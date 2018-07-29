@@ -55,6 +55,8 @@ MonoBehaviour:
     type: 2}
   statsManager: {fileID: 114166417195291008, guid: 3173c26dc6ef883449adf89f777f1096,
     type: 2}
+  soundManager: {fileID: 114443462570505746, guid: 1d7df85b4ba2fa446b1350938757e157,
+    type: 2}
   passedSound: {fileID: 8300000, guid: e6dca564ccdecd046a46ccb58216769a, type: 3}
   failedSound: {fileID: 8300000, guid: 008944d02b2e7854aaa770fa4ee0cbe3, type: 3}
   doingSetup: 0

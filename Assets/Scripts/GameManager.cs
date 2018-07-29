@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour {
 	public static GameManager instance = null;
 	public BoardManager boardManager;
 	public StatsManager statsManager;
+	public SoundManager soundManager;
 	public AudioClip passedSound;
 	public AudioClip failedSound;
 	public bool doingSetup;
@@ -60,6 +61,10 @@ public class GameManager : MonoBehaviour {
 
 		if (StatsManager.instance == null) {
 			Instantiate(statsManager);
+		}
+
+		if (SoundManager.instance == null) {
+			Instantiate(soundManager);
 		}
 
 		levelStart = GameObject.Find("Level Start Screen");
