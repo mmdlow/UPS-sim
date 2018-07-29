@@ -95,8 +95,36 @@ public class GameManager : MonoBehaviour {
 		ItemManager.instance.onItemRemove += TriggerLevelPassed;
 	}
 	void LoadLevel(int level) {
-		ItemManager.instance.ClearAndLoad(1, 1);
-		AIManager.instance.ClearAndLoad(100);
+		int minItems = 0, maxItems = 0, population = 0;
+		switch (level) {
+			case 1:
+				minItems = 1;
+				maxItems = 1;
+				population = 100;
+				break;
+			case 2:
+				minItems = 3;
+				maxItems = 4;
+				population = 300;
+				break;
+			case 3:
+				minItems = 6;
+				maxItems = 7;
+				population = 300;
+				break;
+			case 4:
+				minItems = 8;
+				maxItems = 9;
+				population = 400;
+				break;
+			default:
+				minItems = 9;
+				maxItems = 9;
+				population = 400;
+				break;
+		}
+		ItemManager.instance.ClearAndLoad(minItems, maxItems);
+		AIManager.instance.ClearAndLoad(population);
 		BoardManager.instance.ClearAndLoad();
 		PlayerController.instance.ResetPosition();
 		
@@ -144,12 +172,7 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void GameOver() {
-		Debug.Log("game over");
-<<<<<<< HEAD
-=======
 		SoundManager.instance.PlaySingle(failedSound);
-		AIManager.instance.ClearLevelAI();
->>>>>>> 87e4a9a3f4df6f25cd8bfdacc6522ba8e88aad3c
 		GameOver gameOverComp = gameOver.GetComponentInChildren<GameOver>();
 		gameOverComp.InitScreen();
 		gameOver.SetActive(true);
