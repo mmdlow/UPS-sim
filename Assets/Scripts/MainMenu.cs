@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour {
 
+	void Start() {
+	}
 	public void PlayGame() {
 		// Load next level in queue
 		Debug.Log("Starting game");
@@ -22,5 +24,8 @@ public class MainMenu : MonoBehaviour {
 	public void QuitGame() {
 		Debug.Log("Quitting game");
 		Application.Quit();
+	}
+	public void ToggleOn() {
+		gameObject.SetActive(gameObject.activeSelf);
 	}
 }
