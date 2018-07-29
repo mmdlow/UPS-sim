@@ -42,9 +42,6 @@ public class PlayerController : MonoBehaviour {
         healthDisplay.text = GameManager.instance.GetHealth().ToString();
         ItemManager.instance.onPriorityItemChange += UpdatePriorityItem;
 		playerShooter = GetComponent<PlayerShooter>();
-    }  
-
-    void Update() {
     }
 
     IEnumerator DisplayDamage () {
@@ -95,7 +92,7 @@ public class PlayerController : MonoBehaviour {
         rb.AddForce(speed);
 
         // Engine sound
-        if (engineSound.clip != null) engineSound.pitch = 1 + v / 2;
+        if (engineSound.clip != null) engineSound.pitch = 1 + Mathf.Abs(v / 2);
 
         float direction = Vector2.Dot(rb.velocity, rb.GetRelativeVector(Vector2.up));
         if (direction >= 0.0f) {
