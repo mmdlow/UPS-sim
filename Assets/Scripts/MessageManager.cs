@@ -140,7 +140,7 @@ public class MessageManager : MonoBehaviour {
 		Refresh();
 	}
 	private IEnumerator clearAfter(string messageHash, int timeout) {
-		yield return new WaitForSeconds(timeout);
+		yield return new WaitForSecondsRealtime(timeout);
 		int index = dict[messageHash];
 		messages.RemoveAt(index);
 		// messages after index are automatically moved forward
@@ -152,5 +152,11 @@ public class MessageManager : MonoBehaviour {
 			}
 		}
 		Refresh();
+	}
+	public void Clear() {
+		messages.Clear();
+		dict.Clear();
+		SayPersistentlyPriorityItemHash = null;
+		SayPersistentlyPriorityItem(null);
 	}
 }
