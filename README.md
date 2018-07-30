@@ -1,5 +1,7 @@
 # Cluster Truck
-By: Matthew Low, Donald Lee
+By: Matthew Low, Donald Lee  
+
+![Menu screenshot](https://media.githubusercontent.com/media/mmdlow/UPS-sim/master/Screenshots/Screenshot%202018-07-30%2016.06.35.png) 
 
 ## About this game
 A delivery service game where the player delivers goods across a map in a set amount of time, balancing speed of delivery and quality of service to earn money.
@@ -19,4 +21,5 @@ Minimum for web build:
 Browser that supports WebGL
 ([Does my brower support WebGL?](https://get.webgl.org/))
 
-Developed with Unity
+## Tools used
+Unity, Piskel
