@@ -92,8 +92,11 @@ public class ItemManager : MonoBehaviour {
 		MessageManager.instance.SayPreparedMessage(MessageManager.PreparedMessage.MISSED, 5);
 	}
 	public void ClearAndLoad(int minItems, int maxItems) {
-		while (this.items.Count > 0) {
-			RemoveItem(items[items.Count-1]);
+		// while (this.items.Count > 0) {
+		// 	RemoveItem(items[items.Count-1]);
+		// }
+		foreach (GameObject item in items) {
+			Destroy(item);
 		}
 		this.items.Clear();
 		InventoryUI.instance.Clear();
