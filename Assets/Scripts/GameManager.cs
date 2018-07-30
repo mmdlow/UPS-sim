@@ -107,11 +107,11 @@ public class GameManager : MonoBehaviour {
 				break;
 			case 2:
 				minItems = 2;
-				maxItems = 2;
+				maxItems = 4;
 				population = 130;
 				break;
 			case 3:
-				minItems = 5;
+				minItems = 4;
 				maxItems = 6;
 				population = 160;
 				break;
@@ -140,7 +140,7 @@ public class GameManager : MonoBehaviour {
 		levelStart.SetActive(true);
 		
 	}
-	
+
 	public void LoadNextLevel() {
 		LoadLevel(++level);
 	}

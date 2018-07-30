@@ -11,7 +11,7 @@ public class InventorySlot : MonoBehaviour {
 	string itemName;
 	Button prioritizeBtn; // Slot object itself is a button
 
-	void Start() {
+	void Awake() {
 		priorityAlert.enabled = false;
 		prioritizeBtn = GetComponentInChildren<Button>();
 		prioritizeBtn.interactable = false;
