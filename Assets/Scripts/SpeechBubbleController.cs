@@ -33,59 +33,49 @@ public class SpeechBubbleController : MonoBehaviour {
 		StartCoroutine(clearAfter(timeout));
 	}
 	public void SayPreparedMessage(PreparedMessage pm) {
-		bool mature = GameManager.instance.GetMature();
 		string message = "";
 		string[] messages = {};
 		switch(pm) {
 			case PreparedMessage.HITVEH:
-				messages = mature ? new string[] {
-					"Oi u fookin wanker",
-					"Im gonna fuk u up m8",
-					"Hey you, go SUCK an enormous bag of cocks!",
-					"I hope you choke on a buffet of dicks.",
-					"Who let this retard on the road",
-					"Out of my way u fukin twat",
-					"Sir, are you blind, retarded, or both?",
-					"Kan ni na bei chao chi bai"
-				} : new string[] {
-					"Oi u bastard",
+				messages = new string[] {
+					"You bastard",
+					"Kids these days...",
 					"Im gonna beat the piss out of you",
-					"Why don't you stick that stick shift up your",
+					"Why don't you insert that truck up your",
 					"Seriously?!",
-					"Wa lao eh"
+					"Wa lao eh",
+					"KNNBCCB",
+					"NBCB new car some more",
+					"You duckface",
+					"I'm gonna drive that truck up your a-",
+					"How can dis b allow?",
+					"Thanks Obama",
 				};
                 message = messages[UnityEngine.Random.Range(0, messages.Length)];
 				break;
 			case PreparedMessage.KILLPED:
-				messages = mature ? new string[] {
-					"Motherfuc-",
-					"Son of a bitc-",
-					"Are you fucking kidding m-",
-					"Its too early, I haven't even fuc-",
+				messages = new string[] {
+					"You Motherf-",
 					"Hello darkness my old friend...",
 					"Wa si liao ah...",
-				} : new string[] {
-					"Run over by a truck, just like the gypsy sai-",
-					"Hello darkness my old friend...",
-					"Why don't you stick that stick shift up your",
-					"Seriously?!",
-					"Wa si liao ah...",
+					"Its too early, I haven't even fu-",
+					"Shouldn't have cancelled my policy...",
+					"used to be an adventurer like you...",
+					"Goodbye cruel world",
+					"Kanna sai lah",
+					"Just like the gypsy woman said...",
+					"Urgh kill me now - wait no",
+					"How can dis b allow?",
 				};
                 message = messages[UnityEngine.Random.Range(0, messages.Length)];
 				break;
 			case PreparedMessage.KILLVEH:
-				messages = mature ? new string[] {
-					"Ahh fuck me.",
-					"Aww fuck I can't believe you've done this...",
-					"Hey fuck you too buddy",
-					"Chi Bai crash my car for what",
-					"Walao want to die isit",
-					"NBCB, new car some more..."
-				} : new string[] {
-					"New car some more...",
+				messages = new string[] {
 					"I can't believe you've done this...",
+					"NBCBC new car some more",
+					"Walao want to die isit",
 					"You son of a",
-					"You stupid motherfu-"
+					"You stupid motherfu-",
 				};
                 message = messages[UnityEngine.Random.Range(0, messages.Length)];
 				break;

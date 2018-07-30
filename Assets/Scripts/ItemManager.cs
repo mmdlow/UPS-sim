@@ -110,6 +110,7 @@ public class ItemManager : MonoBehaviour {
 	private List<string[]> ReadItemNames() {
 		List<string[]> arr = new List<string[]>();
 		arr.Add( new string[] { "AK-47", "M" } );
+		arr.Add( new string[] { "SAR-21", "M" } );
 		arr.Add( new string[] { "ANTIQUE DRESS", "H" } );
 		arr.Add( new string[] { "ARMADILLO", "M" } );
 		arr.Add( new string[] { "BAT FOOD", "M" } );
@@ -120,10 +121,10 @@ public class ItemManager : MonoBehaviour {
 		arr.Add( new string[] { "CAT FOOD", "M" } );
 		arr.Add( new string[] { "CHINA VASE", "L" } );
 		arr.Add( new string[] { "CLAY VASE", "L" } );
-		arr.Add( new string[] { "CONDOMS", "M" } );
+		arr.Add( new string[] { "FINE CHINA", "L" } );
 		arr.Add( new string[] { "CREEPY DOLL", "M" } );
 		arr.Add( new string[] { "DESIGNER CLOTHES", "L" } );
-		arr.Add( new string[] { "DILDOS", "H" } );
+		arr.Add( new string[] { "MASSAGE TOYS", "H" } );
 		arr.Add( new string[] { "DOG FOOD", "M" } );
 		arr.Add( new string[] { "DORITOS", "L" } );
 		arr.Add( new string[] { "DUCT TAPE", "M" } );
@@ -162,8 +163,7 @@ public class ItemManager : MonoBehaviour {
 		arr.Add( new string[] { "RATTLING BOX", "L" } );
 		arr.Add( new string[] { "SENTRY GUN", "M" } );
 		arr.Add( new string[] { "SHOTGUN", "M" } );
-		arr.Add( new string[] { "SOAP", "M" } );
-		arr.Add( new string[] { "STRAP-ONS", "M" } );
+		arr.Add( new string[] { "DURIAN", "M" } );
 		arr.Add( new string[] { "STUFFED TOY", "M" } );
 		arr.Add( new string[] { "TABLE", "M" } );
 		arr.Add( new string[] { "TV SET", "L" } );
@@ -172,7 +172,8 @@ public class ItemManager : MonoBehaviour {
 		arr.Add( new string[] { "UMBRELLA", "M" } );
 		arr.Add( new string[] { "WARDROBE", "M" } );
 		arr.Add( new string[] { "WHIP", "M" } );
-		arr.Add( new string[] { "WIENER", "L" } );
+		arr.Add( new string[] { "WIENERS", "L" } );
+		arr.Add( new string[] { "MAGIC WAND", "M" } );
 		return arr;
 	}
 }

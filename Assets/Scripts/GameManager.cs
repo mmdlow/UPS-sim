@@ -25,7 +25,6 @@ public class GameManager : MonoBehaviour {
 	private int health = 100;
 	private int money = 0;
 	private int level = 1;
-	private bool MATURE = true;
 
 	GameObject contentParent;
 	GameObject levelStart;
@@ -259,7 +258,6 @@ public class GameManager : MonoBehaviour {
 	public int GetHealth() { return health; }
 	public int GetMoney() { return money; }
 	public int GetLevel() { return level; }
-	public bool GetMature() { return MATURE; }
 	public int SetHealth(int health) { this.health = health; return this.health; }
 	public int SetMoney(int money) { this.money = money; return this.money; }
 	public int SetLevel(int level) { this.level = level; return this.level; }
