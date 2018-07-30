@@ -17,6 +17,6 @@ Windows 10
 
 Minimum for web build:  
 Browser that supports WebGL
-[Does my brower support WebGL?](https://get.webgl.org/)
+[(Does my brower support WebGL?)](https://get.webgl.org/)
 
 Developed with Unity
