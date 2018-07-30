@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour {
     public GameObject directionIndicator;
     public PlayerShooter playerShooter;
     private GameObject dropzone;
-    private float CHANGE_INDICATOR_DISTANCE = 8f;
+    private float CHANGE_INDICATOR_DISTANCE = 4.5f;
     public AudioSource engineSound;
     public AudioClip impactSound1;
     public AudioClip impactSound2;
