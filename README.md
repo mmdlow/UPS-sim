@@ -4,7 +4,7 @@ By: Matthew Low, Donald Lee
 ## About this game
 A delivery service game where the player delivers goods across a map in a set amount of time, balancing speed of delivery and quality of service to earn money.
 
-# Features
+## Features
   * Make deliveries acrosss a vast 2D map
   * Interact with the friendly non-player characters (NPCs) as you explore the city
   * Fix and improve your vehicle as level progresses
