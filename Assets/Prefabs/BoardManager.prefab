@@ -56,5 +56,5 @@ MonoBehaviour:
   aiManager: {fileID: 114133067113896352, guid: 64bab158600d16c429eb108fad7b8693,
     type: 2}
   gameTime: 90
+  numLevelItems: 0
   timer: {fileID: 0}
-  health: 100

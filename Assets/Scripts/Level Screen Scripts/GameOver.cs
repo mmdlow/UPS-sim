@@ -40,7 +40,7 @@ public class GameOver : MonoBehaviour {
 		if (GameManager.instance.GetHealth() <= 0) {
 			DeathCauseText.text = "BEFORE WRECKING YOUR TRUCK";
 		}
-		if (StatsManager.instance.successfulDeliveries == 0) {
+		if (StatsManager.instance.failedDeliveries == (int) BoardManager.instance.numLevelItems) {
 		 	DeathCauseText.text = "BEFORE FAILING ALL DELIVERIES";			
 		}
 

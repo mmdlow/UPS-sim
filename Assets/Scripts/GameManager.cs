@@ -92,11 +92,10 @@ public class GameManager : MonoBehaviour {
 		if (BoardManager.instance == null) {
 			Instantiate(boardManager);
 		}
-		StatsManager.instance.ResetStats();
 
 		doingSetup = true;
 
-		ItemManager.instance.onItemRemove += TriggerLevelPassed;
+		ItemManager.instance.onItemRemove += CheckDeliveriesDone;
 	}
 	void LoadLevel(int level) {
 		int minItems = 0, maxItems = 0, population = 0;
@@ -107,8 +106,8 @@ public class GameManager : MonoBehaviour {
 				population = 100;
 				break;
 			case 2:
-				minItems = 4;
-				maxItems = 3;
+				minItems = 2;
+				maxItems = 2;
 				population = 130;
 				break;
 			case 3:
@@ -131,6 +130,7 @@ public class GameManager : MonoBehaviour {
 		AIManager.instance.ClearAndLoad(population);
 		BoardManager.instance.ClearAndLoad();
 		PlayerController.instance.ResetPosition();
+		StatsManager.instance.ResetStats();
 		MessageManager.instance.Clear();
 		
 		Time.timeScale = 0;
@@ -140,26 +140,22 @@ public class GameManager : MonoBehaviour {
 		levelStart.SetActive(true);
 		
 	}
+	
 	public void LoadNextLevel() {
 		LoadLevel(++level);
 	}
 
-	public void TimerFinished(float itemNum) {
-		if (ItemManager.instance.items.Count == itemNum) {
+	public void TriggerLevelPassed() {
+		if (StatsManager.instance.failedDeliveries == BoardManager.instance.numLevelItems) {
 			Invoke("GameOver", DELAY_END_GAME);
 		} else {
 			Invoke("LevelPassed", DELAY_END_GAME);
 		}
 	}
 
-	void TriggerLevelPassed(GameObject item) {
+	void CheckDeliveriesDone(GameObject item) {
 		if (ItemManager.instance.items.Count == 0) {
-			if (StatsManager.instance.successfulDeliveries > 0) {
-				Invoke("LevelPassed", DELAY_END_GAME);
-			} else {
-				Invoke("GameOver", DELAY_END_GAME);
-			}
-			//ItemManager.instance.onItemRemove -= TriggerLevelPassed;
+			TriggerLevelPassed();
 		}
 	}
 

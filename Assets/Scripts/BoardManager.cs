@@ -15,6 +15,7 @@ public class BoardManager : MonoBehaviour {
 	private float maxGameTime = 90f;
 	public float numLevelItems = 0;
 	public Text timer;
+	bool timerUp = false;
 
 	void Awake() {
 		if (instance == null) {
@@ -38,17 +39,25 @@ public class BoardManager : MonoBehaviour {
 	}
 
 	void Update() {
-		if (GameManager.instance.doingSetup) return;
+		if (GameManager.instance.doingSetup || timerUp) return;
 		UpdateGameTime();
 	}
 
 	void UpdateGameTime() {
 		if (gameTime > 0) gameTime -= Time.deltaTime;
 		int actualGameTime = Mathf.RoundToInt(gameTime);
-		if (actualGameTime == 0) GameManager.instance.TimerFinished(numLevelItems);
+		if (actualGameTime <= 0) {
+			timer.text = actualGameTime.ToString();
+			StatsManager.instance.failedDeliveries += ItemManager.instance.items.Count;
+			GameManager.instance.TriggerLevelPassed();
+			timerUp = true;
+			return;
+		}
 		timer.text = actualGameTime.ToString();
 	}
 	public void ClearAndLoad() {
 		gameTime = maxGameTime;
+		numLevelItems = ItemManager.instance.items.Count;
+		timerUp = false;
 	}
 }

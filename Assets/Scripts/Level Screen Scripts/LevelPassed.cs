@@ -41,11 +41,12 @@ public class LevelPassed : MonoBehaviour {
 
 	public void InitScreen() {
 		levelNumText.text = "DAY " + GameManager.instance.GetLevel() + " SUMMARY";
-		PDText.text = StatsManager.instance.successfulDeliveries + "/" + BoardManager.instance.numLevelItems;
+		int successfulDeliveries = (int) BoardManager.instance.numLevelItems - StatsManager.instance.failedDeliveries;
+		PDText.text = successfulDeliveries + "/" + BoardManager.instance.numLevelItems;
 		VDText.text = StatsManager.instance.vehiclesDamaged.ToString();
 		VTText.text = StatsManager.instance.vehiclesTotalled.ToString();
 		PHText.text = StatsManager.instance.pedestriansHit.ToString();
-		int moneyEarned = StatsManager.instance.successfulDeliveries * successBonus
+		int moneyEarned = successfulDeliveries * successBonus
 						- StatsManager.instance.vehiclesDamaged * vehDamagedPenalty
 						- StatsManager.instance.vehiclesTotalled * vehTotalledPenalty
 						- StatsManager.instance.pedestriansHit * pedsKilledPenalty;

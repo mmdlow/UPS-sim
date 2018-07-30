@@ -5,7 +5,7 @@ public class StatsManager : MonoBehaviour {
 	
 	public static StatsManager instance = null;
 
-	public int successfulDeliveries = 0;
+	public int failedDeliveries = 0;
 	public int vehiclesDamaged = 0;
 	public int vehiclesTotalled = 0;
 	public int pedestriansHit = 0;
@@ -20,17 +20,16 @@ public class StatsManager : MonoBehaviour {
 
     void Start() {
 		ItemManager.instance.onItemMissed += UpdateFailedDeliveries;
-		successfulDeliveries = ItemManager.instance.items.Count;
     }
 
 	void UpdateFailedDeliveries(GameObject item) {
 		// Message manager output
 		Debug.Log("Failed to deliver " + item.GetComponent<ItemController>().GetItemName());
-		successfulDeliveries--;
+		failedDeliveries++;
 	}
 
 	public void ResetStats() {
-		successfulDeliveries = 0;
+		failedDeliveries = 0;
 		vehiclesDamaged = 0;
 		vehiclesTotalled = 0;
 		pedestriansHit = 0;
