@@ -1,4 +1,4 @@
-# UPS-sim 
+# Cluster Truck
 By: Matthew Low, Donald Lee
 
 ## About this game
@@ -12,9 +12,11 @@ A delivery service game where the player delivers goods across a map in a set am
   * Use the direction indicators to help navigate your way to the targets
 
 ## System requirements
-Minimum for standalone build:
+Minimum for standalone build:  
 Windows 10
 
-Minimum for web build:
-A browser that supports WebGL
-[Does my brower support WebGL?] (https://get.webgl.org/)
+Minimum for web build:  
+Browser that supports WebGL
+[Does my brower support WebGL?](https://get.webgl.org/)
+
+Developed with Unity
