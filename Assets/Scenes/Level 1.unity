@@ -115697,7 +115697,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a248ea5381c3511458dae14590c2400d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sm: {fileID: 0}
 --- !u!1 &935576052
 GameObject:
   m_ObjectHideFlags: 0
@@ -123181,6 +123180,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1311256400}
+  - component: {fileID: 1311256401}
   m_Layer: 5
   m_Name: Pause Screen
   m_TagString: Untagged
@@ -123209,6 +123209,24 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!95 &1311256401
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1311256399}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 60c279b31c83ada4fbda5878f06056dc, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 2
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1351110863
 GameObject:
   m_ObjectHideFlags: 0

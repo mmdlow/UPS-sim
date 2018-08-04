@@ -79,7 +79,6 @@ public class GameManager : MonoBehaviour {
 		levelPassed.SetActive(false);
 		workshop.SetActive(false);
 		gameOver.SetActive(false);
-		pauseScreen.SetActive(false);
 	}
 
 	void Start() {
@@ -170,21 +169,21 @@ public class GameManager : MonoBehaviour {
 	void PauseGame() {
 		paused = true;
 		Time.timeScale = 0;
-		pauseScreen.SetActive(true);
 		inventory.SetActive(false);
 		worldmap.SetActive(false);
 		minimap.SetActive(true);
 		messages.SetActive(true);
 		SoundManager.instance.PauseSound();
 		PlayerController.instance.MuteEngine();
+		pauseScreen.GetComponentInChildren<PauseMenu>().ScreenIn();
 	}
 
 	public void UnpauseGame() {
 		paused = false;
 		Time.timeScale = 1;
+		pauseScreen.GetComponentInChildren<PauseMenu>().ScreenOut();
 		pauseScreen.transform.Find("Pause Menu").gameObject.SetActive(true);
 		pauseScreen.transform.Find("Settings Menu").gameObject.SetActive(false);
-		pauseScreen.SetActive(false);
 		SoundManager.instance.UnpauseSound();
 		PlayerController.instance.UnmuteEngine();
 	}
@@ -238,10 +237,15 @@ public class GameManager : MonoBehaviour {
 				}
 			}
 
-			//if (health == 0) GameOver();
-
 			if (Input.GetButtonDown("Pause")) {
-				if (!pauseScreen.activeSelf) {
+				GameObject settingsMenu = pauseScreen.transform.Find("Settings Menu").gameObject;
+				// If settings is open, go back to main pause menu
+				if (settingsMenu.activeSelf) {
+					settingsMenu.SetActive(false);
+					pauseScreen.transform.Find("Pause Menu").gameObject.SetActive(true);
+					return;
+				}
+				if (!pauseScreen.GetComponentInChildren<PauseMenu>().IsOpen()) {
 					PauseGame();
 				} else {
 					UnpauseGame();
