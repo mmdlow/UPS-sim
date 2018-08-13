@@ -131,12 +131,9 @@ public class GameManager : MonoBehaviour {
 		StatsManager.instance.ResetStats();
 		MessageManager.instance.Clear();
 		
+		levelStart.GetComponentInChildren<LevelStart>().ScreenIn();
 		Time.timeScale = 0;
 		PlayerController.instance.MuteEngine();
-		LevelStart levelStartComp = levelStart.GetComponentInChildren<LevelStart>();
-		levelStartComp.ShowScreen();
-		levelStart.SetActive(true);
-		
 	}
 
 	public void LoadNextLevel() {
@@ -204,7 +201,7 @@ public class GameManager : MonoBehaviour {
 
 	public void HideLevelStart() {
 		doingSetup = false;
-		levelStart.SetActive(false);
+		levelStart.GetComponentInChildren<LevelStart>().ScreenOut();
 		inventory.SetActive(false);
 		worldmap.SetActive(false);
 	}

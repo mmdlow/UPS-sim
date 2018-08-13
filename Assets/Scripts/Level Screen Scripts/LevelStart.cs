@@ -7,11 +7,11 @@ public class LevelStart : MonoBehaviour {
 
 	Text levelNumText;
 	Text levelHealthText;
-	Text levelMoneyText;
-	Button levelStartBtn;
-	
+	Text levelMoneyText;	
 	Text levelItemNamesText;
 	Text levelItemDrbText;
+	Button levelStartBtn;
+	Animator animator;
 
 	void Awake() {
 		levelNumText = transform.Find("Level Number").GetComponent<Text>();
@@ -20,9 +20,10 @@ public class LevelStart : MonoBehaviour {
 		levelItemNamesText = transform.Find("Level Item Names").GetComponent<Text>();
 		levelItemDrbText = transform.Find("Level Item Drb").GetComponent<Text>();
 		levelStartBtn = transform.Find("Level Start Button").GetComponent<Button>();
+		animator = transform.parent.gameObject.GetComponent<Animator>();
 	}
 
-	public void ShowScreen() {
+	public void ScreenIn() {
 		levelNumText.text = "DAY " + GameManager.instance.GetLevel();
 		levelHealthText.text = GameManager.instance.GetHealth().ToString();
 		levelMoneyText.text = GameManager.instance.GetMoney().ToString();
@@ -41,5 +42,10 @@ public class LevelStart : MonoBehaviour {
 			GameManager.instance.HideLevelStart();
 			levelStartBtn.onClick.RemoveAllListeners();
 		});
+		if (GameManager.instance.GetLevel() > 1) animator.SetBool("isOpen", true);
+	}
+
+	public void ScreenOut() {
+		animator.SetBool("isOpen", false);
 	}
 }

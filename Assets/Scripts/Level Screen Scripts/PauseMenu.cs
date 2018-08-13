@@ -6,16 +6,13 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour {
 
-	// public SettingsMenu sm;
 	bool open = false;
 	Button resumeBtn;
-	Button settingsBtn;
 	Button quitBtn;
 	Animator animator;
 
 	void Awake() {
 		resumeBtn = transform.Find("Resume Button").GetComponent<Button>();
-		settingsBtn = transform.Find("Settings Button").GetComponent<Button>();
 		quitBtn = transform.Find("Quit Button").GetComponent<Button>();
 		animator = transform.parent.gameObject.GetComponent<Animator>();
 	}
