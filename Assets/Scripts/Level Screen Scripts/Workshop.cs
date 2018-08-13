@@ -8,7 +8,6 @@ public class Workshop : MonoBehaviour {
 
 	public AudioClip canBuySound;
 	public AudioClip cantBuySound;
-
 	public int speedLvl = 1;
 	public int durbLvl = 1;
 	public int maxLvl = 5;
@@ -24,14 +23,13 @@ public class Workshop : MonoBehaviour {
 	Text mechDialogue;
 	Text speedLvlText;
 	Text durbLvlText;
-
 	Button repairBtn;
 	Button upSpeedBtn;
 	Button upDurbBtn;
 	Button nextBtn;
-
 	GameObject speedCostText;
 	GameObject durbCostText;
+	Animator animator;
 
 	void Awake() {
 		repairBtn = transform.Find("Repair Button").GetComponent<Button>();
@@ -47,10 +45,8 @@ public class Workshop : MonoBehaviour {
 
 		speedCostText = transform.Find("Speed Cost").gameObject;
 		durbCostText = transform.Find("Durability Cost").gameObject;
-	}
 
-	void Start() {
-		//InitWorkshop();
+		animator = transform.parent.gameObject.GetComponent<Animator>();		
 	}
 
 	void RefreshStatLevels() {
@@ -140,9 +136,9 @@ public class Workshop : MonoBehaviour {
 		upDurbBtn.onClick.RemoveAllListeners();
 		repairBtn.onClick.RemoveAllListeners();
 		nextBtn.onClick.RemoveAllListeners();
+		animator.SetBool("isOpen", false);
 		// Go to next level
 		GameManager.instance.LoadNextLevel();
-		transform.parent.gameObject.SetActive(false);
 	}
 
 	public void InitWorkshop() {
@@ -165,5 +161,7 @@ public class Workshop : MonoBehaviour {
 
 		upSpeedBtn.onClick.AddListener(UpgradeSpeed);
 		upDurbBtn.onClick.AddListener(UpgradeDurability);
+
+		animator.SetBool("isOpen", true);
 	}
 }

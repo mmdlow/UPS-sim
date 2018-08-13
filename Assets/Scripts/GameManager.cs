@@ -76,7 +76,6 @@ public class GameManager : MonoBehaviour {
 		minimap = GameObject.Find("Minimap");
 		messages = GameObject.Find("Messages");
 
-		workshop.SetActive(false);
 		gameOver.SetActive(false);
 	}
 
@@ -131,7 +130,7 @@ public class GameManager : MonoBehaviour {
 		MessageManager.instance.Clear();
 		
 		levelStart.GetComponentInChildren<LevelStart>().ScreenIn();
-		Time.timeScale = 0;
+		if (level == 1) Time.timeScale = 0;
 		PlayerController.instance.MuteEngine();
 	}
 
@@ -191,9 +190,7 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void Upgrade() {
-		Workshop workshopComp = workshop.GetComponentInChildren<Workshop>();
-		workshopComp.InitWorkshop();
-		workshop.SetActive(true);
+		workshop.GetComponentInChildren<Workshop>().InitWorkshop();
 	}
 
 	public void HideLevelStart() {
