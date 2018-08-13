@@ -12,6 +12,7 @@ public class LevelPassed : MonoBehaviour {
 
 	GameObject contentParent;
 	Button nextBtn;
+	Animator animator;
 
 	Text levelNumText;
 	Text PDText;
@@ -31,12 +32,13 @@ public class LevelPassed : MonoBehaviour {
 		CEText = contentParent.transform.Find("CE Text").GetComponent<Text>();
 		TCText = contentParent.transform.Find("TC Text").GetComponent<Text>();
 		nextBtn = transform.Find("Next Button").GetComponent<Button>();
+		animator = transform.parent.gameObject.GetComponent<Animator>();
 	}
 
 	void ExitScreen() {
 		nextBtn.onClick.RemoveAllListeners();
+		animator.SetBool("isOpen", false);
 		GameManager.instance.Upgrade();
-		transform.parent.gameObject.SetActive(false);
 	}
 
 	public void InitScreen() {
@@ -56,5 +58,7 @@ public class LevelPassed : MonoBehaviour {
 		TCText.text = "$" + money;
 
 		nextBtn.onClick.AddListener(ExitScreen);
+
+		animator.SetBool("isOpen", true);
 	}
 }

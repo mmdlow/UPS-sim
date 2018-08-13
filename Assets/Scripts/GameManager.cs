@@ -76,7 +76,6 @@ public class GameManager : MonoBehaviour {
 		minimap = GameObject.Find("Minimap");
 		messages = GameObject.Find("Messages");
 
-		levelPassed.SetActive(false);
 		workshop.SetActive(false);
 		gameOver.SetActive(false);
 	}
@@ -158,9 +157,7 @@ public class GameManager : MonoBehaviour {
 		Time.timeScale = 0;
 		PlayerController.instance.MuteEngine();
 		SoundManager.instance.PlaySingle(passedSound);
-		LevelPassed levelPassedComp = levelPassed.GetComponentInChildren<LevelPassed>();
-		levelPassedComp.InitScreen();
-		levelPassed.SetActive(true);	
+		levelPassed.GetComponentInChildren<LevelPassed>().InitScreen();
 	}
 
 	void PauseGame() {
