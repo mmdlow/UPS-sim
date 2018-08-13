@@ -39,8 +39,6 @@ public class AIPedestrianController : MonoBehaviour {
 		if (alive) {
 			Steer();
 			transform.position = Vector3.MoveTowards(transform.position, currentWaypoint, speed);
-		} else {
-			//rb.velocity = new Vector3(0, 0, 0);
 		}
 	}
 

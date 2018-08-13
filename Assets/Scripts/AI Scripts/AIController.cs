@@ -9,7 +9,6 @@ public class AIController : MonoBehaviour {
 	Vector3[] path;
 	Vector3 currentWaypoint;
 	int targetIndex;
-	//Rigidbody2D rb;
 
 	public float steering = 3f;
 	public float speed = 0.01f;
@@ -26,7 +25,6 @@ public class AIController : MonoBehaviour {
 	private SpeechBubbleController bubble;
 
 	void Awake() {
-		//rb = GetComponent<Rigidbody2D>();
 		grid = GameObject.Find("Pathfinder").GetComponent<TileGrid>();
 	}
 
@@ -39,10 +37,7 @@ public class AIController : MonoBehaviour {
 	}
 
 	void FixedUpdate() {
-		if (dead) {
-			StopCoroutine("FollowPath");
-			return;
-		}
+		if (dead) return;
 		if (!damaged) {
 			Steer();
 			transform.position = Vector3.MoveTowards(transform.position, currentWaypoint, speed);
@@ -122,20 +117,4 @@ public class AIController : MonoBehaviour {
 		SpriteRenderer spriteR = gameObject.GetComponent<SpriteRenderer>();
 		spriteR.sprite = carSprite;
 	}
-
-	// public void OnDrawGizmos() {
-	// 	if (path != null) {
-	// 		for (int i = targetIndex; i < path.Length; i ++) {
-	// 			Gizmos.color = Color.black;
-	// 			Gizmos.DrawCube(path[i], Vector3.one);
-
-	// 			if (i == targetIndex) {
-	// 				Gizmos.DrawLine(transform.position, path[i]);
-	// 			}
-	// 			else {
-	// 				Gizmos.DrawLine(path[i-1],path[i]);
-	// 			}
-	// 		}
-	// 	}
-	// }
 }
