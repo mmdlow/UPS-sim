@@ -162,8 +162,8 @@ public class GameManager : MonoBehaviour {
 	void PauseGame() {
 		paused = true;
 		Time.timeScale = 0;
-		inventory.SetActive(false);
-		worldmap.SetActive(false);
+		inventory.GetComponent<InventoryUI>().ScreenOut();
+		worldmap.GetComponent<WorldmapUI>().ScreenOut();
 		minimap.SetActive(true);
 		messages.SetActive(true);
 		SoundManager.instance.PauseSound();
@@ -196,33 +196,33 @@ public class GameManager : MonoBehaviour {
 	public void HideLevelStart() {
 		doingSetup = false;
 		levelStart.GetComponentInChildren<LevelStart>().ScreenOut();
-		inventory.SetActive(false);
-		worldmap.SetActive(false);
+		//inventory.SetActive(false);
+		//worldmap.SetActive(false);
 	}
 
 	void Update() {
 		if (!doingSetup) {
 			if (!paused) {
+				InventoryUI inventoryUI = inventory.GetComponent<InventoryUI>();
+				WorldmapUI worldmapUI = worldmap.GetComponent<WorldmapUI>();
 				if (Input.GetButtonDown("Inventory")) {
-					inventory.SetActive(!inventory.activeInHierarchy);
+					inventoryUI.ToggleScreen();
 					minimap.SetActive(!minimap.activeInHierarchy);
 					messages.SetActive(!messages.activeInHierarchy);
 
 					// Enable pausing when inventory is opened
-					if (inventory.activeSelf) {
-						worldmap.SetActive(true);
+					if (inventoryUI.IsOpen()) {
+						worldmapUI.ScreenIn();
 						Time.timeScale = 0;
-						//paused = true;
 					} else {
-						worldmap.SetActive(false);
+						worldmapUI.ScreenOut();
 						Time.timeScale = 1;
-						//paused = false;
 					}
 				}
 				// Allow for toggling of worldmap when inventory is active
-				if (inventory.activeSelf) {
+				if (inventoryUI.IsOpen()) {
 					if (Input.GetButtonDown("Worldmap")) {
-						worldmap.SetActive(!worldmap.activeInHierarchy);
+						worldmapUI.ToggleScreen();
 						minimap.SetActive(!minimap.activeInHierarchy);
 					}
 				}

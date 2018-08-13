@@ -6,6 +6,8 @@ public class InventoryUI : MonoBehaviour {
 
 	InventorySlot[] slots; // Array of inventory slots
 	PlayerController player;
+	Animator animator;
+	bool open = false;
 	public static InventoryUI instance = null;
 
 	void Awake() {
@@ -14,6 +16,7 @@ public class InventoryUI : MonoBehaviour {
 		} else if (instance != this) {
 			Destroy(gameObject); // enforce singleton pattern
 		}
+		animator = gameObject.GetComponent<Animator>();
 	}
 
 	void Start () {
@@ -58,10 +61,33 @@ public class InventoryUI : MonoBehaviour {
 			}
 		}
 	}
+
 	public void Clear() {
 		for (int i=0; i<slots.Length; i++) {
             slots[i].ClearSlot();
 			slots[i].UnsetPriorityAlert();
 		}
+	}
+
+	public void ScreenIn() {
+		open = true;
+		animator.SetBool("isOpen", true);
+	}
+
+	public void ScreenOut() {
+		open = false;
+		animator.SetBool("isOpen", false);
+	}
+
+	public void ToggleScreen() {
+		if (!open) {
+			ScreenIn();
+		} else {
+			ScreenOut();
+		}
+	}
+
+	public bool IsOpen() {
+		return open;
 	}
 }
