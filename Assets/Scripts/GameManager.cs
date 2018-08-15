@@ -207,15 +207,16 @@ public class GameManager : MonoBehaviour {
 				WorldmapUI worldmapUI = worldmap.GetComponent<WorldmapUI>();
 				if (Input.GetButtonDown("Inventory")) {
 					inventoryUI.ToggleScreen();
-					minimap.SetActive(!minimap.activeInHierarchy);
 					messages.SetActive(!messages.activeInHierarchy);
 
 					// Enable pausing when inventory is opened
 					if (inventoryUI.IsOpen()) {
 						worldmapUI.ScreenIn();
+						minimap.SetActive(false);
 						Time.timeScale = 0;
 					} else {
 						worldmapUI.ScreenOut();
+						minimap.SetActive(true);
 						Time.timeScale = 1;
 					}
 				}

@@ -9,6 +9,7 @@ public class InventoryUI : MonoBehaviour {
 	Animator animator;
 	bool open = false;
 	public static InventoryUI instance = null;
+	private int currentIndex = 0;
 
 	void Awake() {
 		if (instance == null) {
@@ -27,6 +28,57 @@ public class InventoryUI : MonoBehaviour {
 		slots = GetComponentsInChildren<InventorySlot>();
 		player = GameObject.Find("Player").GetComponent<PlayerController>();
 		player.onSustainDamageCallback += UpdateItemIntegrities;
+	}
+
+	void Update() {
+		if (!open) return;
+		if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A)) {
+			MoveToPrevItem();
+		} else if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D)) {
+			MoveToNextItem();
+		} else if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W)) {
+			MoveToTopItem();
+		} else if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S)) {
+			MoveToBottomItem();
+		}
+	}
+
+	void MoveToSlot(InventorySlot slot) {
+		if (slot.GetSlotItem() != null) {
+			ItemManager.instance.ChangePriorityItem(slot.GetSlotItem());
+		}
+	}
+
+	void MoveToPrevItem() {
+		if (ItemManager.instance.priorityItem == null) {
+			MoveToSlot(slots[0]);
+		} else if (currentIndex > 0) {
+			MoveToSlot(slots[--currentIndex]);
+		}
+	}
+
+	void MoveToNextItem() {
+		if (ItemManager.instance.priorityItem == null) {
+			MoveToSlot(slots[0]);
+		} else if (currentIndex < ItemManager.instance.items.Count - 1) {
+			MoveToSlot(slots[++currentIndex]);
+		}
+	}
+
+	void MoveToTopItem() {
+		if (ItemManager.instance.priorityItem == null) {
+			MoveToSlot(slots[0]);
+		} else if (currentIndex >= 3) {
+			MoveToSlot(slots[currentIndex -= 3]);
+		}
+	}
+
+	void MoveToBottomItem() {
+		if (ItemManager.instance.priorityItem == null) {
+			MoveToSlot(slots[0]);
+		} else if (currentIndex <= 5) {
+			MoveToSlot(slots[currentIndex += 3]);
+		}
 	}
 	
 	public void UpdateUI (GameObject item) {
