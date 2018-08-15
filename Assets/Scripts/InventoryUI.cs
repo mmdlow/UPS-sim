@@ -43,41 +43,49 @@ public class InventoryUI : MonoBehaviour {
 		}
 	}
 
-	void MoveToSlot(InventorySlot slot) {
-		if (slot.GetSlotItem() != null) {
-			ItemManager.instance.ChangePriorityItem(slot.GetSlotItem());
+	void MoveToSlot(int incr) {
+		if (incr == 0) {
+			// Prioritize first item
+			if (slots[0].GetSlotItem() != null) {
+				currentIndex = 0;
+				ItemManager.instance.ChangePriorityItem(slots[0].GetSlotItem());
+			}
+		} else if (slots[currentIndex + incr].GetSlotItem() != null) {
+			currentIndex += incr;
+			ItemManager.instance.ChangePriorityItem(slots[currentIndex].GetSlotItem());
 		}
 	}
 
 	void MoveToPrevItem() {
 		if (ItemManager.instance.priorityItem == null) {
-			MoveToSlot(slots[0]);
+			// If priority item not currently set, prioritize first item by default
+			MoveToSlot(0);
 		} else if (currentIndex > 0) {
-			MoveToSlot(slots[--currentIndex]);
+			MoveToSlot(-1);
 		}
 	}
 
 	void MoveToNextItem() {
 		if (ItemManager.instance.priorityItem == null) {
-			MoveToSlot(slots[0]);
+			MoveToSlot(0);
 		} else if (currentIndex < ItemManager.instance.items.Count - 1) {
-			MoveToSlot(slots[++currentIndex]);
+			MoveToSlot(1);
 		}
 	}
 
 	void MoveToTopItem() {
 		if (ItemManager.instance.priorityItem == null) {
-			MoveToSlot(slots[0]);
+			MoveToSlot(0);
 		} else if (currentIndex >= 3) {
-			MoveToSlot(slots[currentIndex -= 3]);
+			MoveToSlot(-3);
 		}
 	}
 
 	void MoveToBottomItem() {
 		if (ItemManager.instance.priorityItem == null) {
-			MoveToSlot(slots[0]);
+			MoveToSlot(0);
 		} else if (currentIndex <= 5) {
-			MoveToSlot(slots[currentIndex += 3]);
+			MoveToSlot(3);
 		}
 	}
 	
@@ -97,6 +105,7 @@ public class InventoryUI : MonoBehaviour {
 		for (int i = 0; i < slots.Length; i++) {
 			GameObject slotItem = slots[i].GetSlotItem();
 			if (slotItem != null && slotItem == ItemManager.instance.priorityItem) {
+				currentIndex = i;
 				slots[i].SetPriorityAlert();
 			} else {
 				slots[i].UnsetPriorityAlert();
