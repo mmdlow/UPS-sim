@@ -6,6 +6,8 @@ public class PlayerController : MonoBehaviour {
 
     GameManager gameManager;
 
+    public static PlayerController instance;
+
     public delegate void OnSustainDamage(float damage);
     public OnSustainDamage onSustainDamageCallback;
 
@@ -14,17 +16,19 @@ public class PlayerController : MonoBehaviour {
     public float damageConstant = 3f;
     public Text healthDisplay;
     public Text damageDisplay;
-    private Rigidbody2D rb;
-    public static PlayerController instance;
     public GameObject directionIndicatorPrefab;
     public GameObject directionIndicator;
     public PlayerShooter playerShooter;
-    private GameObject dropzone;
-    private float CHANGE_INDICATOR_DISTANCE = 4.5f;
     public AudioSource engineSound;
     public AudioClip impactSound1;
     public AudioClip impactSound2;
     public AudioClip impactSound3;
+    private Rigidbody2D rb;
+    private GameObject dropzone;
+    private SpriteRenderer spriteRenderer;
+    private Color originalCol;
+    private float CHANGE_INDICATOR_DISTANCE = 4.5f;
+    private bool damaged = false;
 
 	void Awake() {
 		if (instance == null) {
@@ -39,6 +43,8 @@ public class PlayerController : MonoBehaviour {
 
     void Start () {
         rb = GetComponent<Rigidbody2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        originalCol = spriteRenderer.color;
         healthDisplay.text = GameManager.instance.GetHealth().ToString();
         ItemManager.instance.onPriorityItemChange += UpdatePriorityItem;
 		playerShooter = GetComponent<PlayerShooter>();
@@ -48,40 +54,55 @@ public class PlayerController : MonoBehaviour {
         damageDisplay.CrossFadeAlpha(1, 0f, false);
         yield return new WaitForSeconds(2);
         damageDisplay.CrossFadeAlpha(0, 1f, false);
+        damaged = false; // Turn off invulnerability
+        spriteRenderer.color = originalCol;
+    }
+
+    IEnumerator SetInvulnerable () {
+        while (damaged) {
+            spriteRenderer.color = new Color(1, 1, 1, 0.5f);
+            yield return new WaitForSeconds(0.1f);
+            spriteRenderer.color = originalCol;
+            yield return new WaitForSeconds(0.1f);
+        }
     }
 
     void OnCollisionEnter2D (Collision2D col) {
+        if (!damaged) {
+            damaged = true; // Allow brief period of invulnerability
 
-        SoundManager.instance.RandomSfx(impactSound1, impactSound2, impactSound3);
+            SoundManager.instance.RandomSfx(impactSound1, impactSound2, impactSound3);
 
-        int damage = Mathf.RoundToInt(damageConstant * col.relativeVelocity.magnitude);
-        MessageManager.instance.SayPreparedMessage(MessageManager.PreparedMessage.TAKINGDAMAGE, 5);
-        int health = GameManager.instance.GetHealth();
-        health = GameManager.instance.SetHealth(health - damage);
+            int damage = Mathf.RoundToInt(damageConstant * col.relativeVelocity.magnitude);
+            MessageManager.instance.SayPreparedMessage(MessageManager.PreparedMessage.TAKINGDAMAGE, 5);
+            int health = GameManager.instance.GetHealth();
+            health = GameManager.instance.SetHealth(health - damage);
 
-        // For updating item integrities upon sustaining player damage
-        if (onSustainDamageCallback != null) {
-            onSustainDamageCallback(col.relativeVelocity.magnitude);
-        }
-
-        if (damage > 0) {
-            damageDisplay.text = (-damage).ToString();
-            StartCoroutine(DisplayDamage());
-        }
-
-        if (health <= 0) {
-            healthDisplay.text = "0";
-            GameManager.instance.GameOver();
-        } else {
-            if (health <= 100 && health > 25) {
-                healthDisplay.color = Color.white;
+            // For updating item integrities upon sustaining player damage
+            if (onSustainDamageCallback != null) {
+                onSustainDamageCallback(col.relativeVelocity.magnitude);
             }
-            else {
-                healthDisplay.color = Color.red;
-                MessageManager.instance.SayPreparedMessage(MessageManager.PreparedMessage.LOWHEALTH, 10);
+
+            if (damage > 0) {
+                damageDisplay.text = (-damage).ToString();
+                StartCoroutine("DisplayDamage");
+                StartCoroutine("SetInvulnerable");
             }
-            healthDisplay.text = health.ToString();
-        } 
+
+            if (health <= 0) {
+                healthDisplay.text = "0";
+                GameManager.instance.GameOver();
+            } else {
+                if (health <= 100 && health > 25) {
+                    healthDisplay.color = Color.white;
+                }
+                else {
+                    healthDisplay.color = Color.red;
+                    MessageManager.instance.SayPreparedMessage(MessageManager.PreparedMessage.LOWHEALTH, 10);
+                }
+                healthDisplay.text = health.ToString();
+            }
+        }
     }
 
     void FixedUpdate () {
