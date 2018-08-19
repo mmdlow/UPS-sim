@@ -120,6 +120,7 @@ public class ItemManager : MonoBehaviour {
 		arr.Add( new string[] { "BOOK", "H" } );
 		arr.Add( new string[] { "CAT FOOD", "M" } );
 		arr.Add( new string[] { "CHINA VASE", "L" } );
+		arr.Add( new string[] { "CHAIR", "M" } );
 		arr.Add( new string[] { "CLAY VASE", "L" } );
 		arr.Add( new string[] { "FINE CHINA", "L" } );
 		arr.Add( new string[] { "CREEPY DOLL", "M" } );

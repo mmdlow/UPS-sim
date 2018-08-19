@@ -11,8 +11,7 @@ public class BoardManager : MonoBehaviour {
 	public static BoardManager instance = null;
 	public ItemManager itemManager;
 	public AIManager aiManager;
-	public float gameTime = 90f;
-	private float maxGameTime = 90f;
+	public float gameTime = 50f;
 	public float numLevelItems = 0;
 	public Text timer;
 	bool timerUp = false;
@@ -55,9 +54,15 @@ public class BoardManager : MonoBehaviour {
 		}
 		timer.text = actualGameTime.ToString();
 	}
+
+	float SetGameTime(float numItems) {
+		if (numItems > 1) return 50 + (numItems - 1) * 20;
+		else return 50;
+	}
+
 	public void ClearAndLoad() {
-		gameTime = maxGameTime;
 		numLevelItems = ItemManager.instance.items.Count;
+		gameTime = SetGameTime(numLevelItems);
 		timerUp = false;
 	}
 }
