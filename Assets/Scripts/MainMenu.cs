@@ -2,11 +2,28 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour {
 
-	void Start() {
+	public Animator pointerAnim;
+	Button[] menuButtons;
+	int buttonIndex = 0;
+
+	void Awake() {
+		menuButtons = GetComponentsInChildren<Button>();
 	}
+
+	void Update() {
+		if (Input.GetKeyDown(KeyCode.UpArrow)) {
+			if (buttonIndex <= 0) return;
+			pointerAnim.SetInteger("selectOption", --buttonIndex);
+		} else if (Input.GetKeyDown(KeyCode.DownArrow)) {
+			if (buttonIndex >= 3) return;
+			pointerAnim.SetInteger("selectOption", ++buttonIndex);
+		}
+	}
+
 	public void PlayGame() {
 		// Load next level in queue
 		Debug.Log("Starting game");
