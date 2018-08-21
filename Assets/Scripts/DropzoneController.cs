@@ -27,11 +27,11 @@ public class DropzoneController : MonoBehaviour {
 	public static void InitReachablePositions() {
 		reachablePositions = new List<Vector3Int>();
 		GameObject ground = GameObject.Find("Ground");
-		Tilemap groundTilemap = ground.transform.Find("Tilemap-pavement").gameObject.GetComponent(typeof(Tilemap)) as Tilemap;
+		Tilemap groundTilemap = ground.transform.Find("Tilemap-buildings-base").gameObject.GetComponent(typeof(Tilemap)) as Tilemap;
 		for (int x=groundTilemap.origin.x; x<groundTilemap.size.x; x += 12) {
 			for (int y=groundTilemap.origin.y; y<groundTilemap.size.y; y += 12) {
 				TileBase tile = groundTilemap.GetTile(new Vector3Int(x, y, 0));
-				if (tile != null && tile.name.StartsWith("pavement")) {
+				if (tile != null && tile.name.StartsWith("test")) {
 					reachablePositions.Add(new Vector3Int(x, y, 0));
 				}
 			}
