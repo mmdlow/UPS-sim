@@ -9,6 +9,7 @@ public class GameOver : MonoBehaviour {
 	GameObject contentParent;
 	Button menuBtn;
 	Button restartBtn;
+	Animator animator;
 
 	Text levelNumText;
 	Text DeathCauseText;
@@ -22,12 +23,14 @@ public class GameOver : MonoBehaviour {
 
 		menuBtn = transform.Find("Menu Button").GetComponent<Button>();
 		restartBtn = transform.Find("Restart Button").GetComponent<Button>();
+
+		animator = transform.parent.gameObject.GetComponent<Animator>();
 	}
 
 	void ExitScreen() {
 		menuBtn.onClick.RemoveAllListeners();
 		restartBtn.onClick.RemoveAllListeners();
-		// transform.parent.gameObject.SetActive(false);
+		animator.SetBool("isOpen", false);
 	}
 
 	public void InitScreen() {
@@ -55,5 +58,6 @@ public class GameOver : MonoBehaviour {
 			SceneManager.LoadScene("Level 1");
 			// Restart game;
 		});
+		animator.SetBool("isOpen", true);
 	}
 }

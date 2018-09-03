@@ -42,6 +42,11 @@ public class MainMenu : MonoBehaviour {
 		}
 	}
 
+	public void MovePointer(int index) {
+		pointerAnim.SetInteger("selectOption", index);
+		buttonIndex = index;
+	}
+
 	public void PlayGame() {
 		// Load next level in queue
 		Debug.Log("Starting game");

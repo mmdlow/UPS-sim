@@ -75,8 +75,6 @@ public class GameManager : MonoBehaviour {
 		worldmap = GameObject.Find("Worldmap");
 		minimap = GameObject.Find("Minimap");
 		messages = GameObject.Find("Messages");
-
-		gameOver.SetActive(false);
 	}
 
 	void Start() {
@@ -152,13 +150,6 @@ public class GameManager : MonoBehaviour {
 		}
 	}
 
-	void LevelPassed() {
-		Time.timeScale = 0;
-		PlayerController.instance.MuteEngine();
-		SoundManager.instance.PlaySingle(passedSound);
-		levelPassed.GetComponentInChildren<LevelPassed>().InitScreen();
-	}
-
 	void PauseGame() {
 		paused = true;
 		Time.timeScale = 0;
@@ -181,12 +172,16 @@ public class GameManager : MonoBehaviour {
 		PlayerController.instance.UnmuteEngine();
 	}
 
+	void LevelPassed() {
+		Time.timeScale = 0;
+		PlayerController.instance.MuteEngine();
+		SoundManager.instance.PlaySingle(passedSound);
+		levelPassed.GetComponentInChildren<LevelPassed>().InitScreen();
+	}
+
 	public void GameOver() {
 		SoundManager.instance.PlaySingle(failedSound);
-		GameOver gameOverComp = gameOver.GetComponentInChildren<GameOver>();
-		gameOverComp.InitScreen();
-		gameOver.SetActive(true);
-		//enabled = false;
+		gameOver.GetComponentInChildren<GameOver>().InitScreen();
 	}
 
 	public void Upgrade() {
